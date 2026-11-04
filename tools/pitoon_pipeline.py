@@ -151,9 +151,18 @@ def main(cfg_path):
     if "--plan" in sys.argv:   # per-shot GenerateImage/GenerateVideo calls with bible refs + continuity
         print(json.dumps(continuity.plan(cfg, os.path.dirname(os.path.abspath(cfg_path)), SAFE_VIDEO, STYLE_VIDEO), ensure_ascii=False, indent=1)); return
     if cfg.get("shots") and not os.path.exists(os.path.join(os.path.dirname(os.path.abspath(cfg_path)), cfg["video"])):
-        dd = os.path.dirname(os.path.abspath(cfg_path)); lst = os.path.join(dd, "_concat.txt")
-        open(lst, "w").write("".join(f"file 'shot_{s['id']}.mp4'\n" for s in cfg["shots"]))
-        run("ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-map", "0:v:0", "-map", "0:a:0", "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", "-c:a", "aac", os.path.join(dd, cfg["video"]))
+        dd = os.path.dirname(os.path.abspath(cfg_path)); ids = [s["id"] for s in cfg["shots"]]; T = cfg.get("transition_s", .3)
+        ins = sum([["-i", os.path.join(dd, f"shot_{i}.mp4")] for i in ids], [])
+        # soft cut: each clip (except last) holds its last frame T s, then xfade T s -> timing of lines/SFX unchanged
+        fc = []; L = []
+        for k, i in enumerate(ids):
+            ln = float(sp.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", os.path.join(dd, f"shot_{i}.mp4")], capture_output=True, text=True).stdout); L.append(ln)
+            fc.append(f"[{k}:v:0]scale=1280:720,setsar=1,format=yuv420p,setpts=PTS-STARTPTS,fps=24" + (f",tpad=stop_mode=clone:stop_duration={T}" if k < len(ids) - 1 else "") + f"[v{k}]")
+        prev, off = "v0", 0
+        for k in range(1, len(ids)):
+            off += L[k - 1]; fc.append(f"[{prev}][v{k}]xfade=transition=fade:duration={T}:offset={off:.3f}[x{k}]"); prev = f"x{k}"
+        fc.append("".join(f"[{k}:a:0]" for k in range(len(ids))) + f"concat=n={len(ids)}:v=0:a=1[a]")
+        run("ffmpeg", "-y", *ins, "-filter_complex", ";".join(fc), "-map", f"[{prev}]", "-map", "[a]", "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", "-c:a", "aac", os.path.join(dd, cfg["video"]))
     d = os.path.dirname(os.path.abspath(cfg_path)); P = lambda f: os.path.join(d, f)
     nat = load(P(cfg["video"])); n = len(nat); dur = n / SR
     vo = np.zeros(n); keep = np.zeros(n); talk = np.zeros(n)
@@ -168,7 +177,10 @@ def main(cfg_path):
     # native track: full where we keep its lip-synced speech, else its own SFX at native_gain;
     # if a line is re-voiced, the native speech in that span is muted.
     ng = cfg.get("native_gain", .5); mute = np.clip(sm(((talk > 0) & (keep == 0)).astype(float), 2205) * 2, 0, 1)
-    natl = nat * (keep + (1 - keep) * ng * (1 - mute))
+    nm = np.ones(n)
+    for a0, a1 in cfg.get("native_mute", []): nm[int(a0 * SR):int(a1 * SR)] = 0   # stray/mumbled native speech removed
+    nm = np.clip(sm(nm, 4410), 0, 1)
+    natl = nat * (keep + (1 - keep) * ng * (1 - mute) * nm)
     fx = np.zeros(n)
     for s in cfg.get("sfx", []):
         x = sfx(s["name"]); L = min(len(x), int(s.get("len", 2.0) * SR)); x = x[:L] * np.minimum(1, (L - np.arange(L)) / (SR * .25))
@@ -178,7 +190,7 @@ def main(cfg_path):
         f0, f1 = a.get("from", 0), a.get("to", dur); x = ambience(a["name"], f1 - f0); L = len(x); fade = np.minimum(1, np.minimum(np.arange(L), L - np.arange(L)) / (SR * .5))
         add(amb, x * fade, f0, a.get("gain", .15))
     mus = music(cfg.get("mood", [{"t": 0, "mood": "playful"}]), dur, cfg.get("bpm", 120)) * cfg.get("music_gain", .55)
-    duck = 1 - .6 * talkd                      # music & ambience step back under every spoken line
+    duck = 1 - .85 * talkd                      # music & ambience step back under every spoken line
     mix = natl + vo + fx * cfg.get("sfx_gain", 1) + amb * (1 - .4 * talkd) + mus * duck
     save(P("_mix.wav"), mix / max(1, np.abs(mix).max()))
     for k, v in {"_stem_voice.wav": natl * keep + vo, "_stem_fx.wav": fx + amb, "_stem_music.wav": mus * duck}.items(): save(P(k), v)

@@ -29,3 +29,6 @@ Ví dụ: tools/scene_mau_v4.json → /workspace/ref/pitoon_free/canh_mau_v4.mp4
 - Shot sau bắt đầu từ khung CUỐI của shot trước: `python3 tools/continuity.py x --lastframe shot_s1.mp4 last_s1.png`.
 - Pipeline tự kiểm tra: end của shot i phải bằng start của shot i+1; nhân vật/bối cảnh/đạo cụ phải có trong bible. Nếu chưa có film.mp4 thì tự ghép shot_*.mp4.
 Ví dụ: tools/scene_mau_v5.json → /workspace/ref/pitoon_free/canh_mau_v5.mp4
+
+## Studio (v6)
+Quy trình nhà sản xuất: xem tools/studio/README.md. QC: `python3 tools/studio/qc.py scene.json film.mp4 --report qc.md`.
