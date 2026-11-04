@@ -1,0 +1,187 @@
+{
+ "video": "film.mp4",
+ "out": "../canh_mau_v7.mp4",
+ "bpm": 120,
+ "native_gain": 0.35,
+ "title": "Cún đội khăn xếp",
+ "lesson": "Muốn mượn đồ thì phải hỏi trước.",
+ "lines": [
+  {
+   "who": "Tí",
+   "voice": "child_boy",
+   "emo": "surprised",
+   "text": "Ơ! Khăn của anh đâu rồi?",
+   "win": [
+    0.5,
+    5
+   ],
+   "src": "native"
+  },
+  {
+   "who": "Tí",
+   "voice": "child_boy",
+   "emo": "laugh",
+   "text": "Cún đội giống ông nội ghê! Hì hì!",
+   "win": [
+    10,
+    12.6
+   ],
+   "src": "native"
+  },
+  {
+   "who": "Tí",
+   "voice": "child_boy",
+   "emo": "happy",
+   "text": "Lần sau muốn mượn thì hỏi anh nhé!",
+   "win": [
+    12.6,
+    15
+   ],
+   "src": "native"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 1.8,
+   "name": "zip",
+   "gain": 0.25
+  },
+  {
+   "t": 3.3,
+   "name": "pop",
+   "gain": 0.5
+  },
+  {
+   "t": 3.5,
+   "name": "boing",
+   "gain": 0.5
+  },
+  {
+   "t": 5.4,
+   "name": "bark",
+   "gain": 0.6
+  },
+  {
+   "t": 6.3,
+   "name": "whoosh",
+   "gain": 0.4
+  },
+  {
+   "t": 7.9,
+   "name": "bark2",
+   "gain": 0.5
+  },
+  {
+   "t": 8.7,
+   "name": "whoosh",
+   "gain": 0.4
+  },
+  {
+   "t": 10.1,
+   "name": "twinkle",
+   "gain": 0.4
+  },
+  {
+   "t": 14.5,
+   "name": "bark",
+   "gain": 0.4
+  }
+ ],
+ "ambience": [
+  {
+   "name": "birds",
+   "gain": 0.18
+  },
+  {
+   "name": "wind",
+   "gain": 0.1,
+   "from": 6,
+   "to": 10
+  }
+ ],
+ "mood": [
+  {
+   "t": 0,
+   "mood": "playful"
+  },
+  {
+   "t": 2,
+   "mood": "sneaky"
+  },
+  {
+   "t": 5,
+   "mood": "chase"
+  },
+  {
+   "t": 10,
+   "mood": "happy"
+  }
+ ],
+ "shots": [
+  {
+   "id": "s1",
+   "from": 0,
+   "to": 5,
+   "set": "san_lang",
+   "chars": [
+    "Ti",
+    "Cun"
+   ],
+   "key_pose": "Tí stands near the low stool facing camera, smiling, wearing the khăn xếp; Cún sits on the right, tail wagging.",
+   "action": "Tí takes off the khăn xếp and gently sets it on the low wooden stool, then turns away to tie his sash; Cún tiptoes like a sneaky cartoon spy, picks up the khăn xếp with its mouth and plops it onto its own head, slightly crooked. Tí turns back, eyes pop wide, mouth a big O. The small square knee-height wooden stool keeps exactly the same size and shape the whole time (never a bench).",
+   "continuity": {
+    "start": {
+     "khan_xep": "Ti"
+    },
+    "end": {
+     "khan_xep": "Cun"
+    }
+   }
+  },
+  {
+   "id": "s2",
+   "from": 5,
+   "to": 10,
+   "set": "san_lang",
+   "chars": [
+    "Ti",
+    "Cun"
+   ],
+   "action": "Cún trots proudly in a big circle on the flat yard wearing the khăn xếp; bareheaded Tí jogs slowly after it on flat ground, laughing, arms out; leaves swirl. Camera pans gently with them. The small square knee-height wooden stool keeps exactly the same size and shape the whole time (never a bench).",
+   "continuity": {
+    "start": {
+     "khan_xep": "Cun"
+    },
+    "end": {
+     "khan_xep": "Cun"
+    }
+   }
+  },
+  {
+   "id": "s3",
+   "from": 10,
+   "to": 15,
+   "set": "san_lang",
+   "chars": [
+    "Ti",
+    "Cun"
+   ],
+   "action": "Cún stops and sits with the khăn xếp crooked on its head, making a funny proud face; bareheaded Tí kneels beside it, giggles and says the first line, then gently straightens the hat on Cún's head and says the second line with a kind smile, wagging a finger softly. Slow push-in. The small square knee-height wooden stool keeps exactly the same size and shape the whole time (never a bench).",
+   "continuity": {
+    "start": {
+     "khan_xep": "Cun"
+    },
+    "end": {
+     "khan_xep": "Cun"
+    }
+   }
+  }
+ ],
+ "transition_s": 0.3,
+ "native_mute": [
+  [
+   5,
+   10
+  ]
+ ]
+}
