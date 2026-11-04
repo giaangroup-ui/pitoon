@@ -12,6 +12,7 @@ scene.json keys (times in seconds):
   native_gain: level of the clip's own audio outside dialogue (its own barks/splashes)."""
 import json, subprocess as sp, sys, os, wave, tempfile, numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from safety_check import check as safety_check
+import continuity
 SR = 44100; HERE = os.path.dirname(os.path.abspath(__file__)); SFXDIR = os.path.join(HERE, "sfx")
 rng = np.random.default_rng(7)
 
@@ -142,11 +143,17 @@ def video_prompt(cfg):
 
 def main(cfg_path):
     cfg = json.load(open(cfg_path))
-    issues = safety_check(cfg)
+    issues = safety_check(cfg) + continuity.check(cfg)
     if issues:
         print("⚠ KIỂM TRA AN TOÀN:\n  " + "\n  ".join(issues))
         if "--force" not in sys.argv: sys.exit("Dừng: sửa scene.json theo HUONG_DAN_NOI_DUNG.md (hoặc --force).")
     if "--prompt" in sys.argv: print(video_prompt(cfg)); return
+    if "--plan" in sys.argv:   # per-shot GenerateImage/GenerateVideo calls with bible refs + continuity
+        print(json.dumps(continuity.plan(cfg, os.path.dirname(os.path.abspath(cfg_path)), SAFE_VIDEO, STYLE_VIDEO), ensure_ascii=False, indent=1)); return
+    if cfg.get("shots") and not os.path.exists(os.path.join(os.path.dirname(os.path.abspath(cfg_path)), cfg["video"])):
+        dd = os.path.dirname(os.path.abspath(cfg_path)); lst = os.path.join(dd, "_concat.txt")
+        open(lst, "w").write("".join(f"file 'shot_{s['id']}.mp4'\n" for s in cfg["shots"]))
+        run("ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-map", "0:v:0", "-map", "0:a:0", "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", "-c:a", "aac", os.path.join(dd, cfg["video"]))
     d = os.path.dirname(os.path.abspath(cfg_path)); P = lambda f: os.path.join(d, f)
     nat = load(P(cfg["video"])); n = len(nat); dur = n / SR
     vo = np.zeros(n); keep = np.zeros(n); talk = np.zeros(n)
@@ -176,6 +183,6 @@ def main(cfg_path):
     save(P("_mix.wav"), mix / max(1, np.abs(mix).max()))
     for k, v in {"_stem_voice.wav": natl * keep + vo, "_stem_fx.wav": fx + amb, "_stem_music.wav": mus * duck}.items(): save(P(k), v)
     run("ffmpeg", "-y", "-i", P(cfg["video"]), "-i", P("_mix.wav"), "-map", "0:v:0", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
-        "-af", "loudnorm=I=-16:TP=-1.5", "-shortest", P(cfg["out"]))
+        "-af", "loudnorm=I=-16:TP=-1.5", "-ar", "48000", "-shortest", P(cfg["out"]))
     print("OK", os.path.abspath(P(cfg["out"])))
 if __name__ == "__main__": main([a for a in sys.argv[1:] if not a.startswith("--")][0])

@@ -21,3 +21,11 @@ Ví dụ: tools/scene_mau_v3.json → /workspace/ref/pitoon_free/canh_mau_v3.mp4
 - `python3 tools/pitoon_pipeline.py scene.json --prompt` → in prompt GenerateVideo (tự gắn luật an toàn + câu thoại theo mốc thời gian).
 - Pipeline tự chạy `tools/safety_check.py`; có hành động nguy hiểm / thiếu bài học / câu thoại > 12 từ → dừng (trừ khi `--force`).
 Ví dụ: tools/scene_mau_v4.json → /workspace/ref/pitoon_free/canh_mau_v4.mp4
+
+## v5 – Đồng bộ nhân vật & bối cảnh (bible)
+- `tools/bible/`: model sheet Tí, Cún, plate bối cảnh sân làng + `bible.json` (mô tả khoá cho từng nhân vật/đạo cụ/bối cảnh, style, palette).
+- scene.json `shots[]`: {id, from, to, set, chars, action, key_pose, continuity:{start:{prop:holder}, end:{...}}}.
+- `python3 tools/pitoon_pipeline.py scene.json --plan` → danh sách lệnh GenerateImage (keyframe shot 1 từ ảnh bible) và GenerateVideo cho từng shot: luôn kèm 3 ảnh tham chiếu + mô tả khoá + trạng thái đầu/cuối + luật một-đạo-cụ (ai đội khăn thì người kia đầu trần) + luật an toàn.
+- Shot sau bắt đầu từ khung CUỐI của shot trước: `python3 tools/continuity.py x --lastframe shot_s1.mp4 last_s1.png`.
+- Pipeline tự kiểm tra: end của shot i phải bằng start của shot i+1; nhân vật/bối cảnh/đạo cụ phải có trong bible. Nếu chưa có film.mp4 thì tự ghép shot_*.mp4.
+Ví dụ: tools/scene_mau_v5.json → /workspace/ref/pitoon_free/canh_mau_v5.mp4

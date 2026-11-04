@@ -1,0 +1,19 @@
+{
+ "style": "3D Pixar-style animated family film, soft global illumination, warm sunny morning light, saturated but gentle colours, cute rounded proportions, big expressive eyes, kid-friendly, no text",
+ "palette": "royal blue #2B3FA0, white, black silk, golden yellow #E2B04A, cream, warm earth brown, banana-leaf green, sky blue",
+ "characters": {
+  "Ti": {"ref": "ti_model_sheet.jpg", "voice": "child_boy",
+   "locked": "Tí: chubby 7-year-old Vietnamese boy, round face, rosy cheeks, big dark-brown eyes, short black hair; royal-blue knee-length áo dài with small cloth buttons on the right side, white loose trousers, barefoot",
+   "when_hat": "wearing his black khăn xếp", "when_no_hat": "BAREHEADED, short black hair visible, no hat of any kind"},
+  "Cun": {"ref": "cun_model_sheet.jpg", "voice": null,
+   "locked": "Cún: fluffy golden-yellow puppy, cream-white chest patch and cream muzzle, floppy ears with slightly darker golden tips, big round black eyes, small black nose, curled fluffy tail, NO collar"}
+ },
+ "props": {
+  "khan_xep": {"unique": true, "wearable": true,
+   "locked": "the ONLY khăn xếp: rigid short cylindrical black silk band-hat with tight parallel diagonal pleats, flat top, straight sides (never a turban, never a conical hat)"}
+ },
+ "sets": {
+  "san_lang": {"ref": "set_san_lang.jpg",
+   "locked": "flat packed-dirt Vietnamese village yard; thatched bamboo hut on the right; bamboo fence at the back; banana trees behind; three brown clay jars far left; one LOW knee-height wooden stool middle-left; small green plants at the edges; blue sky with puffy clouds"}
+ }
+}
