@@ -1,0 +1,5 @@
+{"series":"Tí và Cún – Chuyện xóm làng","age":"3-10","style":"3D hoạt hình hài, ấm áp, kiểu Masha/Tom&Jerry nhẹ nhàng",
+ "cast":{"ti":{"sheet":"../bible/ti_model_sheet.jpg","desc":"cậu bé 6 tuổi, áo dài xanh, quần trắng, tóc đen ngắn"},
+         "cun":{"sheet":"../bible/cun_model_sheet.jpg","desc":"chó con lông vàng, tinh nghịch, không nói"}},
+ "sets":{"san_lang":{"plate":"../bible/set_san_lang.jpg","props":["ghế đẩu thấp","chum sành","chòi lá","hàng chuối"]}},
+ "rules":["một đạo cụ chính mỗi cảnh","tái dùng cast+set, không thêm nhân vật mới nếu chưa có model sheet","luật an toàn: ../HUONG_DAN_NOI_DUNG.md"]}
