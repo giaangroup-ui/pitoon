@@ -1,0 +1,9 @@
+{"video":"a.mp4","out":"../canh_mau_v3.mp4","bpm":120,"native_gain":0.55,
+ "lines":[{"who":"Tí","voice":"child_boy","emo":"cheeky","text":"Cún ơi, đứng lại đó!","win":[0,2.6],"src":"native"},
+          {"who":"Tí","voice":"child_boy","emo":"laugh","text":"Ối! Ướt hết rồi, ha ha!","win":[10.6,13.6],"src":"native"}],
+ "sfx":[{"t":2.0,"name":"pop","gain":0.5},{"t":2.3,"name":"bark","gain":0.8},{"t":3.0,"name":"whoosh","gain":0.6},
+        {"t":4.6,"name":"zip","gain":0.3},{"t":5.4,"name":"bark2","gain":0.6},{"t":6.6,"name":"whoosh","gain":0.5},
+        {"t":7.6,"name":"boing","gain":0.7},{"t":8.4,"name":"slide_down","gain":0.5},{"t":8.9,"name":"splash","gain":0.6,"len":1.3},
+        {"t":9.3,"name":"thud","gain":0.8},{"t":9.6,"name":"twinkle","gain":0.5},{"t":13.8,"name":"bark","gain":0.5}],
+ "ambience":[{"name":"birds","gain":0.18},{"name":"wind","gain":0.12,"from":12.5,"to":15}],
+ "mood":[{"t":0,"mood":"playful"},{"t":3,"mood":"chase"},{"t":8.5,"mood":"surprise"},{"t":10.5,"mood":"happy"}]}

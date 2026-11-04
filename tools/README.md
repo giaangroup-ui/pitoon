@@ -6,3 +6,11 @@
    - tự dò đoạn miệng nói trong âm thanh gốc của clip (trong khung `win`), co giãn câu thoại (giữ cao độ) cho khớp miệng;
    - giữ tiếng động gốc (nước bắn, chó sủa), tắt tiếng nói gốc; nhạc nền vui tự tạo, tự hạ nhạc khi có thoại; chuẩn hoá âm lượng −16 LUFS.
 Ví dụ: tools/scene_mau.json → /workspace/ref/pitoon_free/canh_mau_v2.mp4
+
+## v3 (scene.json có lớp âm thanh)
+- `lines[].src`: `native` (giữ giọng nói khớp môi do GenerateVideo tạo – khớp nhất, giọng hợp nhân vật), `edge` (edge-tts + đổi formant để thành giọng trẻ em/ông bà), `piper` (Piper vi_VN, đặt model vào tools/piper/).
+- `sfx`: [{t, name, gain, len}] – file trong tools/sfx hoặc tiếng tổng hợp (whoosh, boing, slide_down/up, pop, thud, twinkle, zip).
+- `ambience`: birds / wind / wind_synth / rain_synth, có from/to.
+- `mood`: [{t, mood}] playful | chase | surprise | sad | happy | tense | sneaky – đổi nhạc đúng phách theo `bpm`.
+- Prompt GenerateVideo nên ghi: squash-and-stretch, anticipation/overshoot, máy quay whip-pan/push-in, mốc thời gian từng hành động và câu thoại trong ngoặc kép.
+Ví dụ: tools/scene_mau_v3.json → /workspace/ref/pitoon_free/canh_mau_v3.mp4
