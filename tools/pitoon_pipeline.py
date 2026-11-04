@@ -11,6 +11,7 @@ scene.json keys (times in seconds):
   mood:     [{t, mood: playful|chase|surprise|sad|happy|tense|sneaky}]  (changes snap to the beat)
   native_gain: level of the clip's own audio outside dialogue (its own barks/splashes)."""
 import json, subprocess as sp, sys, os, wave, tempfile, numpy as np
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from safety_check import check as safety_check
 SR = 44100; HERE = os.path.dirname(os.path.abspath(__file__)); SFXDIR = os.path.join(HERE, "sfx")
 rng = np.random.default_rng(7)
 
@@ -126,8 +127,27 @@ def music(mood_list, dur, bpm):
         a, b = int(t1 * SR) - int(.06 * SR), int(t1 * SR); out[max(0, a):b] *= np.linspace(1, 0, len(out[max(0, a):b]))
     n = len(out); return norm(out * np.minimum(1, np.minimum(np.arange(n) / (SR * .3), (n - np.arange(n)) / (SR * 1.2))), .5)
 
+SAFE_VIDEO = ("Kid-safe content for ages 3-10: characters stay on flat ground, move gently, nobody climbs, falls, "
+              "hits their head or gets hurt; no fire, electricity, deep water, sharp objects; polite to adults; "
+              "only gentle slapstick with soft objects; warm, logical, cute humor.")
+STYLE_VIDEO = ("3D Pixar-style kids comedy, lively squash-and-stretch, anticipation and overshoot, expressive faces, "
+               "dynamic but smooth camera (push-in, pan), bright sunny colors.")
+def video_prompt(cfg):
+    """Build the GenerateVideo prompt from scene.json 'beats' + dialogue + safety rules."""
+    parts = [STYLE_VIDEO, cfg.get("look", "")]
+    for b in cfg.get("beats", []):
+        say = "".join(f' {l["who"]} says clearly with big mouth movements: "{l["text"]}".' for l in cfg.get("lines", []) if b["from"] <= l["win"][0] < b["to"])
+        parts.append(f'{b["from"]}-{b["to"]}s: {b["action"]}.{say}')
+    return " ".join(p for p in parts + [SAFE_VIDEO] if p)
+
 def main(cfg_path):
-    cfg = json.load(open(cfg_path)); d = os.path.dirname(os.path.abspath(cfg_path)); P = lambda f: os.path.join(d, f)
+    cfg = json.load(open(cfg_path))
+    issues = safety_check(cfg)
+    if issues:
+        print("⚠ KIỂM TRA AN TOÀN:\n  " + "\n  ".join(issues))
+        if "--force" not in sys.argv: sys.exit("Dừng: sửa scene.json theo HUONG_DAN_NOI_DUNG.md (hoặc --force).")
+    if "--prompt" in sys.argv: print(video_prompt(cfg)); return
+    d = os.path.dirname(os.path.abspath(cfg_path)); P = lambda f: os.path.join(d, f)
     nat = load(P(cfg["video"])); n = len(nat); dur = n / SR
     vo = np.zeros(n); keep = np.zeros(n); talk = np.zeros(n)
     for j, ln in enumerate(cfg.get("lines", [])):
@@ -158,4 +178,4 @@ def main(cfg_path):
     run("ffmpeg", "-y", "-i", P(cfg["video"]), "-i", P("_mix.wav"), "-map", "0:v:0", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
         "-af", "loudnorm=I=-16:TP=-1.5", "-shortest", P(cfg["out"]))
     print("OK", os.path.abspath(P(cfg["out"])))
-if __name__ == "__main__": main(sys.argv[1])
+if __name__ == "__main__": main([a for a in sys.argv[1:] if not a.startswith("--")][0])

@@ -14,3 +14,10 @@ Ví dụ: tools/scene_mau.json → /workspace/ref/pitoon_free/canh_mau_v2.mp4
 - `mood`: [{t, mood}] playful | chase | surprise | sad | happy | tense | sneaky – đổi nhạc đúng phách theo `bpm`.
 - Prompt GenerateVideo nên ghi: squash-and-stretch, anticipation/overshoot, máy quay whip-pan/push-in, mốc thời gian từng hành động và câu thoại trong ngoặc kép.
 Ví dụ: tools/scene_mau_v3.json → /workspace/ref/pitoon_free/canh_mau_v3.mp4
+
+## v4 – An toàn cho trẻ em
+- Đọc `tools/HUONG_DAN_NOI_DUNG.md` trước khi viết kịch bản.
+- scene.json có thêm `title`, `lesson`, `look`, `beats` [{from,to,action}].
+- `python3 tools/pitoon_pipeline.py scene.json --prompt` → in prompt GenerateVideo (tự gắn luật an toàn + câu thoại theo mốc thời gian).
+- Pipeline tự chạy `tools/safety_check.py`; có hành động nguy hiểm / thiếu bài học / câu thoại > 12 từ → dừng (trừ khi `--force`).
+Ví dụ: tools/scene_mau_v4.json → /workspace/ref/pitoon_free/canh_mau_v4.mp4

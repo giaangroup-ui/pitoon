@@ -1,0 +1,143 @@
+{
+ "video": "a.mp4",
+ "out": "../canh_mau_v4.mp4",
+ "bpm": 120,
+ "native_gain": 0.55,
+ "title": "Cún đội khăn xếp",
+ "lesson": "Muốn mượn đồ thì phải hỏi trước.",
+ "look": "Same village yard as the first frame: flat dirt yard, thatched hut, banana trees, bamboo fence. Boy in royal-blue áo dài and a rigid black pleated flat-topped khăn xếp (never a turban); fluffy golden puppy.",
+ "beats": [
+  {
+   "from": 0,
+   "to": 3,
+   "action": "the boy bows and takes off his khăn xếp, puts it gently on a low wooden stool beside him to tie his sash; the puppy watches it with sparkling curious eyes, tail wagging"
+  },
+  {
+   "from": 3,
+   "to": 5,
+   "action": "the puppy tiptoes like a sneaky cartoon spy, grabs the soft khăn xếp with its mouth and plops it on its own head, it slides over one eye; the boy turns around, eyes pop wide, mouth makes a big O"
+  },
+  {
+   "from": 5,
+   "to": 10,
+   "action": "the puppy trots proudly in a circle around the flat yard wearing the hat, the boy jogs slowly after it on the flat ground, laughing, arms out; they go round and round, chickens flap out of the way, leaves swirl"
+  },
+  {
+   "from": 10,
+   "to": 15,
+   "action": "the puppy stops, sits, tilts its head with the hat crooked and gives a funny proud face; the boy kneels, giggles and says the first line, then gently straightens the hat on the puppy's head and says the second line with a kind smile, wagging a finger softly"
+  }
+ ],
+ "lines": [
+  {
+   "who": "Tí",
+   "voice": "child_boy",
+   "emo": "surprised",
+   "text": "Ơ! Khăn của anh đâu rồi?",
+   "win": [
+    2.5,
+    6.5
+   ],
+   "src": "native"
+  },
+  {
+   "who": "Tí",
+   "voice": "child_boy",
+   "emo": "laugh",
+   "text": "Cún đội giống ông nội ghê! Hì hì!",
+   "win": [
+    10,
+    12.6
+   ],
+   "src": "native"
+  },
+  {
+   "who": "Tí",
+   "voice": "child_boy",
+   "emo": "happy",
+   "text": "Lần sau muốn mượn thì hỏi anh nhé!",
+   "win": [
+    12.6,
+    15
+   ],
+   "src": "native"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 3.0,
+   "name": "zip",
+   "gain": 0.25
+  },
+  {
+   "t": 3.6,
+   "name": "pop",
+   "gain": 0.5
+  },
+  {
+   "t": 4.0,
+   "name": "boing",
+   "gain": 0.5
+  },
+  {
+   "t": 5.2,
+   "name": "bark",
+   "gain": 0.6
+  },
+  {
+   "t": 6.2,
+   "name": "whoosh",
+   "gain": 0.4
+  },
+  {
+   "t": 8.0,
+   "name": "bark2",
+   "gain": 0.5
+  },
+  {
+   "t": 8.6,
+   "name": "whoosh",
+   "gain": 0.4
+  },
+  {
+   "t": 10.1,
+   "name": "twinkle",
+   "gain": 0.4
+  },
+  {
+   "t": 14.4,
+   "name": "bark",
+   "gain": 0.45
+  }
+ ],
+ "ambience": [
+  {
+   "name": "birds",
+   "gain": 0.18
+  },
+  {
+   "name": "wind",
+   "gain": 0.1,
+   "from": 6,
+   "to": 10
+  }
+ ],
+ "mood": [
+  {
+   "t": 0,
+   "mood": "playful"
+  },
+  {
+   "t": 3,
+   "mood": "sneaky"
+  },
+  {
+   "t": 5,
+   "mood": "chase"
+  },
+  {
+   "t": 10,
+   "mood": "happy"
+  }
+ ]
+}
