@@ -152,6 +152,20 @@ def main(cfg_path):
         print(json.dumps(continuity.plan(cfg, os.path.dirname(os.path.abspath(cfg_path)), SAFE_VIDEO, STYLE_VIDEO), ensure_ascii=False, indent=1)); return
     if cfg.get("shots") and not os.path.exists(os.path.join(os.path.dirname(os.path.abspath(cfg_path)), cfg["video"])):
         dd = os.path.dirname(os.path.abspath(cfg_path)); ids = [s["id"] for s in cfg["shots"]]; T = cfg.get("transition_s", .3)
+        # optional beat-synced cuts: snap shot boundaries to music onsets (cfg.beat_snap true)
+        if cfg.get("beat_snap"):
+            try:
+                import sys as _sys; _sys.path.insert(0, os.path.join(os.path.dirname(__file__), "motion"))
+                from beats import load_wav, onset_beats, snap as _snap
+                stem = os.path.join(dd, "_stem_music.wav")
+                if os.path.exists(stem):
+                    _y,_sr = load_wav(stem); _beats,_ = onset_beats(_y,_sr)
+                    cuts = [s["to"] for s in cfg["shots"][:-1]]
+                    snapped = _snap(cuts, _beats)
+                    for i,s in enumerate(cfg["shots"][:-1]): s["to"] = snapped[i]; cfg["shots"][i+1]["from"] = snapped[i]
+                    print("beat-snap cuts", cuts, "→", snapped)
+            except Exception as e:
+                print("beat-snap skipped:", e)
         ins = sum([["-i", os.path.join(dd, f"shot_{i}.mp4")] for i in ids], [])
         # soft cut: each clip (except last) holds its last frame T s, then xfade T s -> timing of lines/SFX unchanged
         fc = []; L = []

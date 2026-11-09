@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset=utf-8>
+<link rel=stylesheet href=base.css>
+<style>
+body{background:linear-gradient(180deg,#2B3FA0 0%,#4A6FE3 40%,#FFE08A 100%);font-family:DejaVu Sans,Segoe UI,system-ui,sans-serif}
+.card{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%) scale(0);width:86%;text-align:center;
+  background:rgba(255,255,255,.95);border-radius:1.4em;padding:1.4em 1em;box-shadow:0 14px 0 #E2B04A,0 0 0 8px #2B3FA0,0 24px 40px rgba(0,0,0,.3)}
+.card h1{font-size:clamp(32px,8vw,80px);color:#2B3FA0;font-weight:900;line-height:1.2}
+.card p{margin-top:.6em;font-size:clamp(16px,3.5vw,32px);color:#E26A2C;font-weight:700}
+.ep{position:absolute;top:8%;left:50%;transform:translateX(-50%) scale(0);background:#FF6B9A;color:#fff;font-weight:900;
+  padding:.4em 1.2em;border-radius:2em;font-size:clamp(16px,3.5vw,28px);box-shadow:0 4px 0 #2B3FA0}
+</style></head><body>
+<div class=stage>
+  <div class=bg style="background-image:url('../assets/san.png');opacity:.25;position:absolute;inset:0;background-size:cover"></div>
+  <div class=ep id=ep>Tập mới</div>
+  <div class=card id=card>
+    <h1 id=title>Cún đội khăn xếp</h1>
+    <p id=lesson>Muốn mượn đồ thì phải hỏi trước</p>
+  </div>
+</div>
+<script>
+const q=new URLSearchParams(location.search);
+if(q.get('title')) title.textContent=q.get('title');
+if(q.get('lesson')) lesson.textContent=q.get('lesson');
+if(q.get('ep')) ep.textContent=q.get('ep');
+class S{constructor(x=0,k=240,c=14){this.x=x;this.v=0;this.k=k;this.c=c;this.t=x}
+set(t){this.t=t} step(dt){const a=-this.k*(this.x-this.t)-this.c*this.v;this.v+=a*dt;this.x+=this.v*dt;return this.x}}
+const sC=new S(0), sE=new S(0); let start=0, prev=0;
+function f(now){if(!start)start=now; const t=(now-start)/1000,dt=Math.min(.033,(now-prev)/1000||.016);prev=now;
+  if(t>.1)sE.set(1); if(t>.35)sC.set(1);
+  const C=sC.step(dt),E=sE.step(dt), bob=Math.sin(t*2.5)*3;
+  document.querySelector('.stage').style.transform=`translateY(${bob}px)`;
+  card.style.transform=`translate(-50%,-50%) scale(${.3+C*.75}) rotate(${(1-C)*8}deg)`;
+  ep.style.transform=`translateX(-50%) scale(${E})`;
+  requestAnimationFrame(f)}
+requestAnimationFrame(f); window.__DURATION=2.8; window.__READY=true;
+</script></body></html>

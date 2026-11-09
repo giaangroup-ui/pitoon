@@ -1,0 +1,44 @@
+<!doctype html><html><head><meta charset=utf-8>
+<link rel=stylesheet href=base.css>
+<style>
+body{background:linear-gradient(160deg,#7EC8E3 0%,#FFE08A 55%,#FF9F6B 100%);font-family:DejaVu Sans,Segoe UI,system-ui,sans-serif}
+.logo{font-size:clamp(48px,12vw,140px);position:absolute;left:50%;top:42%;transform:translate(-50%,-50%) scale(0);font-weight:900;color:#FFF;text-shadow:0 4px 0 #2B3FA0,0 8px 16px rgba(0,0,0,.25)}
+.series{position:absolute;left:50%;top:62%;transform:translate(-50%,0) scale(0);font-size:clamp(22px,4.5vw,48px);color:#2B3FA0;font-weight:800;text-align:center;text-shadow:0 2px 0 #fff;width:90%}
+.char{position:absolute;bottom:6%;width:34%;height:40%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 10px 8px rgba(0,0,0,.25));opacity:0}
+.char.ti{left:3%} .char.cun{right:3%}
+.blob{position:absolute;border-radius:50%;opacity:.85}
+.spark{position:absolute;width:18px;height:18px;background:#FFE08A;border-radius:50%;box-shadow:0 0 12px #FFE08A}
+</style></head><body>
+<div class=stage id=stage>
+  <div class=bg style="background-image:url('../assets/san.png');opacity:.35;filter:saturate(1.2) brightness(1.1);position:absolute;inset:0;background-size:cover"></div>
+  <div class="blob" style="width:40%;height:28%;background:#FF6B9A;left:-10%;top:-8%"></div>
+  <div class="blob" style="width:35%;height:25%;background:#7ED957;right:-8%;top:10%"></div>
+  <img class="char ti" id=ti src="../assets/ti.png" alt="">
+  <img class="char cun" id=cun src="../assets/cun.png" alt="">
+  <div class=logo id=logo>PiToon</div>
+  <div class=series id=series>Tí và Cún – Chuyện xóm làng</div>
+</div>
+<script>
+class S{constructor(x=0,k=260,c=14){this.x=x;this.v=0;this.k=k;this.c=c;this.t=x}
+set(t){this.t=t} step(dt){const a=-this.k*(this.x-this.t)-this.c*this.v;this.v+=a*dt;this.x+=this.v*dt;return this.x}}
+const logo=document.getElementById('logo'), series=document.getElementById('series');
+const ti=document.getElementById('ti'), cun=document.getElementById('cun');
+const sLogo=new S(0), sSer=new S(0,200,16), sTi=new S(0,180,14), sCun=new S(0,180,14);
+let start=0, prev=0, sparked=0;
+function frame(now){
+  if(!start) start=now; const t=(now-start)/1000; const dt=Math.min(.033,(now-prev)/1000||.016); prev=now;
+  if(t>.15) sLogo.set(1); if(t>.9) sSer.set(1); if(t>.4){sTi.set(1);sCun.set(1)}
+  const L=sLogo.step(dt), S=sSer.step(dt), T=sTi.step(dt), C=sCun.step(dt);
+  const bob=Math.sin(t*2.5)*4;
+  document.getElementById('stage').style.transform=`translateY(${bob}px)`;
+  logo.style.transform=`translate(-50%,-50%) scale(${.2+L*.95}) rotate(${(1-L)*-12}deg)`;
+  logo.style.opacity=Math.min(1,L*1.4);
+  series.style.transform=`translate(-50%,0) scale(${.5+S*.5})`; series.style.opacity=S;
+  ti.style.transform=`translateY(${(1-T)*40}%)`; ti.style.opacity=T;
+  cun.style.transform=`translateY(${(1-C)*40}%)`; cun.style.opacity=C;
+  if(L>.98 && !sparked){sparked=1; for(let i=0;i<8;i++){const s=document.createElement('div');s.className='spark';
+    s.style.left=(40+Math.random()*20)+'%';s.style.top=(35+Math.random()*20)+'%';document.getElementById('stage').appendChild(s)}}
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame); window.__DURATION=3.6; window.__READY=true;
+</script></body></html>

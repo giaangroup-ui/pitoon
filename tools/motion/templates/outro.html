@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset=utf-8>
+<link rel=stylesheet href=base.css>
+<style>
+body{background:linear-gradient(160deg,#FFE08A,#7EC8E3 50%,#FF9F6B);font-family:DejaVu Sans,Segoe UI,system-ui,sans-serif}
+.cta{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%) scale(0);font-size:clamp(28px,7vw,64px);
+  font-weight:900;color:#fff;text-align:center;text-shadow:0 4px 0 #2B3FA0,0 8px 18px rgba(0,0,0,.3);width:90%;line-height:1.25}
+.lesson{position:absolute;left:50%;bottom:26%;transform:translateX(-50%) scale(0);width:84%;font-size:clamp(16px,3.6vw,30px);text-align:center;
+  font-weight:700;color:#2B3FA0;background:rgba(255,255,255,.92);border-radius:1.2em;padding:.55em 1em;box-shadow:0 6px 0 #E2B04A}
+.char{position:absolute;bottom:3%;width:34%;height:38%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 10px 8px rgba(0,0,0,.25));opacity:0}
+.char.ti{left:3%} .char.cun{right:3%}
+</style></head><body>
+<div class=stage>
+  <div class=bg style="background-image:url('../assets/san.png');opacity:.3;position:absolute;inset:0;background-size:cover"></div>
+  <img class="char ti" id=ti src="../assets/ti.png" alt="">
+  <img class="char cun" id=cun src="../assets/cun.png" alt="">
+  <div class=cta id=cta>Nhớ follow PiToon nhé!</div>
+  <div class=lesson id=lesson>Bài học: Muốn mượn đồ thì phải hỏi trước.</div>
+</div>
+<script>
+const q=new URLSearchParams(location.search); if(q.get('lesson')) lesson.textContent='Bài học: '+q.get('lesson');
+class S{constructor(x=0,k=200,c=14){this.x=x;this.v=0;this.k=k;this.c=c;this.t=x}
+set(t){this.t=t} step(dt){const a=-this.k*(this.x-this.t)-this.c*this.v;this.v+=a*dt;this.x+=this.v*dt;return this.x}}
+const sA=new S,sL=new S,sT=new S,sC=new S; let start=0, prev=0;
+function f(now){if(!start)start=now; const t=(now-start)/1000,dt=Math.min(.033,(now-prev)/1000||.016);prev=now;
+  if(t>.1)sA.set(1); if(t>.5)sL.set(1); if(t>.2){sT.set(1);sC.set(1)}
+  const A=sA.step(dt),L=sL.step(dt),T=sT.step(dt),C=sC.step(dt);
+  const bob=Math.sin(t*2.5)*3, w=Math.sin(t*6)*10;
+  document.querySelector('.stage').style.transform=`translateY(${bob}px)`;
+  cta.style.transform=`translate(-50%,-50%) scale(${.4+A*.7})`;
+  lesson.style.transform=`translateX(-50%) scale(${.5+L*.5})`;
+  ti.style.opacity=T; ti.style.transform=`translateY(${(1-T)*30}%) rotate(${w}deg)`;
+  cun.style.opacity=C; cun.style.transform=`translateY(${(1-C)*30}%) rotate(${-w}deg)`;
+  requestAnimationFrame(f)}
+requestAnimationFrame(f); window.__DURATION=3.2; window.__READY=true;
+</script></body></html>

@@ -38,7 +38,7 @@ def run(cfg_path, film, report=None, grid_dir=None):
     item("Độ dài", want[0] <= dur <= want[1], f"{dur:.2f}s (yêu cầu {want[0]}–{want[1]}s)")
     bd = sh("ffmpeg", "-i", film, "-vf", "blackdetect=d=0.2:pix_th=0.1", "-an", "-f", "null", "-").stderr
     item("Không có khung đen", "black_start" not in bd, ";".join(re.findall(r"black_start:\S+ black_end:\S+", bd)))
-    fz = sh("ffmpeg", "-i", film, "-vf", "freezedetect=n=0.003:d=1.0", "-an", "-f", "null", "-").stderr
+    fz = sh("ffmpeg", "-i", film, "-vf", "freezedetect=n=0.003:d=" + str(cfg.get("qc", {}).get("freeze_d", 1.0)) + "", "-an", "-f", "null", "-").stderr
     item("Không đứng hình > 1s", "freeze_start" not in fz, ";".join(re.findall(r"freeze_start: \S+", fz)))
     # cut smoothness: mean abs frame diff at shot boundaries vs typical
     cuts = [sh_["to"] for sh_ in cfg.get("shots", [])][:-1]; bad = []
