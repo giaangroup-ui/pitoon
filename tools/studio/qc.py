@@ -51,16 +51,18 @@ def run(cfg_path, film, report=None, grid_dir=None):
             if dd > 18: bad.append(f"{t}s Δ={dd:.1f}")
     item("Chuyển cảnh mượt (không giật tại điểm nối)", not bad, "; ".join(bad))
     # 3 audio – speech
-    x = load(film); lines = cfg.get("lines", []); used = set(); det = []
-    # optional: only ASR the dialogue span (skip MG intro/outro whose music fools Whisper)
-    sr = cfg.get("qc", {}).get("speech_range")
-    if sr:
-        a, b = int(sr[0] * SR), int(sr[1] * SR)
-        words = whisper(x[a:b])
-        for w in words:  # shift timestamps back to film time
-            w.start += sr[0]; w.end += sr[0]
+    lines = cfg.get("lines", []); used = set(); det = []
+    # optional speech_film: ASR a pre-MG body file (timestamps +offset); else speech_range slice; else whole film
+    sf = cfg.get("qc", {}).get("speech_film"); sr = cfg.get("qc", {}).get("speech_range"); off = 0.0
+    if sf and os.path.exists(sf):
+        x = load(sf); words = whisper(x); off = float(cfg.get("qc", {}).get("speech_offset", 0))
+        for w in words: w.start += off; w.end += off
+    elif sr:
+        x = load(film); a, b = int(sr[0] * SR), int(sr[1] * SR)
+        words = whisper(x[a:b]); off = sr[0]
+        for w in words: w.start += off; w.end += off
     else:
-        words = whisper(x)
+        words = whisper(load(film))
     ok_all = True; lip_ok = True
     for i, l in enumerate(lines):
         w0, w1 = l["win"]; ws = [w for w in words if w0 - .3 <= w.start < w1]
