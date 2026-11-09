@@ -51,7 +51,16 @@ def run(cfg_path, film, report=None, grid_dir=None):
             if dd > 18: bad.append(f"{t}s Δ={dd:.1f}")
     item("Chuyển cảnh mượt (không giật tại điểm nối)", not bad, "; ".join(bad))
     # 3 audio – speech
-    x = load(film); words = whisper(x); lines = cfg.get("lines", []); used = set(); det = []
+    x = load(film); lines = cfg.get("lines", []); used = set(); det = []
+    # optional: only ASR the dialogue span (skip MG intro/outro whose music fools Whisper)
+    sr = cfg.get("qc", {}).get("speech_range")
+    if sr:
+        a, b = int(sr[0] * SR), int(sr[1] * SR)
+        words = whisper(x[a:b])
+        for w in words:  # shift timestamps back to film time
+            w.start += sr[0]; w.end += sr[0]
+    else:
+        words = whisper(x)
     ok_all = True; lip_ok = True
     for i, l in enumerate(lines):
         w0, w1 = l["win"]; ws = [w for w in words if w0 - .3 <= w.start < w1]
