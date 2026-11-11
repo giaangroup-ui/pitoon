@@ -1,0 +1,233 @@
+[
+  {
+    "id": "S01",
+    "duration_sec": 9,
+    "title": "Quán cà phê sau cơn mưa",
+    "characters": [
+      "Thảo Nguyên",
+      "Thảo My"
+    ],
+    "wardrobe": "Trang phục mặc định theo master: Thảo Nguyên áo than chì/đen graphic, dây chuyền chữ V vàng, quần cargo be; Thảo My áo trắng in hình hoạt hình, quần cargo/jean xanh. Giày sneaker như model sheet.",
+    "camera": "Toàn cảnh thiết lập quán, chuyển sang trung cảnh hai chị em ở bàn cửa sổ; ống kính 35mm, tầm mắt trẻ em.",
+    "action": "Quán cà phê Việt Nam ấm áp sau mưa. Thảo My đọc sách; Thảo Nguyên làm mặt tinh nghịch; hai chị em bật cười tự nhiên.",
+    "dialogue": "Thảo Nguyên: Này My, em đọc gì mà chăm chú thế? / Thảo My: Bí mật của em là… chị đừng làm em mất tập trung!",
+    "narration": "Chiều thứ bảy, Thảo Nguyên và Thảo My ghé vào quán cà phê quen thuộc.",
+    "image_prompt_en": "Use the exact approved sister master image and individual character references. Two Vietnamese sisters at a cozy cafe window table after rain. Older sister Thao Nguyen: wavy layered shoulder-length black hair, round black glasses, charcoal-black oversized graphic sweatshirt with gray front graphic, dark bead necklace with small gold V pendant, beige cargo trousers, white sneakers. Younger sister Thao My: straight black bob with full blunt bangs, translucent pink round glasses, tiny gold hoop earrings, white colorful cartoon-print T-shirt, blue jeans/cargo pants, white-pink sneakers. Thao My reads a book while Thao Nguyen makes a playful face. Cinematic high-quality 3D anime, natural child proportions, physically coherent depth, 16:9, 2K, no text.",
+    "motion_prompt_en": "Slow gentle camera push-in. Thao My turns one page; Thao Nguyen makes a small playful expression; both smile naturally. Preserve exact face geometry, glasses, hair, outfit and height difference. Natural blinking and subtle breathing only.",
+    "image_prompt_vi": "Dùng đúng ảnh master đã duyệt và ảnh tham chiếu riêng của hai nhân vật. Hai chị em Việt Nam ngồi cạnh cửa sổ quán cà phê sau mưa. Thảo Nguyên tóc đen layer gợn ngang vai, kính tròn đen, áo graphic rộng màu than chì, dây chuyền chữ V vàng, quần cargo be, sneaker trắng. Thảo My tóc bob đen thẳng mái bằng, kính tròn hồng trong, bông tai vàng nhỏ, áo thun trắng in hình hoạt hình, quần jean xanh, sneaker trắng-hồng. My đọc sách, chị Nguyên làm mặt tinh nghịch. Hoạt hình 3D Anime điện ảnh, khối 3D rõ, giải phẫu tự nhiên, 16:9, 2K, không chữ.",
+    "audio": "Âm thanh quán cà phê, giọt mưa, piano vui nhẹ."
+  },
+  {
+    "id": "S02",
+    "duration_sec": 9,
+    "title": "Cậu bé bên mái hiên",
+    "characters": [
+      "Thảo Nguyên",
+      "Thảo My",
+      "Khang"
+    ],
+    "wardrobe": "Hai chị em giữ nguyên trang phục mặc định từ S01. Khang: áo nâu cũ, quần short tối màu, dép đơn giản.",
+    "camera": "Góc qua vai từ phía hai chị em nhìn ra mái hiên; trung-toàn cảnh; giữ khoảng cách tôn trọng.",
+    "action": "Khang ngồi yên dưới mái hiên, ôm chiếc túi nhỏ. Cậu có vẻ đói và rụt rè, không diễn cử chỉ khẩn cầu quá mức.",
+    "dialogue": "Thảo My: Chị Nguyên ơi, bạn ấy chắc đang cần giúp đỡ. / Thảo Nguyên: Ừ. Mình hỏi mẹ trước nhé.",
+    "narration": "Khi chuẩn bị ra về, Thảo My nhìn thấy một cậu bé ngồi bên mái hiên.",
+    "image_prompt_en": "Use exact approved sister references and keep their approved appearance. A fictional Vietnamese boy about 10, short slightly messy black hair, kind eyes, small build, faded brown shirt, dark simple shorts and sandals, sits quietly beneath a cafe awning after rain holding a small bag. The two sisters are foreground three-quarter/back view; Thao Nguyen black glasses and dark graphic sweatshirt; Thao My pink glasses and white cartoon tee. Respectful, empathetic framing, no poverty caricature, cinematic 3D anime, 16:9, 2K, no text.",
+    "motion_prompt_en": "Slow pan from the sisters toward Khang. Khang looks up gently, hands remain relaxed around his bag. Keep face and wardrobe stable. No exaggerated begging, no humiliating close-up.",
+    "image_prompt_vi": "Dùng đúng tham chiếu hai chị em đã duyệt. Khang là bé trai Việt Nam hư cấu khoảng 10 tuổi, tóc đen ngắn hơi rối, mắt hiền, vóc dáng nhỏ, áo nâu cũ, quần short tối màu, dép đơn giản; ngồi yên dưới mái hiên quán cà phê sau mưa, ôm túi nhỏ. Hai chị em ở tiền cảnh góc 3/4 hoặc nhìn từ sau. Khung hình tôn trọng, không cường điệu nghèo khó, 3D Anime điện ảnh, 16:9, 2K, không chữ.",
+    "audio": "Âm thanh phố nhẹ, xe xa xa, nhạc suy tư ấm áp."
+  },
+  {
+    "id": "S03",
+    "duration_sec": 10,
+    "title": "Chia sẻ chiếc bánh",
+    "characters": [
+      "Thảo Nguyên",
+      "Thảo My",
+      "Khang",
+      "Mẹ"
+    ],
+    "wardrobe": "Hai chị em trang phục mặc định. Khang áo nâu cũ. Mẹ mặc trang phục đời thường giản dị.",
+    "camera": "Trung cảnh ngang tầm mắt, góc 3/4; cận tay trao bánh rồi trở lại gương mặt.",
+    "action": "Mẹ đứng cạnh hai chị em. Thảo My đưa bánh được gói sạch; Khang nhận bằng hai tay.",
+    "dialogue": "Thảo My: Bạn ăn chiếc bánh này nhé. Mình tên Thảo My. / Khang: Cảm ơn bạn. Mình tên Khang. / Thảo Nguyên: Mình là Thảo Nguyên, chị của My.",
+    "narration": "Một lời chào và chiếc bánh nhỏ đã mở đầu cho tình bạn.",
+    "image_prompt_en": "Exact approved Thao Nguyen and Thao My references, with their approved dark graphic sweatshirt and white cartoon-print tee. Their mother stands nearby. Thao My gently offers a clean wrapped bread to Khang, the fictional 10-year-old boy in a faded brown shirt, who receives it respectfully with both hands. Eye-level medium 3/4 composition, believable child hands, warm cafe entrance, cinematic 3D anime, 16:9, no text.",
+    "motion_prompt_en": "Small natural hand movement as the bread is offered and accepted. Khang gives a shy smile and nod. Mother remains close and reassuring. Stable camera, preserve faces and clothing.",
+    "image_prompt_vi": "Giữ đúng hai nhân vật theo ảnh master: Thảo Nguyên áo graphic tối màu, kính đen; Thảo My áo trắng in hình hoạt hình, kính hồng. Mẹ đứng gần. Thảo My nhẹ nhàng đưa chiếc bánh sạch được gói kín cho Khang; Khang nhận bằng hai tay. Trung cảnh góc 3/4 ngang tầm mắt, bàn tay tự nhiên, ánh sáng ấm, 3D Anime điện ảnh, 16:9, không chữ.",
+    "audio": "Nhạc dây nhẹ hy vọng, âm thanh giấy gói bánh, nền quán."
+  },
+  {
+    "id": "S04",
+    "duration_sec": 10,
+    "title": "Quyển vở cũ và ước mơ",
+    "characters": [
+      "Thảo Nguyên",
+      "Thảo My",
+      "Khang"
+    ],
+    "wardrobe": "Trang phục mặc định của hai chị em; Khang áo nâu cũ và quần short.",
+    "camera": "Cận cảnh quyển vở/bức tranh; rack focus chậm sang ba gương mặt.",
+    "action": "Khang mở túi, cho xem quyển vở cũ và bức tranh một ngôi trường. Hai chị em quan sát với sự quan tâm chân thành.",
+    "dialogue": "Thảo My: Bạn vẽ ngôi trường đẹp quá! / Khang: Mình mong được đi học lại. / Thảo Nguyên: Tụi mình sẽ kể với mẹ.",
+    "narration": "Trong chiếc túi nhỏ là một quyển vở cũ và ước mơ được trở lại trường.",
+    "image_prompt_en": "Use exact sister identity references, current outfits and proportions. At the cafe table, Khang opens a small worn notebook showing a hopeful childlike drawing of a Vietnamese school with trees and a playground. Thao My in pink glasses leans in with interest; Thao Nguyen in black glasses listens warmly. Close-up drawing foreground, faces softly visible, 3D anime cinematic, 16:9, 2K, no readable text.",
+    "motion_prompt_en": "Khang gently opens the notebook. Camera focuses on the school drawing, then smoothly racks focus to the sisters’ caring expressions. No face morphing, no hand distortions.",
+    "image_prompt_vi": "Dùng đúng ảnh tham chiếu hai chị em và trang phục đang mặc. Khang mở quyển vở cũ, bên trong là bức tranh trẻ thơ vẽ ngôi trường Việt Nam có hàng cây và sân chơi. Thảo My kính hồng chăm chú nhìn; Thảo Nguyên kính đen lắng nghe dịu dàng. Cận cảnh tranh ở tiền cảnh, gương mặt thấy rõ phía sau, 3D Anime điện ảnh, 16:9, 2K, không chữ dễ đọc.",
+    "audio": "Piano dịu, tiếng lật trang giấy."
+  },
+  {
+    "id": "S05",
+    "duration_sec": 10,
+    "title": "Kể với mẹ",
+    "characters": [
+      "Thảo Nguyên",
+      "Thảo My",
+      "Mẹ"
+    ],
+    "wardrobe": "Hai chị em giữ trang phục mặc định. Mẹ giữ tạo hình thống nhất ở các cảnh trong nhà.",
+    "camera": "Trung cảnh trong phòng khách, ngang tầm mắt, bố cục tam giác gia đình.",
+    "action": "Hai chị em kể chuyện. Mẹ lắng nghe và giải thích cần nhờ người lớn đáng tin cậy để tìm sự hỗ trợ phù hợp.",
+    "dialogue": "Mẹ: Khi gặp một bạn nhỏ cần giúp đỡ, các con hãy báo người lớn đáng tin cậy nhé. / Thảo Nguyên: Dạ, tụi con hiểu rồi ạ. / Thảo My: Con muốn tặng bạn một quyển vở mới!",
+    "narration": "Hai chị em hiểu rằng lòng tốt cần đi cùng sự an toàn và đúng cách.",
+    "image_prompt_en": "Cozy Vietnamese family living room. Mother listens carefully to Thao Nguyen and Thao My. Keep the sisters exactly as approved: older sister with wavy layered hair, black round glasses, charcoal graphic top and V pendant; younger sister with blunt bob, pink round glasses, gold hoops, white cartoon tee. Gentle supportive conversation, warm natural lighting, cinematic 3D anime, 16:9, no text.",
+    "motion_prompt_en": "Mother nods gently; the sisters speak in turn and listen. Natural eye contact, subtle gestures, no exaggerated mouth motion. Keep all faces and outfits consistent.",
+    "image_prompt_vi": "Phòng khách gia đình Việt Nam ấm cúng. Mẹ chăm chú lắng nghe Thảo Nguyên và Thảo My. Giữ đúng mẫu chị tóc layer gợn, kính đen, áo graphic tối và dây chuyền chữ V; em tóc bob mái bằng, kính hồng, bông tai vàng, áo trắng in hình. Cuộc trò chuyện dịu dàng, ánh sáng tự nhiên, 3D Anime điện ảnh, 16:9, không chữ.",
+    "audio": "Guitar mộc ấm, âm thanh sinh hoạt gia đình."
+  },
+  {
+    "id": "S06",
+    "duration_sec": 9,
+    "title": "Chuẩn bị món quà",
+    "characters": [
+      "Thảo Nguyên",
+      "Thảo My"
+    ],
+    "wardrobe": "Trang phục mặc định; không đổi giữa các cảnh cùng ngày.",
+    "camera": "Cận cảnh từ trên xuống các dụng cụ học tập, sau đó trung cảnh hai chị em đóng túi quà.",
+    "action": "Hai chị em xếp vở, sách, bút màu và quần áo sạch còn tốt vào túi.",
+    "dialogue": "Thảo My: Con tặng bạn quyển vở mới nhé! / Thảo Nguyên: Chị sẽ chọn thêm hộp bút màu.",
+    "narration": "Hai chị em chọn những món đồ còn tốt để gửi tặng Khang.",
+    "image_prompt_en": "Exact approved Thao Nguyen and Thao My models in their default outfits. They carefully pack clean notebooks, colored pencils, a few good books and folded clean clothes into a simple gift bag on a tidy table. Close top-down insert followed by a medium composition with both faces visible. Warm 3D anime, realistic props, 16:9, 2K, no text.",
+    "motion_prompt_en": "Hands place notebooks and pencils into the bag one at a time; sisters exchange a small smile. Maintain correct fingers, stable props, fixed facial identity and clothing.",
+    "image_prompt_vi": "Hai chị em đúng mẫu 3D đã duyệt, mặc trang phục mặc định. Cả hai cẩn thận xếp vở mới, bút màu, vài quyển sách còn tốt và quần áo sạch gấp gọn vào túi quà trên bàn ngăn nắp. Cận cảnh từ trên xuống rồi chuyển sang trung cảnh thấy rõ mặt hai bé. 3D Anime ấm áp, đạo cụ chân thực, 16:9, 2K, không chữ.",
+    "audio": "Nhạc vui nhẹ, tiếng giấy và bút chì."
+  },
+  {
+    "id": "S07",
+    "duration_sec": 9,
+    "title": "Trao món quà cùng người lớn",
+    "characters": [
+      "Thảo Nguyên",
+      "Thảo My",
+      "Khang",
+      "Mẹ"
+    ],
+    "wardrobe": "Hai chị em trang phục mặc định. Khang trang phục đầu truyện. Mẹ đi cùng.",
+    "camera": "Trung cảnh nhóm tại nơi công cộng an toàn, góc 3/4; mẹ ở gần trẻ em.",
+    "action": "Mẹ đồng hành khi hai chị em trao túi đồ học tập cho Khang. Khang nhận với lòng biết ơn và sự tự trọng.",
+    "dialogue": "Khang: Mình cảm ơn. Mình sẽ giữ gìn thật cẩn thận. / Thảo My: Mình mong bạn sớm được đến trường.",
+    "narration": "Món quà nhỏ mang theo lời chúc và sự động viên chân thành.",
+    "image_prompt_en": "Mother accompanies Thao Nguyen and Thao My as they give Khang a neat bag of school supplies in a safe public community setting. Khang accepts with dignity and a grateful gentle smile. Keep sisters exact to approved image: Nguyen black glasses, wavy hair, charcoal graphic sweatshirt, V necklace; My pink glasses, blunt bob, white cartoon tee, gold hoops. Warm 3D anime, 16:9, no text.",
+    "motion_prompt_en": "Khang accepts the bag with both hands, looks at the sisters and smiles. Mother stands close, reassuring. Slow stable camera; preserve all identities and clothes.",
+    "image_prompt_vi": "Mẹ đi cùng Thảo Nguyên và Thảo My trao túi đồ học tập cho Khang tại địa điểm công cộng an toàn. Khang nhận bằng hai tay, nét mặt biết ơn nhưng tự trọng. Giữ chính xác kính đen, tóc gợn, áo tối graphic của Thảo Nguyên; kính hồng, bob mái bằng, áo trắng hoạt hình và bông tai vàng của Thảo My. 3D Anime ấm áp, 16:9, không chữ.",
+    "audio": "Nhạc hy vọng nhẹ, âm thanh ngoài trời."
+  },
+  {
+    "id": "S08",
+    "duration_sec": 10,
+    "title": "Ngày trở lại trường",
+    "characters": [
+      "Khang",
+      "Thảo Nguyên",
+      "Thảo My",
+      "Mẹ",
+      "Người hỗ trợ"
+    ],
+    "wardrobe": "Thảo Nguyên và Thảo My giữ trang phục mặc định. Khang chuyển sang đồng phục học sinh sạch, ba lô gọn.",
+    "camera": "Toàn cảnh cổng trường Việt Nam buổi sáng, dolly-in nhẹ; không gian sáng và thân thiện.",
+    "action": "Khang đến trường cùng người thân/người hỗ trợ đáng tin cậy. Hai chị em đứng gần mẹ và vẫy tay.",
+    "dialogue": "Khang: Mình sẽ cố gắng học thật tốt! / Thảo Nguyên: Chúc bạn một ngày vui nhé!",
+    "narration": "Nhờ sự chung tay của gia đình và những người có trách nhiệm, Khang có cơ hội trở lại trường.",
+    "image_prompt_en": "Bright Vietnamese primary school gate in morning light. Khang now wears a neat simple white school shirt, dark navy school bottoms and a small backpack, accompanied by a trusted adult. Thao Nguyen and Thao My wave nearby with their mother. Exact approved sister appearances and default outfits, cinematic 3D anime, hopeful but natural, 16:9, 2K, no text or school logo.",
+    "motion_prompt_en": "Khang takes a few steps toward the school gate, turns and waves; sisters wave back. Gentle dolly forward. Keep children’s faces, height and clothing stable.",
+    "image_prompt_vi": "Cổng trường tiểu học Việt Nam buổi sáng. Khang mặc áo đồng phục trắng sạch, quần xanh đậm và ba lô nhỏ, đi cùng người lớn đáng tin cậy. Thảo Nguyên và Thảo My đứng gần mẹ, vui vẻ vẫy tay. Hai chị em giữ nguyên ngoại hình và trang phục mặc định đã duyệt. 3D Anime điện ảnh, hy vọng tự nhiên, 16:9, 2K, không logo hay chữ.",
+    "audio": "Âm thanh sân trường, chim hót, tiếng học sinh vừa phải, nhạc sáng."
+  },
+  {
+    "id": "S09",
+    "duration_sec": 9,
+    "title": "Bức tranh tình bạn",
+    "characters": [
+      "Thảo Nguyên",
+      "Thảo My",
+      "Khang"
+    ],
+    "wardrobe": "Hai chị em trang phục mặc định; Khang mặc đồng phục hoặc trang phục gọn gàng sau khi trở lại trường.",
+    "camera": "Cận bức tranh giữa ba bạn, chuyển sang trung cảnh ba gương mặt.",
+    "action": "Khang đưa hai chị em bức tranh ba người bạn trước cổng trường; hai chị em vui vẻ đón nhận.",
+    "dialogue": "Khang: Mình tặng hai bạn bức tranh này. / Thảo My: Mình sẽ treo ở góc học tập! / Thảo Nguyên: Bức tranh đẹp lắm!",
+    "narration": "Tình bạn lớn lên từ sự quan tâm và tôn trọng lẫn nhau.",
+    "image_prompt_en": "Three Vietnamese child friends at a cafe table admiring Khang’s colorful drawing of three children at a school gate. In the drawing, older Thao Nguyen has black round glasses and wavy dark hair, younger Thao My has pink round glasses and a neat bob, Khang holds a book. Keep real characters exactly matching their approved references. 3D anime, 16:9, warm light, no readable text.",
+    "motion_prompt_en": "Khang lifts the drawing; My leans forward smiling; Nguyen nods approvingly. Smooth rack focus from drawing to faces. Preserve identity and wardrobe.",
+    "image_prompt_vi": "Ba người bạn nhỏ Việt Nam ngồi cạnh bàn, cùng ngắm bức tranh Khang vẽ ba bạn trước cổng trường. Trong tranh, Thảo Nguyên đeo kính đen và tóc layer gợn; Thảo My đeo kính hồng, tóc bob; Khang ôm quyển sách. Nhân vật thật phải đúng ảnh tham chiếu đã duyệt. 3D Anime, 16:9, ánh sáng ấm, không chữ dễ đọc.",
+    "audio": "Piano nhẹ, tiếng giấy vẽ."
+  },
+  {
+    "id": "S10",
+    "duration_sec": 10,
+    "title": "Ước mơ biết sẻ chia",
+    "characters": [
+      "Khang",
+      "Thảo Nguyên",
+      "Thảo My",
+      "Bạn học"
+    ],
+    "wardrobe": "Khang đồng phục học sinh; hai chị em trang phục mặc định; bạn học mặc đồng phục giản dị.",
+    "camera": "Trung cảnh khu trưng bày mỹ thuật ở trường, pan nhẹ qua bức tranh rồi dừng ở Khang.",
+    "action": "Bức tranh của Khang được trưng bày. Khang nói với các bạn về ước mơ giúp trẻ em khác được đến trường.",
+    "dialogue": "Khang: Sau này, mình muốn giúp những bạn nhỏ khác được đến trường.",
+    "narration": "Khang cũng muốn trao đi niềm hy vọng mà mình từng nhận được.",
+    "image_prompt_en": "Vietnamese primary school art display. Khang’s colorful painting is shown on a board; Khang stands beside it speaking modestly to classmates. Thao Nguyen and Thao My listen proudly nearby, preserving exact identity references and default outfits. Hopeful school atmosphere, cinematic 3D anime, 16:9, 2K, no legible text.",
+    "motion_prompt_en": "Slow pan from artwork to Khang, then a subtle nod from the sisters. Small natural gestures, consistent faces and clothes.",
+    "image_prompt_vi": "Góc trưng bày mỹ thuật ở trường tiểu học Việt Nam. Bức tranh nhiều màu của Khang được treo ngay ngắn; Khang đứng bên cạnh nói chuyện khiêm tốn với các bạn. Thảo Nguyên và Thảo My lắng nghe vui mừng ở gần đó, giữ đúng ảnh tham chiếu và trang phục mặc định. Không khí trường học ấm áp, 3D Anime, 16:9, 2K, không chữ rõ.",
+    "audio": "Âm thanh lớp học nhẹ, nhạc truyền cảm hứng."
+  },
+  {
+    "id": "S11",
+    "duration_sec": 10,
+    "title": "Ba người bạn bên cửa sổ",
+    "characters": [
+      "Thảo Nguyên",
+      "Thảo My",
+      "Khang"
+    ],
+    "wardrobe": "Hai chị em giữ trang phục mặc định; Khang mặc đồ học sinh gọn gàng.",
+    "camera": "Trung-toàn cảnh ba người ở bàn cửa sổ, ánh sáng vàng cuối chiều, máy quay lùi nhẹ.",
+    "action": "Thảo Nguyên mỉm cười, Thảo My đọc sách, Khang vẽ trong quyển vở. Ba bạn ở cạnh nhau tự nhiên.",
+    "dialogue": "Thảo Nguyên: Từ nay, chúng mình là bạn nhé! / Thảo My: Bạn bè là cùng quan tâm và giúp nhau tiến bộ. / Khang: Ừ! Mình vui vì có hai bạn.",
+    "narration": "Ba người bạn giữ lại một kỷ niệm đẹp về lòng tốt và tình bạn.",
+    "image_prompt_en": "Three Vietnamese child friends seated together at a cozy cafe window table in golden afternoon light. Thao Nguyen in her charcoal graphic top, black glasses and V necklace; Thao My with blunt bob, pink glasses and white cartoon tee; Khang in neat simple school clothes drawing in his notebook. Warm emotional 3D anime, natural smiles, exact identity references, 16:9, 2K, no text.",
+    "motion_prompt_en": "Subtle actions: Nguyen smiles and looks to the others, My turns a page, Khang sketches. Slow camera pull-back, stable faces, clothing and screen direction.",
+    "image_prompt_vi": "Ba người bạn nhỏ ngồi cạnh bàn cửa sổ quán cà phê trong ánh nắng chiều vàng. Thảo Nguyên mặc áo graphic tối, kính đen, dây chuyền chữ V; Thảo My tóc bob mái bằng, kính hồng, áo trắng hoạt hình; Khang mặc đồng phục gọn, vẽ trong vở. Nụ cười tự nhiên, 3D Anime ấm áp, đúng ảnh nhận diện, 16:9, 2K, không chữ.",
+    "audio": "Chủ đề piano ấm, nền quán cà phê nhẹ."
+  },
+  {
+    "id": "S12",
+    "duration_sec": 8,
+    "title": "Thông điệp cuối",
+    "characters": [
+      "Thảo Nguyên",
+      "Thảo My",
+      "Khang"
+    ],
+    "wardrobe": "Giữ trang phục đã dùng ở S11 để đảm bảo liên tục.",
+    "camera": "Toàn cảnh từ phía sau ba bạn đi trên lối cây xanh gần trường; dừng ở khung hình rộng, chừa khoảng trống cho end card.",
+    "action": "Ba bạn đi cạnh nhau trên lối nhỏ, dừng lại và nhìn về phía trước. Lá cây chuyển động nhẹ.",
+    "dialogue": "Không có.",
+    "narration": "Hãy biết sẻ chia, tôn trọng và giúp đỡ nhau. Một hành động tử tế, dù nhỏ, cũng có thể mở ra hy vọng.",
+    "image_prompt_en": "Wide cinematic 3D anime ending shot of three Vietnamese child friends walking together along a tree-lined path near a school in warm late-afternoon sunlight. Seen from behind/three-quarter back; retain Thao Nguyen’s wavy black layered hair silhouette and dark outfit, Thao My’s neat black bob silhouette and white top, Khang’s simple school outfit and backpack. Leave clean negative space for editor-added end card. 16:9, 2K, no text.",
+    "motion_prompt_en": "Slow follow shot from behind, then a gentle wide hold for 2 seconds. Leaves move lightly in the breeze. No sudden motion, no face or outfit changes.",
+    "image_prompt_vi": "Toàn cảnh kết phim 3D Anime điện ảnh: ba người bạn nhỏ đi cạnh nhau trên lối cây xanh gần trường trong nắng chiều. Góc nhìn từ sau hoặc 3/4 sau; giữ bóng dáng tóc gợn và áo tối của Thảo Nguyên, tóc bob và áo trắng của Thảo My, đồng phục và ba lô của Khang. Chừa khoảng trống sạch để thêm end card khi dựng. 16:9, 2K, không chữ.",
+    "audio": "Nhạc kết ấm áp, tiếng chim và gió nhẹ, fade out."
+  }
+]

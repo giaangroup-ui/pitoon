@@ -1,1 +1,8 @@
 __pycache__/
+
+# local audio stems (regenerable)
+films/thao_sisters/audio/_stem_*.wav
+films/thao_sisters/audio/_mix_preview.wav
+films/thao_sisters/audio/voices/raw_*
+__pycache__/
+*.pyc

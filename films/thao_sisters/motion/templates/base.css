@@ -1,0 +1,14 @@
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:DejaVu Sans,Segoe UI,system-ui,sans-serif;background:#7EC8E3}
+.stage{position:relative;width:100%;height:100%;overflow:hidden}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.safe{position:absolute;left:6%;right:6%;top:10%;bottom:14%} /* 9:16 TikTok safe */
+.logo{font-weight:900;letter-spacing:.02em;color:#FFF;text-shadow:0 4px 0 #2B3FA0,0 8px 16px rgba(0,0,0,.25)}
+.title{font-weight:800;color:#FFF;text-shadow:0 3px 0 #E2B04A,0 6px 14px rgba(0,0,0,.3)}
+.lesson{font-weight:700;color:#2B3FA0;background:rgba(255,255,255,.92);border-radius:1.2em;padding:.55em 1em;box-shadow:0 6px 0 #E2B04A}
+.char{position:absolute;bottom:6%;width:36%;height:42%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 10px 8px rgba(0,0,0,.25))}
+.char.ti{left:4%} .char.cun{right:4%}
+.blob{position:absolute;border-radius:50%;opacity:.85;filter:blur(2px)}
+.sub-wrap{position:absolute;left:5%;right:5%;bottom:12%;text-align:center;pointer-events:none}
+.sub-word{display:inline-block;margin:0 .12em;padding:.12em .28em;background:#FFF;color:#2B3FA0;font-weight:900;
+  border-radius:.4em;box-shadow:0 4px 0 #E2B04A;transform:scale(0);opacity:0}

@@ -1,0 +1,72 @@
+{
+  "series": "Hai chị em Thảo Nguyên – Thảo My và người bạn ăn xin",
+  "studio": "PiToon",
+  "age": "8-12",
+  "style": "Cinematic high-quality 3D anime, natural child proportions, physically coherent depth, warm lighting, 16:9, 24fps, no on-image text",
+  "message": "Lòng nhân ái, tôn trọng phẩm giá, chia sẻ đúng cách và tìm kiếm sự hỗ trợ an toàn từ người lớn đáng tin cậy.",
+  "dignity_rule": "Khang is never framed as an object of pity: no poverty caricature, no exaggerated begging, no humiliating close-up. He is a child with dignity, hope and agency.",
+  "wardrobe_rule": "Default wardrobe is used in all 12 main scenes. Dress wardrobe is only for extras (birthday, outing, promo). Do not let the model invent new clothes between contiguous same-day scenes. At school, only Khang changes into a uniform; face, hair and body stay locked.",
+  "text_rule": "No AI-written Vietnamese (or any) text inside generated images. Titles, subtitles, name tags and the closing message are added in post with the motion package.",
+  "characters": {
+    "ThaoNguyen": {
+      "name_vi": "Thảo Nguyên",
+      "role": "chị lớn, vui vẻ, thông minh, trách nhiệm",
+      "age_look": "older sister, about 11–12",
+      "locked": "Wavy layered shoulder-length black hair, round black glasses, small gold hoop in the visible ear, black/charcoal oversized graphic tee (gray front graphic), dark bead necklace with a small gold V pendant, beige cargo pants, white sneakers. Round friendly face, large dark eyes, natural child proportions. Must match approved master and model sheets exactly.",
+      "refs": [
+        "TWO_SISTERS_APPROVED_MASTER.png",
+        "thao_nguyen_master_bust.png",
+        "thao_nguyen_portrait.png",
+        "thao_nguyen_face_turnaround.png",
+        "thao_nguyen_expressions.png",
+        "thao_nguyen_body_360.png",
+        "thao_nguyen_model_sheet.png"
+      ],
+      "voice": "child_girl_older"
+    },
+    "ThaoMy": {
+      "name_vi": "Thảo My",
+      "role": "em nhỏ, dịu dàng, giàu tình cảm, biết quan tâm",
+      "age_look": "younger sister, about 8–9, visibly shorter than her sister",
+      "locked": "Straight black bob with full blunt bangs, translucent pink round glasses, tiny gold hoop earrings, white Powerpuff-style cartoon-print T-shirt, blue cargo jeans, white-pink sneakers. Soft round face, large dark eyes. Must match approved master and model sheets exactly.",
+      "refs": [
+        "TWO_SISTERS_APPROVED_MASTER.png",
+        "thao_my_master_bust.png",
+        "thao_my_portrait.png",
+        "thao_my_face_turnaround.png",
+        "thao_my_expressions.png",
+        "thao_my_body_360.png",
+        "thao_my_model_sheet.png"
+      ],
+      "voice": "child_girl_younger"
+    },
+    "Khang": {
+      "name_vi": "Khang",
+      "role": "bạn mới, khoảng 10 tuổi, thích vẽ, mong được đi học lại",
+      "locked": "Fictional Vietnamese boy about 10, short slightly messy black hair, kind eyes, small build, natural child proportions. NEVER a pitying or caricatured look.",
+      "wardrobe_story": "faded brown shirt, dark simple shorts, simple sandals, small bag",
+      "wardrobe_school": "neat simple white school shirt, dark navy school bottoms, small backpack — same face, hair and body as the master; clothes only change",
+      "refs": ["khang_master.png (CHƯA TẠO — cần GenerateImage khi còn hạn mức)"],
+      "voice": "child_boy",
+      "status": "master_pending_usage"
+    },
+    "Me": {
+      "name_vi": "Mẹ",
+      "role": "mẹ của hai chị em, người lớn đáng tin cậy, ấm áp",
+      "locked": "Vietnamese mother in her mid-30s, warm kind face, natural adult proportions, casual modest everyday clothes (soft blouse and trousers in earth/cream tones), hair in a simple dark bun or low ponytail. Consistent across all home and outdoor scenes. Stands close and reassuring, never theatrical.",
+      "refs": ["me_master.png (CHƯA TẠO — cần GenerateImage khi còn hạn mức)"],
+      "voice": "woman",
+      "status": "master_pending_usage"
+    }
+  },
+  "qc_checklist": [
+    "Mặt đúng master (không morph)",
+    "Kính: Nguyên đen tròn, My hồng tròn",
+    "Tóc: Nguyên layer gợn ngang vai, My bob mái bằng",
+    "Trang phục mặc định (không tự đổi)",
+    "Tay chân tự nhiên, đúng tỷ lệ trẻ em",
+    "Độ tuổi / chiều cao: Nguyên cao hơn My",
+    "Khang không bị quay theo cách thương hại",
+    "Không chữ tiếng Việt trong khung hình gốc"
+  ]
+}

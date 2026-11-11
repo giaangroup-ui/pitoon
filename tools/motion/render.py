@@ -34,7 +34,11 @@ def render(html, out, w=1080, h=1920, fps=30, dur=None, audio=None, qs=""):
     with tempfile.TemporaryDirectory(prefix="pitoon_fr_") as td:
         td = Path(td)
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True, args=["--disable-dev-shm-usage", "--no-sandbox", "--font-render-hinting=none"])
+            args=["--disable-dev-shm-usage", "--no-sandbox", "--font-render-hinting=none"]
+            try:
+                browser = p.chromium.launch(headless=True, args=args)
+            except Exception:
+                browser = p.chromium.launch(headless=True, executable_path="/usr/bin/google-chrome", args=args)
             page = browser.new_page(viewport={"width": w, "height": h}, device_scale_factor=1)
             page.add_init_script(INJECT)
             page.goto(url, wait_until="networkidle", timeout=90000)
