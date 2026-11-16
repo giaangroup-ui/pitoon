@@ -1,0 +1,43 @@
+/* PiToon intro + brand tokens used by the app */
+:root{
+  --pt-sky:#7ec8e3; --pt-sky2:#b9e4f4; --pt-cream:#f3e4c4; --pt-coral:#ff6b3d;
+  --pt-royal:#2b3fa0; --pt-gold:#e8b84a; --pt-pink:#ff6b9a; --pt-ink:#1e2a4a;
+  --pt-ant:#3a241c; --pt-lens:#fff8; --pt-glass:#1a1a1a;
+}
+.pti{position:fixed;inset:0;z-index:100;overflow:hidden;background:
+  linear-gradient(180deg,#7ec8e3 0%,#b9e4f4 40%,#f0d9a0 100%);
+  font-family:Fredoka,Nunito,system-ui,sans-serif;color:var(--pt-ink);
+  -webkit-user-select:none;user-select:none}
+.pti.is-out{opacity:0;pointer-events:none;transition:opacity .45s ease}
+.pti-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.pti-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.pti-world{position:absolute;inset:0;width:100%;height:100%}
+
+.pti-logo{position:absolute;left:50%;top:48%;display:flex;align-items:baseline;gap:.02em;
+  font-weight:700;font-size:clamp(56px,14vw,152px);line-height:1;letter-spacing:.02em;
+  color:var(--pt-royal);transform:translate(-50%,-50%);white-space:nowrap;filter:drop-shadow(0 8px 0 #1e2a4a22)}
+.pti-logo .ch{display:inline-block;transform-origin:50% 80%}
+.pti-hole{display:inline-block;width:.72em;height:.72em;margin:0 .03em;border-radius:50%;
+  box-shadow:inset 0 0 0 4px #2b3fa033;background:#fff6;vertical-align:middle;position:relative;top:-.06em}
+.pti-o{position:absolute;width:.72em;height:.72em;border-radius:50%;background:#f3e4c4;
+  box-shadow:inset 0 0 0 .16em #2b3fa0,0 4px 0 #1e2a4a22;pointer-events:none;left:0;top:0}
+.pti-o.is-lens{background:radial-gradient(circle at 32% 28%,#fff 0 20%,#c5e4ff 21% 62%,transparent 63%);
+  box-shadow:inset 0 0 0 .13em #1a1a1a,0 3px 0 #0002}
+.pti-ant{position:absolute;left:0;top:62%;width:clamp(130px,26vw,260px);height:auto;
+  transform:translate(-120%,-50%);overflow:visible;filter:drop-shadow(0 12px 10px #0003)}
+.pti-bulb{position:absolute;width:52px;height:64px;opacity:0;pointer-events:none;z-index:3}
+.pti-skip,.pti-snd{position:absolute;z-index:5;border:0;border-radius:999px;font:700 15px/1 Fredoka,Nunito,system-ui,sans-serif;
+  padding:11px 18px;cursor:pointer;background:#fff;color:var(--pt-royal);box-shadow:0 4px 0 #2b3fa033}
+.pti-skip{right:max(14px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));background:var(--pt-coral);color:#fff;box-shadow:0 4px 0 #c94a22}
+.pti-snd{right:max(14px,env(safe-area-inset-right));top:max(14px,env(safe-area-inset-top));width:44px;height:44px;padding:0}
+.pti-skip:hover,.pti-snd:hover{transform:translateY(-1px)}
+.pti-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.pti-portal{position:absolute;left:50%;top:50%;width:min(70vmin,520px);height:min(70vmin,520px);
+  transform:translate(-50%,-50%) scale(0);border-radius:50%;pointer-events:none;opacity:0;z-index:4;
+  background:conic-gradient(#2b3fa0,#7ec8e3,#ff6b9a,#e8b84a,#ff6b3d,#7ed957,#2b3fa0);
+  box-shadow:0 0 40px #2b3fa088,0 0 120px #ff6b3d55}
+.pti-portal::after{content:"";position:absolute;inset:16%;border-radius:50%;background:
+  radial-gradient(circle, #0b1238 0 38%, #1a1460 55%, transparent 72%)}
+@media (prefers-reduced-motion:reduce){
+  .pti-portal,.pti-o,.pti-ant{transition:none}
+}

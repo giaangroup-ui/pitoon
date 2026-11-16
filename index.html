@@ -1,30 +1,46 @@
-<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="app-version" content="__APP_VERSION__"><title>PiToon – Xưởng phim hoạt hình AI</title><link rel="manifest" href="manifest.webmanifest?v=__APP_VERSION__"><meta name="theme-color" content="#fb5607"><link rel="icon" type="image/png" href="icons/icon-192.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="PiToon">
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="app-version" content="__APP_VERSION__"><title>PiToon – Xưởng phim hoạt hình AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="intro.css"><link rel="manifest" href="manifest.webmanifest?v=__APP_VERSION__"><meta name="theme-color" content="#ff6b3d"><link rel="icon" type="image/png" href="icons/icon-192.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="PiToon">
 <style>
-:root{--bg:#fff8ec;--c:#fff;--t:#2b2118;--m:#8a7a6a;--a:#fb5607;--a2:#3a86ff;--b:#f0e2cc;--ok:#16a34a;--er:#dc2626}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-header{position:sticky;top:0;z-index:5;background:#fffc;backdrop-filter:blur(8px);border-bottom:1px solid var(--b);display:flex;align-items:center;gap:10px;padding:10px 14px}
-header img{width:34px;height:34px;border-radius:9px}header h1{font-size:18px;margin:0;flex:1}header h1 small{display:block;font-size:11px;color:var(--m);font-weight:500}
-nav{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;background:var(--bg);position:sticky;top:55px;z-index:4}
-nav button{white-space:nowrap;border:1px solid var(--b);background:var(--c);border-radius:999px;padding:7px 13px;font-weight:600;cursor:pointer;color:var(--t)}
-nav button.on{background:var(--a);color:#fff;border-color:var(--a)}
-main{max-width:1100px;margin:0 auto;padding:6px 14px 90px}
-.card{background:var(--c);border:1px solid var(--b);border-radius:16px;padding:14px;margin:10px 0;box-shadow:0 2px 10px #f0d9b533}
-h2{font-size:18px;margin:4px 0 10px}h3{font-size:15px;margin:6px 0}
-label{display:block;font-size:12px;color:var(--m);font-weight:600;margin:8px 0 3px}
-input,select,textarea{width:100%;border:1px solid var(--b);border-radius:10px;padding:9px 10px;font:inherit;background:#fffdf8;color:var(--t)}textarea{min-height:70px;resize:vertical}
-button{font:inherit}.btn,.b2{border:0;border-radius:11px;padding:9px 15px;font-weight:700;cursor:pointer}.btn{background:var(--a);color:#fff}.b2{background:#fff;border:1px solid var(--b);color:var(--t)}
-.btn:disabled{opacity:.5}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
-.thumb{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;background:#f3e6d2;display:block}.sq{aspect-ratio:1}
-.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:#ffe9d6;color:#9a3412;margin:2px}
+:root{--bg:#fff6e8;--c:#fffdf9;--t:#1e2a4a;--m:#5b6a88;--a:#ff6b3d;--a2:#2b3fa0;--b:#f0ddc4;--ok:#16a34a;--er:#dc2626;--gold:#e8b84a;--pink:#ff6b9a}
+*{box-sizing:border-box}body{margin:0;background:
+  radial-gradient(1200px 500px at 10% -10%,#ffe3a8 0,transparent 50%),
+  radial-gradient(900px 400px at 110% 0%,#b9e4f4 0,transparent 46%),
+  var(--bg);color:var(--t);font:16px/1.5 Nunito,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fffbf6ee;backdrop-filter:blur(12px);border-bottom:1px solid var(--b);display:flex;align-items:center;gap:10px;padding:10px 16px}
+.brand{display:flex;align-items:center;gap:10px;flex:1;border:0;background:none;padding:0;cursor:pointer;text-align:left;color:inherit;font:inherit;min-width:0}
+.brand-ant{width:42px;height:42px;flex:none;border-radius:14px;background:linear-gradient(160deg,#ffd36a,#ff6b3d);display:grid;place-items:center;box-shadow:0 4px 0 #ff6b3d44}
+.brand-ant svg{width:30px;height:30px}
+header h1{font-family:Fredoka,Nunito,system-ui,sans-serif;font-size:22px;margin:0;letter-spacing:.01em;color:var(--a2)}
+header h1 small{display:block;font-family:Nunito,system-ui,sans-serif;font-size:11px;color:var(--m);font-weight:700;letter-spacing:0}
+nav{display:flex;gap:8px;overflow-x:auto;padding:12px 16px;background:transparent;position:sticky;top:62px;z-index:4}
+nav button{white-space:nowrap;border:1px solid var(--b);background:var(--c);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;color:var(--t);font-family:Fredoka,Nunito,system-ui,sans-serif;box-shadow:0 2px 0 #e8d3b8}
+nav button.on{background:var(--a);color:#fff;border-color:var(--a);box-shadow:0 3px 0 #c94a22}
+main{max-width:1100px;margin:0 auto;padding:6px 16px 90px}
+.card{background:var(--c);border:1px solid var(--b);border-radius:22px;padding:16px;margin:12px 0;box-shadow:0 8px 24px #e8b84a22}
+h2{font-family:Fredoka,Nunito,system-ui,sans-serif;font-size:22px;margin:4px 0 12px;color:var(--a2)}h3{font-size:16px;margin:6px 0}
+label{display:block;font-size:12px;color:var(--m);font-weight:800;margin:8px 0 3px;letter-spacing:.02em}
+input,select,textarea{width:100%;border:1px solid var(--b);border-radius:14px;padding:10px 12px;font:inherit;background:#fff;color:var(--t)}textarea{min-height:70px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:3px solid #ff6b3d44;border-color:var(--a)}
+button{font:inherit}.btn,.b2{border:0;border-radius:14px;padding:10px 16px;font-weight:800;cursor:pointer;font-family:Fredoka,Nunito,system-ui,sans-serif}
+.btn{background:var(--a);color:#fff;box-shadow:0 4px 0 #c94a22}.b2{background:#fff;border:1px solid var(--b);color:var(--t)}
+.btn:hover{filter:brightness(1.05)}.btn:disabled{opacity:.5;box-shadow:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.thumb{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;background:#f3e6d2;display:block}.sq{aspect-ratio:1}
+.tag{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;background:#ffe3d0;color:#9a3412;margin:2px;font-weight:800}
 .mut{color:var(--m);font-size:13px}.ok{color:var(--ok)}.er{color:var(--er)}
-.tale{border:1px solid var(--b);border-radius:12px;padding:10px;cursor:pointer;background:#fffdf8}.tale.on{border-color:var(--a);box-shadow:0 0 0 2px #fb560733}
-.dlg{position:fixed;inset:0;background:#0006;display:none;align-items:flex-start;justify-content:center;z-index:50;overflow:auto;padding:20px 10px}.dlg.on{display:flex}.dlg>div{background:#fff;border-radius:18px;max-width:640px;width:100%;padding:16px}
-#log{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;background:#2b2118ee;color:#fff;padding:9px 16px;border-radius:999px;font-size:13px;display:none;z-index:60;max-width:92vw}
-.prog{height:8px;background:#f3e6d2;border-radius:9px;overflow:hidden}.prog>i{display:block;height:100%;background:var(--a);width:0}
-.shot{display:grid;grid-template-columns:200px 1fr;gap:12px}@media(max-width:640px){.shot{grid-template-columns:1fr}}
-.warn{background:#fff4d6;border:1px solid #f5d27a;border-radius:10px;padding:8px 10px;font-size:13px}
+.tale{border:1px solid var(--b);border-radius:16px;padding:12px;cursor:pointer;background:#fff;transition:transform .15s,box-shadow .15s}.tale:hover{transform:translateY(-2px)}
+.tale.on{border-color:var(--a);box-shadow:0 0 0 3px #ff6b3d33}
+.dlg{position:fixed;inset:0;background:#1e2a4a88;display:none;align-items:flex-start;justify-content:center;z-index:50;overflow:auto;padding:20px 10px}.dlg.on{display:flex}.dlg>div{background:#fff;border-radius:24px;max-width:640px;width:100%;padding:18px;box-shadow:0 20px 60px #1e2a4a33}
+#log{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;background:#1e2a4aee;color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;display:none;z-index:60;max-width:92vw}
+.prog{height:10px;background:#f3e6d2;border-radius:9px;overflow:hidden}.prog>i{display:block;height:100%;background:linear-gradient(90deg,var(--a),var(--gold));width:0}
+.shot{display:grid;grid-template-columns:200px 1fr;gap:12px}@media(max-width:720px){header{flex-wrap:wrap;row-gap:8px}header h1 small{display:none}.brand{flex:1 1 auto;min-width:0}header h1{white-space:nowrap;font-size:20px}#modeB,header select,header .b2{flex:none}.shot{grid-template-columns:1fr}}
+.warn{background:#fff4d6;border:1px solid #f5d27a;border-radius:14px;padding:10px 12px;font-size:13px}
 </style></head><body>
-<header><img src="icons/icon-192.png" alt=""><h1>PiToon<small data-i>Xưởng phim hoạt hình 3D cho bé 3–10 tuổi</small></h1>
+<header><button type="button" class="brand" id="brandBtn" title="Phát lại intro PiToon" onclick="playPiToonIntro&&playPiToonIntro()">
+<span class="brand-ant" aria-hidden="true"><svg viewBox="0 0 32 32"><ellipse cx="16" cy="22" rx="7" ry="6" fill="#3a241c"/><ellipse cx="16" cy="14" rx="8" ry="7" fill="#4a2e24"/><circle cx="12" cy="13" r="3.2" fill="#fff"/><circle cx="20" cy="13" r="3.2" fill="#fff"/><circle cx="12.3" cy="13.2" r="1.5" fill="#1a1a1a"/><circle cx="20.3" cy="13.2" r="1.5" fill="#1a1a1a"/><circle cx="12" cy="13" r="4.4" fill="none" stroke="#1a1a1a" stroke-width="1.6"/><circle cx="20" cy="13" r="4.4" fill="none" stroke="#1a1a1a" stroke-width="1.6"/></svg></span>
+<h1>PiToon<small data-i>Xưởng phim hoạt hình 3D cho bé 3–10 tuổi</small></h1></button>
 <button class="b2" id="modeB" onclick="openSet()" style="font-size:12px"></button><select id="lang" style="width:auto"><option value="vi">VI</option><option value="en">EN</option><option value="zh">中文</option></select>
 <button class="b2" onclick="openProj()">📁</button><button class="b2" onclick="openSet()">⚙</button></header>
 <nav id="nav"></nav><main id="main"></main>
@@ -268,4 +284,7 @@ if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWork
 setTimeout(check,2500);setInterval(check,5*60*1000);setInterval(()=>{if(pending)AU_TRY()},3000);
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")check()});addEventListener("focus",check);addEventListener("online",check);
 })();</script>
+<div id="pt-intro" hidden></div>
+<script src="intro.js"></script>
+<script>PiToonIntro.mount({once:true,auto:true});</script>
 </body></html>
