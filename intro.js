@@ -1,4 +1,4 @@
-/* PiToon landing intro v2 — official 3D art (assets/ant.webp + logo pieces), spring physics, Web Audio SFX.
+/* PiToon landing intro v3 — official 3D art, cut-out walk-cycle rig, spring physics, cartoon jingle + SFX.
    Story: the ant peeks in, sneaks and looks around, drags "PiToon" to the centre, the two O's roll away
    along one straight track, the ant gets an idea, runs into the gap and its glasses become the logo eyes,
    the logo comes alive, thumbs up, then BOOM — a fairy-tale portal into the app. */
@@ -17,6 +17,7 @@
       antenna: [0.40719, 0.0, 0.38972, 0.35775], n: [0.71657, 0.18451, 0.28343, 0.76761],
       ringL: [0.49800, 0.55070], ringR: [0.66866, 0.55352], ringR_vis: 0.0888 }
   };
+  ART.rig = {"w":800,"h":877,"parts":{"antL":{"file":"assets/rig/antL.webp","x":165,"y":26,"w":213,"h":101,"px":362.40934065934067,"py":96.34615384615384,"ox":197.40934065934067,"oy":70.34615384615384},"antR":{"file":"assets/rig/antR.webp","x":521,"y":0,"w":190,"h":144,"px":535.4479768786127,"py":128.14739884393063,"ox":14.447976878612735,"oy":128.14739884393063},"head":{"file":"assets/rig/head.webp","x":234,"y":100,"w":566,"h":403,"px":500.0,"py":475.0,"ox":266.0,"oy":375.0},"armR":{"file":"assets/rig/armR.webp","x":509,"y":451,"w":240,"h":154,"px":555.0,"py":515.0,"ox":46.0,"oy":64.0},"armL":{"file":"assets/rig/armL.webp","x":281,"y":537,"w":118,"h":182,"px":370.0,"py":560.0,"ox":89.0,"oy":23.0},"armL_lo":{"file":"assets/rig/armL_lo.webp","x":272,"y":700,"w":82,"h":75,"px":300.0,"py":700.0,"ox":28.0,"oy":0.0},"legMR":{"file":"assets/rig/legMR.webp","x":473,"y":542,"w":82,"h":143,"px":535.0,"py":555.0,"ox":62.0,"oy":13.0},"legMR_lo":{"file":"assets/rig/legMR_lo.webp","x":510,"y":654,"w":128,"h":163,"px":520.0,"py":665.0,"ox":10.0,"oy":11.0},"legHR":{"file":"assets/rig/legHR.webp","x":377,"y":572,"w":111,"h":135,"px":445.0,"py":590.0,"ox":68.0,"oy":18.0},"legHR_lo":{"file":"assets/rig/legHR_lo.webp","x":391,"y":681,"w":93,"h":196,"px":412.0,"py":690.0,"ox":21.0,"oy":9.0},"legML":{"file":"assets/rig/legML.webp","x":203,"y":565,"w":118,"h":114,"px":300.0,"py":565.0,"ox":97.0,"oy":0.0},"legML_lo":{"file":"assets/rig/legML_lo.webp","x":185,"y":656,"w":99,"h":171,"px":250.0,"py":655.0,"ox":65.0,"oy":-1.0},"legHL":{"file":"assets/rig/legHL.webp","x":126,"y":467,"w":217,"h":146,"px":310.0,"py":535.0,"ox":184.0,"oy":68.0},"legHL_lo":{"file":"assets/rig/legHL_lo.webp","x":0,"y":536,"w":204,"h":302,"px":155.0,"py":568.0,"ox":155.0,"oy":32.0},"abd":{"file":"assets/rig/abd.webp","x":23,"y":408,"w":334,"h":273,"px":315.0,"py":530.0,"ox":292.0,"oy":122.0},"body":{"file":"assets/rig/body.webp","x":320,"y":465,"w":237,"h":175,"px":450.0,"py":530.0,"ox":130.0,"oy":65.0}},"children":{"legHL":"legHL_lo","legML":"legML_lo","armL":"armL_lo","legHR":"legHR_lo","legMR":"legMR_lo"},"order":["abd","legHL","legML","body","legHR","legMR","armL","armR","head"],"headChildren":["antL","antR"],"pivots":{"antL":[362.40934065934067,96.34615384615384],"antR":[535.4479768786127,128.14739884393063],"head":[500.0,475.0],"abd":[315.0,530.0],"body":[450.0,530.0],"armR":[555.0,515.0],"armR_lo":[610.0,575.0],"armL":[370.0,560.0],"armL_lo":[300.0,700.0],"legHL":[310.0,535.0],"legHL_lo":[155.0,568.0],"legML":[300.0,565.0],"legML_lo":[250.0,655.0],"legHR":[445.0,590.0],"legHR_lo":[412.0,690.0],"legMR":[535.0,555.0],"legMR_lo":[520.0,665.0]}};
   function rng(seed) { let s = seed >>> 0; return function () { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
 
   /* ---------- Web Audio ---------- */
@@ -105,6 +106,7 @@
     const k = key || name + t.toFixed(2);
     if (lastCue[k]) return;
     lastCue[k] = 1;
+    if (usingFile && bgAudio && !bgAudio.paused && !muted) return;
     if (SFX[name]) SFX[name]();
   }
   SFX.ding = function () {
@@ -147,6 +149,151 @@
   }
   function wob(t0, t, f, decay) { if (t < t0) return 0; const x = t - t0; return Math.sin(x * (f || 18)) * Math.exp(-x * (decay || 4)); }
 
+
+  /* ---------- rig DOM (cut-out parts of official ant.webp) ---------- */
+  function pct(n, d) { return (n / d * 100).toFixed(3) + "%"; }
+  function rigHTML() {
+    const R = ART.rig, P = R.parts;
+    const img = (name) => {
+      const p = P[name];
+      return `<img src="${A}rig/${name}.webp" alt="" draggable="false" style="left:${pct(p.x,R.w)};top:${pct(p.y,R.h)};width:${pct(p.w,R.w)}">`;
+    };
+    const origin = (name) => { const p = P[name]; return pct(p.px, R.w) + " " + pct(p.py, R.h); };
+    const wrap = (name, inner, cls) => `<div class="pr ${cls || name}" data-part="${name}" style="transform-origin:${origin(name)}">${img(name)}${inner || ""}</div>`;
+    const limb = (name) => {
+      const lo = R.children && R.children[name];
+      return wrap(name, lo && P[lo] ? wrap(lo, "", "lo") : "", "hi " + name);
+    };
+    let h = '<div class="pti-rig">';
+    ["abd", "legHL", "legML", "body", "legHR", "legMR", "armL", "armR"].forEach(n => { h += limb(n); });
+    h += `<div class="pr head" data-part="head" style="transform-origin:${origin("head")}">${img("head")}${wrap("antL","","ant-l")}${wrap("antR","","ant-r")}<i class="pti-glint g0"></i><i class="pti-glint g1"></i></div></div>`;
+    h += `<img class="pti-ant-full" src="${A}ant.webp" alt="" draggable="false">`;
+    return h;
+  }
+
+  /* ---------- cartoon walk cycle (cut-out, overlapping action) ---------- */
+  function gait(phase, kind, ah) {
+    const cfg = {
+      tiptoe: { amp: 11, bob: 0.014, sq: 0.04,  headLag: 0.16, antAmp: 10, lift: 0.014, arm: 12, hang: 16 },
+      walk:   { amp: 16, bob: 0.024, sq: 0.055, headLag: 0.2,  antAmp: 12, lift: 0.02,  arm: 16, hang: 24 },
+      run:    { amp: 22, bob: 0.034, sq: 0.08,  headLag: 0.24, antAmp: 16, lift: 0.032, arm: 24, hang: 30 },
+      idle:   { amp: 3,  bob: 0.01,  sq: 0.02,  headLag: 0.12, antAmp: 7,  lift: 0.004, arm: 4,  hang: 6  },
+      still:  { amp: 0,  bob: 0,     sq: 0,     headLag: 0,    antAmp: 0,  lift: 0,     arm: 0,  hang: 0  }
+    }[kind] || { amp: 0, bob: 0, sq: 0, headLag: 0, antAmp: 0, lift: 0, arm: 0, hang: 0 };
+    const p = phase * Math.PI * 2;
+    const bobUp = (1 - Math.abs(Math.cos(p))) * cfg.bob * ah;
+    const contact = Math.abs(Math.cos(p));
+    const sy = 1 - contact * cfg.sq + (1 - contact) * cfg.sq * 0.35;
+    const sx = 1 + (1 - sy) * 0.85;
+    /* right-facing: negative rotate swings a hanging leg forward */
+    const midR = -Math.cos(p) * cfg.amp, midL = Math.cos(p) * cfg.amp;
+    /* hind left is a long limb — smaller hip swing so it does not can-can */
+    const hindR = Math.cos(p) * cfg.amp * 0.65, hindL = -Math.cos(p) * cfg.amp * 0.45;
+    function knee(off) {
+      const ph = ((phase + off) % 1 + 1) % 1;
+      if (ph < 0.5) return 6 + 4 * Math.sin(ph * Math.PI * 2);
+      return 8 + 14 * Math.sin((ph - 0.5) * Math.PI);
+    }
+    function lift(off) {
+      const ph = ((phase + off) % 1 + 1) % 1;
+      if (ph < 0.5) return 0;
+      return Math.sin((ph - 0.5) * Math.PI) * cfg.lift * ah;
+    }
+    const pHead = p - cfg.headLag * 2 * Math.PI;
+    const pAnt = p - cfg.headLag * 3.4 * Math.PI;
+    return {
+      bobUp, sx, sy,
+      midR, midL, hindR, hindL,
+      kneeMR: knee(0), kneeML: knee(0.5), kneeHR: knee(0.5), kneeHL: knee(0),
+      liftMR: lift(0), liftML: lift(0.5), liftHR: lift(0.5), liftHL: lift(0), liftAL: lift(0),
+      armR: cfg.hang - Math.cos(p) * cfg.arm, armL: -cfg.hang + Math.cos(p) * cfg.arm,
+      armL_el: 10 + Math.abs(Math.sin(p + Math.PI)) * 14,
+      headRot: Math.sin(pHead) * (cfg.amp * 0.16), headY: Math.sin(pHead) * cfg.bob * 0.45 * ah,
+      antL: Math.sin(pAnt) * cfg.antAmp + Math.sin(p * 2.15) * cfg.antAmp * 0.28,
+      antR: Math.sin(pAnt + 0.45) * cfg.antAmp * 0.85 + Math.sin(p * 2.15 + 1.1) * cfg.antAmp * 0.28,
+      abdRot: -Math.sin(p - 0.55) * cfg.amp * 0.08,
+      bodyRot: Math.sin(p) * 2.6,
+      hang: cfg.hang
+    };
+  }
+  function setPartRot(name, rot, tx, ty) {
+    const el = els.parts && els.parts[name];
+    if (!el) return;
+    el.style.transform = "translate(" + (tx || 0).toFixed(2) + "px," + (ty || 0).toFixed(2) + "px) rotate(" + (rot || 0).toFixed(2) + "deg)";
+  }
+  function applyGait(g) {
+    if (!g) {
+      if (els.parts) Object.keys(els.parts).forEach(n => setPartRot(n, 0, 0, 0));
+      return;
+    }
+    setPartRot("body", g.bodyRot, 0, 0);
+    setPartRot("abd", g.abdRot, 0, 0);
+    setPartRot("head", g.headRot, 0, g.headY);
+    setPartRot("antL", g.antL, 0, 0);
+    setPartRot("antR", g.antR, 0, 0);
+    setPartRot("legMR", g.midR, 0, -g.liftMR);
+    setPartRot("legMR_lo", g.kneeMR, 0, 0);
+    setPartRot("legML", g.midL, 0, -g.liftML);
+    setPartRot("legML_lo", g.kneeML, 0, 0);
+    setPartRot("legHR", g.hindR, 0, -g.liftHR);
+    setPartRot("legHR_lo", g.kneeHR, 0, 0);
+    setPartRot("legHL", g.hindL, 0, -g.liftHL);
+    setPartRot("legHL_lo", g.kneeHL, 0, 0);
+    setPartRot("armR", g.armR, 0, 0);
+    setPartRot("armL", g.armL, 0, -g.liftAL);
+    setPartRot("armL_lo", g.armL_el, 0, 0);
+  }
+
+  /* ---------- intro jingle (pre-rendered, synced) ---------- */
+  let bgAudio = null, usingFile = false, audioBlocked = false;
+  function loadBgAudio() {
+    if (bgAudio) return bgAudio;
+    bgAudio = new Audio(A + "intro_audio.mp3");
+    bgAudio.preload = "auto";
+    bgAudio.loop = false;
+    return bgAudio;
+  }
+  function nowT() {
+    if (!playing || startT < 0) return 0;
+    return Math.max(0, ((typeof performance !== "undefined" ? performance.now() : Date.now()) - startT) / 1000);
+  }
+  function showUnmute(on) {
+    if (!els || !els.unmute) return;
+    if (isAds || muted) on = false;
+    els.unmute.classList.toggle("on", !!on);
+  }
+  function tryPlayAudio(offset) {
+    if (muted) { showUnmute(false); usingFile = false; return Promise.resolve(false); }
+    const a = loadBgAudio();
+    const start = () => {
+      try { a.currentTime = Math.max(0, Math.min(DUR - 0.05, offset || 0)); } catch (e) {}
+      const p = a.play();
+      if (p && p.then) {
+        return p.then(() => { audioBlocked = false; usingFile = true; showUnmute(false); return true; })
+          .catch(() => { audioBlocked = true; usingFile = false; showUnmute(true); return false; });
+      }
+      audioBlocked = false; usingFile = true; showUnmute(false); return Promise.resolve(true);
+    };
+    if (a.readyState >= 2) return start();
+    return new Promise((res) => {
+      let done = false;
+      const go = () => { if (done) return; done = true; Promise.resolve(start()).then(res); };
+      a.addEventListener("canplay", go, { once: true });
+      a.addEventListener("error", () => { if (!done) { done = true; res(false); } }, { once: true });
+      setTimeout(go, 700);
+    });
+  }
+  function stopAudio() {
+    if (bgAudio) { try { bgAudio.pause(); bgAudio.currentTime = 0; } catch (e) {} }
+    usingFile = false;
+  }
+  function syncAudio(t) {
+    if (!usingFile || !bgAudio || muted || bgAudio.paused) return;
+    if (Math.abs(bgAudio.currentTime - t) > 0.18) {
+      try { bgAudio.currentTime = Math.max(0, t); } catch (e) {}
+    }
+  }
+
   function build(root) {
     root.innerHTML = "";
     root.className = "pti";
@@ -156,7 +303,7 @@
       `<div class="pti-bg" aria-hidden="true"><i class="pti-sun"></i><i class="pti-cloud c1"></i><i class="pti-cloud c2"></i><i class="pti-hill h1"></i><i class="pti-hill h2"></i></div>
        <div class="pti-track" aria-hidden="true"></div>
        <svg class="pti-rope" aria-hidden="true"><path d=""/></svg>
-       <div class="pti-ant" aria-hidden="true"><img src="${A}ant.webp" alt="" draggable="false"><i class="pti-glint g0"></i><i class="pti-glint g1"></i></div>
+       <div class="pti-ant" aria-hidden="true">${rigHTML()}</div>
        <div class="pti-logo" aria-hidden="true">
          <img class="pc pit" src="${A}logo_pit.webp" alt="" draggable="false">
          <img class="pc n" src="${A}logo_n.webp" alt="" draggable="false">
@@ -168,14 +315,18 @@
        <div class="pti-thumb" aria-hidden="true"><img src="${A}ant.webp" alt="" draggable="false"><b>Vào xưởng phim thôi!</b></div>
        <canvas class="pti-fx" aria-hidden="true"></canvas>
        <div class="pti-flash" aria-hidden="true"></div>
+       <button class="pti-unmute" type="button">🔊 Bật âm thanh</button>
        <button class="pti-skip" type="button">Bỏ qua</button>
        <button class="pti-snd" type="button" aria-label="Bật/tắt âm thanh"></button>`;
     const q = s => root.querySelector(s);
+    const parts = {};
+    root.querySelectorAll(".pti-rig [data-part]").forEach(el => { parts[el.dataset.part] = el; });
     return {
       root, track: q(".pti-track"), rope: q(".pti-rope"), ropeP: q(".pti-rope path"), logo: q(".pti-logo"),
       pit: q(".pc.pit"), n: q(".pc.n"), eyes: q(".pc.eyes"), antenna: q(".pc.antenna"),
       o0: q(".o0"), o1: q(".o1"), ant: q(".pti-ant"), g0: q(".g0"), g1: q(".g1"), bulb: q(".pti-bulb"),
-      thumb: q(".pti-thumb"), fx: q(".pti-fx"), flash: q(".pti-flash"), skip: q(".pti-skip"), snd: q(".pti-snd")
+      thumb: q(".pti-thumb"), fx: q(".pti-fx"), flash: q(".pti-flash"), skip: q(".pti-skip"), snd: q(".pti-snd"),
+      unmute: q(".pti-unmute"), antFull: q(".pti-ant-full"), parts
     };
   }
 
@@ -184,7 +335,12 @@
   function setMuted(m) {
     muted = m; try { localStorage.setItem(SNDK, m ? "0" : "1"); } catch (e) {}
     if (master) master.gain.value = m ? 0 : 0.7;
+    if (bgAudio) {
+      if (m) { try { bgAudio.pause(); } catch (e) {} usingFile = false; showUnmute(false); }
+      else if (playing) tryPlayAudio(nowT());
+    }
     if (els && els.snd) els.snd.textContent = m ? "🔇" : "🔊";
+    if (m) showUnmute(false);
   }
 
   function place(el, x, y, w, h, tf, origin) {
@@ -410,20 +566,23 @@
     if (t >= 4.27) cue("pop", 4.27, "hop");
     if (t >= 4.6) cue("roll", 4.6, "roll");
 
-    /* ---------- the ant ---------- */
+    /* ---------- the ant (rigged walk cycle) ---------- */
     let P, aw = L.antW0, rot = 0, flip = 1, sx = 1, sy = 1, op = 1;
+    let G = null, fullOp = 0;
     const peekX = L.antW0 * (ART.ant.lmx - 0.56);  /* only the head shows at the left edge */
     if (t < 2.3) {
-      /* peek, sneak, look left/right */
+      /* sneaky tiptoe peek, look left/right */
       const inU = spring(0.1, t, 10, 0.5) - smooth(2.0, 2.3, t) * 1.0;
       const x = lerp(-L.antW0 * 0.5, peekX + L.antW0 * 0.06, inU);
-      const bob = Math.sin(t * 7) * L.antH0 * 0.012;
-      P = groundP(L, x, aw, bob);
+      const ph = t * 1.7; /* ~3.4 tiptoe steps / s, two steps per cycle */
+      G = gait(ph, "tiptoe", L.antH0);
+      P = groundP(L, x, aw, G.bobUp);
       rot = t > 0.6 ? Math.sin((t - 0.6) * 4.2) * 9 : 0;
       flip = (t > 1.3 && t < 1.68) ? -1 : 1;
       if (t > 1.28 && t < 1.32) cue("blink", 1.28, "lk1");
       const bl = (t > 1.05 && t < 1.17) || (t > 1.9 && t < 2.02);
-      sy = bl ? 0.92 : 1 - Math.abs(wob(0.25, t, 16, 5)) * 0.08; sx = 2 - sy;
+      const eye = bl ? 0.92 : 1 - Math.abs(wob(0.25, t, 16, 5)) * 0.06;
+      sy = G.sy * eye; sx = G.sx * (bl ? 2 - eye : 1);
       if (bl) cue("blink", t < 1.5 ? 1.05 : 1.9, t < 1.5 ? "b1" : "b2");
       if (t > 0.35 && Math.floor(t * 5) !== render._s) { render._s = Math.floor(t * 5); cue("tiptoe", t, "s" + render._s); }
     } else if (t < 4.1) {
@@ -431,30 +590,60 @@
       const u = spring(2.45, t, 8, 0.6);
       const endX = L.portrait ? L.W * 0.66 : L.lx + L.logoW + L.antW0 * 0.15;
       const x = lerp(-L.antW0 * 0.6, endX, u);
-      const step = Math.sin(t * 16);
-      P = groundP(L, x, aw, Math.abs(step) * L.antH0 * 0.03 * (1 - smooth(3.6, 4.0, t)));
-      rot = 4 + step * 3 * (1 - smooth(3.6, 4.0, t));
+      const fade = 1 - smooth(3.6, 4.0, t);
+      const ph = (t - 2.45) * 1.35;
+      G = gait(ph, "walk", L.antH0);
+      /* ease the cycle out as it arrives */
+      if (fade < 1) {
+        const k = fade;
+        ["midR","midL","hindR","hindL","armR","armL","headRot","abdRot","bodyRot","antL","antR",
+         "kneeMR","kneeML","kneeHR","kneeHL","armL_el","bobUp","liftMR","liftML","liftHR","liftHL","liftAL","headY"].forEach(key => {
+          if (key[0] === "k") G[key] = G[key] * k;
+          else if (key.indexOf("lift") === 0 || key === "bobUp" || key === "headY") G[key] *= k;
+          else if (key === "armR") G[key] = G.hang * k + (G[key] - G.hang) * k;
+          else G[key] = G[key] * k;
+        });
+        G.sy = lerp(1, G.sy, k); G.sx = lerp(1, G.sx, k);
+      }
+      P = groundP(L, x, aw, G.bobUp);
+      rot = 3 * fade + G.bodyRot * 0.4;
+      sx *= G.sx; sy *= G.sy;
       if (t > 2.45 && Math.floor(t * 6) !== render._s) { render._s = Math.floor(t * 6); cue("tiptoe", t, "w" + render._s); }
     } else if (t < 5.75) {
-      /* watches the O's roll away, then gets the idea */
+      /* watches the O's roll away, then gets the idea, anticipates the run */
       const endX = L.portrait ? L.W * 0.66 : L.lx + L.logoW + L.antW0 * 0.15;
       const jump = t > 4.6 && t < 4.95 ? Math.sin((t - 4.6) / 0.35 * Math.PI) * L.antH0 * 0.12 : 0;
-      P = groundP(L, endX, aw, jump);
+      G = gait(t * 0.7, "idle", L.antH0);
+      if (jump > 0) { G.midR = G.hindR = -12; G.midL = G.hindL = 10; G.kneeMR = G.kneeML = 28; }
+      /* anticipation: squash + lean back before the scurry */
+      const antc = t > 5.42 ? smooth(5.42, 5.75, t) : 0;
+      if (antc > 0) {
+        G.sy = G.sy * (1 - antc * 0.16); G.sx = G.sx * (1 + antc * 0.14);
+        rot = lerp(t > 5.2 ? wob(5.2, t, 12, 3) * 8 : -6, 14, antc);
+      } else {
+        rot = t > 5.2 ? wob(5.2, t, 12, 3) * 8 : -6;
+      }
+      P = groundP(L, endX, aw, jump + G.bobUp * (1 - antc) - antc * L.antH0 * 0.04);
       flip = t > 4.7 && t < 5.15 ? -1 : 1;
-      rot = t > 5.2 ? wob(5.2, t, 12, 3) * 8 : -6;
-      sy = 1 - wob(5.2, t, 18, 6) * 0.1; sx = 2 - sy;
+      if (t <= 5.42) { sy = (1 - wob(5.2, t, 18, 6) * 0.1) * G.sy; sx = (2 - (1 - wob(5.2, t, 18, 6) * 0.1)) * G.sx * 0.5 + G.sx * 0.5; }
+      else { sx = G.sx; sy = G.sy; }
     } else {
-      /* runs into the gap: lens midpoint → ring midpoint, glasses become the logo eyes */
+      /* scurry into the gap: lens midpoint → ring midpoint, glasses become the logo eyes */
       const endX = L.portrait ? L.W * 0.66 : L.lx + L.logoW + L.antW0 * 0.15;
       const P0 = groundP(L, endX, L.antW0, 0);
       const u = smooth(5.75, 6.5, t);
       const arc = Math.sin(u * Math.PI) * L.logoH * 0.6;
       P = { x: lerp(P0.x, L.mid.x, u), y: lerp(P0.y, L.mid.y, u) - arc };
       aw = lerp(L.antW0, L.antW1, smooth(5.85, 6.5, t));
-      rot = lerp(-10, ART.ant.tilt, smooth(5.8, 6.5, t)) + Math.sin(t * 30) * 4 * (1 - u);
+      const runFade = 1 - smooth(6.25, 6.5, t);
+      G = gait((t - 5.75) * 2.6, "run", lerp(L.antH0, aw * ART.ant.ar, u));
+      rot = lerp(-10, ART.ant.tilt, smooth(5.8, 6.5, t)) + Math.sin(t * 30) * 4 * (1 - u) * 0.5 + (u < 0.7 ? -8 : 0);
       const land = wob(6.5, t, 22, 7);
-      sy = 1 - land * 0.12; sx = 1 + land * 0.12;
+      sy = (1 - land * 0.12) * lerp(G.sy, 1, 1 - runFade);
+      sx = (1 + land * 0.12) * lerp(G.sx, 1, 1 - runFade);
       op = 1 - smooth(6.6, 6.95, t);
+      /* crossfade to the official full art so the glasses snap cleanly */
+      fullOp = smooth(6.28, 6.52, t) * (1 - smooth(6.6, 6.95, t));
       if (t >= 5.78) cue("whoosh", 5.78, "run");
       if (t >= 6.5) { cue("pop", 6.5, "land"); }
       if (t >= 6.55 && !render._spk) {
@@ -466,6 +655,13 @@
       }
     }
     setAnt(L, P, aw, rot, flip, sx, sy, op);
+    applyGait(G);
+    if (els.antFull) els.antFull.style.opacity = fullOp;
+    if (els.root && els.root.querySelector) {
+      const rigEl = els.ant && els.ant.querySelector(".pti-rig");
+      if (rigEl) rigEl.style.opacity = String(1 - fullOp);
+    }
+    syncAudio(t);
     /* glasses glint sweeps */
     const glint = (t0) => clamp((t - t0) / 0.35, 0, 1);
     const gl = t < 1.6 ? glint(0.9) : t < 3 ? glint(1.95) : glint(5.3);
@@ -522,6 +718,7 @@
 
   function finish(skipped) {
     playing = false;
+    stopAudio();
     if (raf) cancelAnimationFrame(raf);
     try { localStorage.setItem(STORE, "1"); } catch (e) {}
     if (host) { host.classList.add("is-out"); host.style.opacity = "0"; }
@@ -536,6 +733,8 @@
     host.style.opacity = "1";
     playing = true; startT = -1;
     try { ctx(); } catch (e) {}
+    showUnmute(false);
+    tryPlayAudio(0);
     raf = requestAnimationFrame(frame);
   }
 
@@ -553,7 +752,9 @@
     setMuted(muted);
     els.skip.onclick = () => { try { ctx(); } catch (e) {} skip(); };
     els.snd.onclick = () => { try { ctx(); } catch (e) {} setMuted(!muted); };
-    host.addEventListener("pointerdown", () => { try { ctx(); } catch (e) {}; }, { once: true });
+    if (els.unmute) els.unmute.onclick = (ev) => { ev.stopPropagation(); try { ctx(); } catch (e) {} setMuted(false); tryPlayAudio(nowT()); };
+    const armAudio = () => { try { ctx(); } catch (e) {} if (!muted) tryPlayAudio(nowT()); };
+    host.addEventListener("pointerdown", armAudio, { once: true });
 
     const reduce = opts.ignoreReduce ? false : (opts.forceMotion ? false : !!(global.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches));
     const seen = (() => { try { return localStorage.getItem(STORE) === "1"; } catch (e) { return false; } })();
