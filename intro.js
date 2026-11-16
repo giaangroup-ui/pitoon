@@ -579,7 +579,7 @@
 
   global.PiToonIntro = {
     mount, play: function () { if (host) play(); else mount({ once: false, auto: true }); },
-    skip, duration: DUR, render: function (t) { render(t); }
+    skip, isPlaying: function () { return !!playing; }, duration: DUR, render: function (t) { render(t); }
   };
   global.playPiToonIntro = function () { global.PiToonIntro.play(); };
 })(typeof window !== "undefined" ? window : this);

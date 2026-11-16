@@ -4,9 +4,9 @@ self.addEventListener("install",e=>{self.skipWaiting();e.waitUntil(caches.open(C
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x.startsWith("pitoon-")&&x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener("fetch",e=>{const r=e.request,u=new URL(r.url);
  if(r.method!=="GET"||u.origin!==location.origin)return;
- const fresh=r.mode==="navigate"||/\/$|\.html$|\.js$|\.json$|\.webmanifest$/.test(u.pathname);
- if(fresh){e.respondWith(fetch(r,{cache:"no-store"}).then(res=>{if(res.ok&&!u.pathname.endsWith("version.json")){const cp=res.clone();caches.open(C).then(c=>c.put(r,cp))}return res})
+ if(u.pathname.endsWith("version.json")){e.respondWith(fetch(new Request(r,{cache:"no-store"})));return}
+ const dest=r.destination,fresh=r.mode==="navigate"||dest==="document"||dest==="script"||dest==="style"||dest==="manifest"||/\/$|\.(html|js|css|json|webmanifest)$/.test(u.pathname);
+ if(fresh){e.respondWith(fetch(r,{cache:"no-store"}).then(res=>{if(res.ok){const cp=res.clone();caches.open(C).then(c=>c.put(r,cp))}return res})
   .catch(()=>caches.match(r,{ignoreSearch:true}).then(m=>m||caches.match("./"))));return}
  e.respondWith(caches.match(r).then(m=>m||fetch(r).then(res=>{if(res.ok){const cp=res.clone();caches.open(C).then(c=>c.put(r,cp))}return res})))});
-
 self.addEventListener("message",e=>{if(e.data==="skipWaiting")self.skipWaiting()});
