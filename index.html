@@ -35,14 +35,32 @@ button{font:inherit}.btn,.b2{border:0;border-radius:14px;padding:10px 16px;font-
 .dlg{position:fixed;inset:0;background:#1e2a4a88;display:none;align-items:flex-start;justify-content:center;z-index:50;overflow:auto;padding:20px 10px}.dlg.on{display:flex}.dlg>div{background:#fff;border-radius:24px;max-width:640px;width:100%;padding:18px;box-shadow:0 20px 60px #1e2a4a33}
 #log{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;background:#1e2a4aee;color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;display:none;z-index:60;max-width:92vw}
 .prog{height:10px;background:#f3e6d2;border-radius:9px;overflow:hidden}.prog>i{display:block;height:100%;background:linear-gradient(90deg,var(--a),var(--gold));width:0}
-.shot{display:grid;grid-template-columns:200px 1fr;gap:12px}@media(max-width:720px){header{flex-wrap:wrap;row-gap:8px}.brand-logo{height:30px}header h1 small{display:none}.brand{flex:1 1 auto;min-width:0}header h1{white-space:nowrap;font-size:20px}#modeB,header select,header .b2{flex:none}.shot{grid-template-columns:1fr}}
+.shot{display:grid;grid-template-columns:200px 1fr;gap:12px}@media(max-width:720px){header{flex-wrap:wrap;row-gap:8px}.brand-logo{height:30px}header h1 small{display:none}.brand{flex:1 1 auto;min-width:0}header h1{white-space:nowrap;font-size:20px}#modeB,#installBtn,header select,header .b2{flex:none}.shot{grid-template-columns:1fr}}
 .warn{background:#fff4d6;border:1px solid #f5d27a;border-radius:14px;padding:10px 12px;font-size:13px}
+
+.pt-install{background:linear-gradient(90deg,#ffc84a,#ff6b3d);color:#1e2a4a;border:0;border-radius:14px;padding:8px 14px;font:800 14px Fredoka,Nunito,system-ui,sans-serif;cursor:pointer;box-shadow:0 3px 0 #c94a22,0 6px 16px #ff6b3d33;white-space:nowrap;flex:none}
+.pt-install:hover{filter:brightness(1.06)}
+.pt-install[hidden],#installBanner[hidden],#installGuide[hidden]{display:none!important}
+@media (display-mode:standalone),(display-mode:window-controls-overlay){.pt-install,#installBanner,#installGuide{display:none!important}}
+#installBanner{position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:40;display:flex;gap:10px;align-items:center;background:#fffdf9;color:#1e2a4a;border-radius:18px;padding:12px 14px;box-shadow:0 10px 36px #1e2a4a33;border:1px solid var(--b);font:700 14px/1.4 Nunito,system-ui,sans-serif}
+#installBanner .msg{flex:1;min-width:0}#installBanner b{font-family:Fredoka,Nunito,sans-serif;font-size:15px;display:block}
+#installBanner .go{border:0;border-radius:999px;background:linear-gradient(90deg,#ffc84a,#ff6b3d);color:#1e2a4a;font:800 13px Fredoka,Nunito,sans-serif;padding:8px 14px;cursor:pointer;white-space:nowrap;box-shadow:0 3px 0 #c94a22}
+#installBanner .x{border:0;background:none;color:#8a7f73;font:800 22px/1 system-ui;cursor:pointer;padding:4px 6px}
+#installGuide{position:fixed;inset:0;z-index:2147483001;background:#1e2a4a88;display:flex;align-items:flex-end;justify-content:center;padding:16px 12px calc(16px + env(safe-area-inset-bottom))}
+#installGuide>div{background:#fff;color:#1e2a4a;border-radius:22px;padding:18px;max-width:420px;width:100%;box-shadow:0 16px 50px #0004;font:600 15px/1.5 Nunito,system-ui,sans-serif}
+#installGuide h3{font-family:Fredoka,Nunito,sans-serif;font-size:18px;margin:0 0 8px;color:#1e2a4a}
+#installIllust{display:none;margin:4px 0 12px}#installIllust.on{display:block}
+#installIllust svg{width:100%;height:auto;display:block}
+#installGuide ol{margin:6px 0 10px;padding-left:22px}#installGuide li{margin:6px 0}
+#installGuide .okb{display:block;margin:12px 0 0 auto;border:0;border-radius:999px;background:#ff6b3d;color:#fff;font:800 14px Fredoka,Nunito,sans-serif;padding:9px 18px;cursor:pointer}
+
 </style></head><body>
 <header><button type="button" class="brand" id="brandBtn" title="Phát lại intro PiToon" onclick="playPiToonIntro&&playPiToonIntro()">
 <span class="brand-ant" aria-hidden="true"><img src="assets/ant_head.webp" alt="" width="40" height="40"></span>
 <h1><img class="brand-logo" src="assets/logo_sm.webp" alt="PiToon" width="600" height="212"><small data-i>Xưởng phim hoạt hình 3D cho bé 3–10 tuổi</small></h1></button>
-<button class="b2" id="modeB" onclick="openSet()" style="font-size:12px"></button><select id="lang" style="width:auto"><option value="vi">VI</option><option value="en">EN</option><option value="zh">中文</option></select>
-<button class="b2 pt-install" id="installBtn" type="button" hidden>📲 Cài PiToon</button><button class="b2" onclick="openProj()">📁</button><button class="b2" onclick="openSet()">⚙</button></header>
+<button class="b2" id="modeB" onclick="openSet()" style="font-size:12px"></button>
+<button class="pt-install" id="installBtn" type="button" aria-label="Cài PiToon">📲 Cài<span class="inst-long"> PiToon</span></button>
+<select id="lang" style="width:auto"><option value="vi">VI</option><option value="en">EN</option><option value="zh">中文</option></select><button class="b2" onclick="openProj()">📁</button><button class="b2" onclick="openSet()">⚙</button></header>
 <nav id="nav"></nav><main id="main"></main>
 <div class="dlg" id="setDlg"><div id="setBody"></div></div><div class="dlg" id="projDlg"><div id="projBody"></div></div><div id="log"></div>
 <script>
@@ -279,21 +297,96 @@ if("serviceWorker"in navigator){const boot=()=>navigator.serviceWorker.register(
 check();setTimeout(check,2500);setInterval(check,5*60*1000);setInterval(()=>{if(pending)AU_TRY()},3000);
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")check()});addEventListener("focus",check);addEventListener("online",check);
 })();</script>
-<!-- au-bump: verify auto-update --><footer id="ptFoot"<!-- au-bump: verify auto-update --><footer id="ptFoot" style="text-align:center;font:600 12px Nunito,system-ui,sans-serif;color:#8a7f73;padding:18px 12px calc(18px + env(safe-area-inset-bottom))"><span id="ptVer">PiToon</span></footer>
-<div id="iosGuide" hidden style="position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:2147483001;background:#fff;color:#1e2a4a;border-radius:18px;padding:16px 18px;box-shadow:0 10px 40px #0005;font:600 15px/1.45 Nunito,system-ui,sans-serif">
-<b style="font-family:Fredoka,Nunito,sans-serif;font-size:17px">Cài PiToon lên iPhone/iPad</b><br>1. Bấm nút <b>Chia sẻ</b> <span aria-hidden="true">⬆️</span> ở thanh Safari.<br>2. Chọn <b>Thêm vào MH chính</b> (Add to Home Screen).<br>3. Bấm <b>Thêm</b> — biểu tượng chú kiến PiToon sẽ hiện trên màn hình.
-<button type="button" id="iosGuideX" style="display:block;margin:12px 0 0 auto;border:0;border-radius:999px;background:#ff6b3d;color:#fff;font:700 14px Fredoka,Nunito,sans-serif;padding:9px 18px;cursor:pointer">Đã hiểu</button></div>
-<script>/* Cài PiToon (PWA) */
+<footer id="ptFoot" style="text-align:center;font:600 12px Nunito,system-ui,sans-serif;color:#8a7f73;padding:18px 12px calc(18px + env(safe-area-inset-bottom))"><span id="ptVer">PiToon</span></footer>
+<div id="installBanner" hidden>
+  <div class="msg"><b>Cài PiToon ra màn hình</b>Mở nhanh như app thật. Bản mới được cập nhật tự động.</div>
+  <button type="button" class="go" id="installBannerGo">Cài ngay</button>
+  <button type="button" class="x" id="installBannerX" aria-label="Để sau">×</button>
+</div>
+<div id="installGuide" hidden>
+  <div>
+    <h3 id="installGuideT">Cài PiToon ra màn hình</h3>
+    <div id="installIllust"><svg viewBox="0 0 360 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect x="8" y="8" width="100" height="94" rx="16" fill="#fff6e8" stroke="#f0ddc4"/>
+  <rect x="38" y="22" width="40" height="58" rx="8" fill="#fff" stroke="#1e2a4a" stroke-width="2"/>
+  <rect x="48" y="70" width="20" height="4" rx="2" fill="#c9c3bb"/>
+  <path d="M58 36v14m0 0l-6-6m6 6l6-6" fill="none" stroke="#ff6b3d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="58" y="92" text-anchor="middle" font-size="11" font-weight="800" font-family="Nunito,system-ui" fill="#5b6a88">1. Chia sẻ</text>
+  <path d="M116 55h20" stroke="#ff6b3d" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="136,55 128,50 128,60" fill="#ff6b3d"/>
+  <rect x="148" y="8" width="100" height="94" rx="16" fill="#fff6e8" stroke="#f0ddc4"/>
+  <rect x="160" y="28" width="76" height="44" rx="10" fill="#fff" stroke="#e8d3b8"/>
+  <circle cx="176" cy="50" r="8" fill="#ffe7a3" stroke="#ffb000" stroke-width="1.5"/>
+  <rect x="188" y="44" width="40" height="6" rx="3" fill="#1e2a4a"/>
+  <rect x="188" y="54" width="28" height="4" rx="2" fill="#c9c3bb"/>
+  <text x="198" y="92" text-anchor="middle" font-size="10" font-weight="800" font-family="Nunito,system-ui" fill="#5b6a88">2. Thêm MH chính</text>
+  <path d="M256 55h20" stroke="#ff6b3d" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="276,55 268,50 268,60" fill="#ff6b3d"/>
+  <rect x="284" y="8" width="68" height="94" rx="16" fill="#fff6e8" stroke="#f0ddc4"/>
+  <rect x="300" y="28" width="36" height="36" rx="10" fill="#fff6e8" stroke="#f0ddc4" stroke-width="2"/>
+  <circle cx="312" cy="42" r="5" fill="#ffc84a"/>
+  <circle cx="324" cy="42" r="5" fill="#ffc84a"/>
+  <circle cx="318" cy="52" r="3" fill="#ff8aa8"/>
+  <text x="318" y="92" text-anchor="middle" font-size="11" font-weight="800" font-family="Nunito,system-ui" fill="#5b6a88">3. Thêm</text>
+</svg></div>
+    <div id="installGuideBody"></div>
+    <button type="button" class="okb" id="installGuideX">Đã hiểu</button>
+  </div>
+</div>
+<script>/* Cài PiToon (PWA) — nút luôn hiện trên màn hình chính khi chưa cài; tự ẩn khi đã là app */
 (()=>{const vf=document.getElementById("ptVer"),cv=window.APP_VERSION||"dev";if(vf)vf.textContent="PiToon · phiên bản "+(cv.startsWith("__")?"dev":cv);
-const b=document.getElementById("installBtn"),g=document.getElementById("iosGuide");if(!b)return;
+const btn=document.getElementById("installBtn"),banner=document.getElementById("installBanner"),guide=document.getElementById("installGuide");
+const illust=document.getElementById("installIllust"),body=document.getElementById("installGuideBody"),title=document.getElementById("installGuideT");
+if(!btn)return;
 const standalone=()=>matchMedia("(display-mode: standalone)").matches||matchMedia("(display-mode: window-controls-overlay)").matches||navigator.standalone===true;
 const ua=navigator.userAgent||"",ios=/iphone|ipad|ipod/i.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
-let dp=null;const show=v=>{b.hidden=!v||standalone()};
-addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;show(true)});
-addEventListener("appinstalled",()=>{dp=null;show(false)});
-if(ios&&!standalone())show(true);
-b.onclick=async()=>{if(dp){dp.prompt();try{await dp.userChoice}catch(e){}dp=null;show(false)}else if(ios){g.hidden=false}else alert("Mở menu trình duyệt (⋮) → \"Cài đặt PiToon\" hoặc \"Thêm vào màn hình chính\".")};
-document.getElementById("iosGuideX").onclick=()=>{g.hidden=true};
+const and=/android/i.test(ua),edge=/edg\//i.test(ua),safari=/^((?!chrome|android|crios|fxios).)*safari/i.test(ua);
+const KEY="pt_inst_banner",LATER=3*24*60*60*1000;let dp=null;
+const hideAll=()=>{btn.hidden=true;if(banner)banner.hidden=true;if(guide)guide.hidden=true};
+const showBtn=()=>{if(standalone()){hideAll();return}btn.hidden=false};
+const due=()=>{try{const t=+localStorage.getItem(KEY)||0;return!t||Date.now()-t>LATER}catch(e){return true}};
+const showBanner=()=>{if(!banner||standalone()||!due())return;banner.hidden=false};
+const dismiss=()=>{if(banner)banner.hidden=true;try{localStorage.setItem(KEY,String(Date.now()))}catch(e){}};
+const TX={
+ vi:{t:"Cài PiToon ra màn hình",iosT:"Cài PiToon lên iPhone/iPad",ok:"Đã hiểu",after:"Sau khi cài, mở PiToon từ biểu tượng trên màn hình. App tự cập nhật bản mới, bạn không cần làm gì.",
+  ios:["Bấm nút <b>Chia sẻ</b> ⬆️ ở thanh Safari (phía dưới màn hình).","Chọn <b>Thêm vào MH chính</b> (Add to Home Screen).","Bấm <b>Thêm</b> — biểu tượng mặt kính PiToon sẽ hiện trên màn hình."],
+  and:["Trên Chrome, bấm <b>⋮</b> góc trên bên phải.","Chọn <b>Cài đặt ứng dụng</b> hoặc <b>Thêm vào màn hình chính</b>.","Mở PiToon từ biểu tượng vừa cài."],
+  edge:["Bấm <b>⋯</b> góc trên Edge.","Chọn Ứng dụng → <b>Cài đặt PiToon</b>. Hoặc bấm biểu tượng cài ở cuối thanh địa chỉ.","Mở PiToon từ menu Start hoặc màn hình desktop."],
+  mac:["Trong Safari máy tính, mở menu <b>Tệp</b> (File).","Chọn <b>Thêm vào Dock</b> (Add to Dock).","Mở PiToon từ Dock như app thật."],
+  chrome:["Bấm biểu tượng cài đặt ở cuối thanh địa chỉ.","Hoặc menu ⋮ → Truyền, lưu và chia sẻ → <b>Cài đặt PiToon</b>.","Mở PiToon từ biểu tượng trên desktop / menu Start."],
+  other:["Mở menu trình duyệt (⋮ hoặc Tệp).","Chọn <b>Cài đặt PiToon</b> hoặc <b>Thêm vào màn hình chính</b> / Add to Dock.","Mở PiToon từ biểu tượng vừa thêm."]},
+ en:{t:"Install PiToon",iosT:"Install PiToon on iPhone/iPad",ok:"Got it",after:"After installing, open PiToon from its home-screen icon. The app updates itself — you don’t need to do anything.",
+  ios:["Tap the <b>Share</b> ⬆️ button in Safari.","Choose <b>Add to Home Screen</b>.","Tap <b>Add</b> — the PiToon glasses icon appears on your home screen."],
+  and:["In Chrome, tap <b>⋮</b> at the top right.","Choose <b>Install app</b> or <b>Add to Home screen</b>.","Open PiToon from the new icon."],
+  edge:["Tap <b>⋯</b> in Edge.","Choose Apps → <b>Install PiToon</b>, or the install icon in the address bar.","Open PiToon from the Start menu or desktop."],
+  mac:["In desktop Safari, open the <b>File</b> menu.","Choose <b>Add to Dock</b>.","Open PiToon from the Dock."],
+  chrome:["Click the install icon at the right of the address bar.","Or ⋮ → Cast, save and share → <b>Install PiToon</b>.","Open PiToon from the desktop / Start menu."],
+  other:["Open the browser menu (⋮ or File).","Choose <b>Install PiToon</b> or <b>Add to Home Screen</b> / Add to Dock.","Open PiToon from the new icon."]},
+ zh:{t:"安装 PiToon",iosT:"将 PiToon 添加到 iPhone/iPad",ok:"知道了",after:"安装后请从主屏幕图标打开 PiToon。应用会自动更新，无需手动操作。",
+  ios:["点 Safari 的<b>分享</b> ⬆️ 按钮。","选择<b>添加到主屏幕</b>。","点<b>添加</b>，主屏幕会出现 PiToon 眼镜图标。"],
+  and:["在 Chrome 点右上角 <b>⋮</b>。","选择<b>安装应用</b>或<b>添加到主屏幕</b>。","从新图标打开 PiToon。"],
+  edge:["点 Edge 的 <b>⋯</b>。","选择 应用 → <b>安装 PiToon</b>，或地址栏中的安装图标。","从开始菜单或桌面打开。"],
+  mac:["在电脑版 Safari 打开<b>文件</b>菜单。","选择<b>添加到程序坞</b>。","从程序坞打开 PiToon。"],
+  chrome:["点击地址栏右侧的安装图标。","或 ⋮ → 投放、保存并共享 → <b>安装 PiToon</b>。","从桌面或开始菜单打开。"],
+  other:["打开浏览器菜单（⋮ 或 文件）。","选择<b>安装 PiToon</b>或添加到主屏幕 / 程序坞。","从新图标打开 PiToon。"]}
+};
+const lang=()=>{try{const l=(window.AU_LANG?AU_LANG():document.documentElement.lang||"vi").slice(0,2);return TX[l]?l:"vi"}catch(e){return"vi"}};
+function openGuide(){const t=TX[lang()];let kind="other",steps=t.other,hd=t.t;
+ if(ios){kind="ios";steps=t.ios;hd=t.iosT}else if(and){kind="and";steps=t.and}else if(edge){kind="edge";steps=t.edge}else if(safari){kind="mac";steps=t.mac}else if(/chrome|chromium|crios/i.test(ua)){kind="chrome";steps=t.chrome}
+ if(title)title.textContent=hd;if(body)body.innerHTML="<ol>"+steps.map(s=>"<li>"+s+"</li>").join("")+"</ol><p class=mut>"+t.after+"</p>";
+ if(illust)illust.classList.toggle("on",kind==="ios");
+ const ox=document.getElementById("installGuideX");if(ox)ox.textContent=t.ok;
+ if(guide)guide.hidden=false}
+async function install(){if(standalone())return;if(dp){try{dp.prompt();const r=await dp.userChoice;if(r&&r.outcome==="accepted"){dp=null;hideAll();try{localStorage.setItem(KEY,String(Date.now()))}catch(e){}}}catch(e){openGuide()}return}openGuide()}
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;showBtn()});
+addEventListener("appinstalled",()=>{dp=null;hideAll()});
+showBtn();
+const waitBanner=()=>{if(standalone())return;try{const el=document.getElementById("pt-intro");if(el&&el.style.display==="block"&&!el.classList.contains("is-out"))return setTimeout(waitBanner,500)}catch(e){}showBanner()};
+setTimeout(waitBanner,1200);
+btn.onclick=install;
+const go=document.getElementById("installBannerGo"),bx=document.getElementById("installBannerX"),gx=document.getElementById("installGuideX");
+if(go)go.onclick=()=>{dismiss();install()};if(bx)bx.onclick=dismiss;if(gx)gx.onclick=()=>{if(guide)guide.hidden=true};
+if(guide)guide.addEventListener("click",e=>{if(e.target===guide)guide.hidden=true});
 })();</script>
 <div id="pt-intro" hidden></div>
 <script src="intro.js"></script>
