@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Xưởng phim PiToon – bảng 10 khâu</title>
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff6e8;--c:#fffdf9;--t:#1e2a4a;--m:#5b6a88;--a:#ff6b3d;--a2:#2b3fa0;--b:#f0ddc4;--ok:#16a34a;--gold:#e8b84a;--pink:#ff6b9a}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 500px at 10% -10%,#ffe3a8 0,transparent 50%),radial-gradient(900px 400px at 110% 0%,#b9e4f4 0,transparent 46%),var(--bg);color:var(--t);font:16px/1.5 Nunito,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+header{display:flex;align-items:center;gap:12px;padding:16px 20px;flex-wrap:wrap}
+header img.logo{height:40px;width:auto}
+header h1{font-family:Fredoka,Nunito,system-ui,sans-serif;font-size:22px;margin:0;color:var(--a2);flex:1;min-width:220px}
+header h1 small{display:block;font-size:12px;color:var(--m);font-weight:700}
+main{max-width:1180px;margin:0 auto;padding:0 16px 64px}
+.card{background:var(--c);border:1px solid var(--b);border-radius:22px;padding:18px;margin:14px 0;box-shadow:0 8px 24px #e8b84a22}
+h2{font-family:Fredoka,Nunito,system-ui,sans-serif;font-size:20px;margin:0;color:var(--a2)}
+.mut{color:var(--m);font-size:13px;font-weight:700}
+.top{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}.top .ti{flex:1;min-width:220px}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 12px;font:700 14px Fredoka,Nunito,sans-serif;white-space:nowrap}
+.p-cho{background:#eef0f5;color:#5b6a88}.p-dang_lam{background:#e3ecff;color:#2b3fa0}.p-dat,.p-cho_chu_duyet,.p-chu_da_duyet{background:#dcfce7;color:#166534}
+.p-tra_ve{background:#ffedd5;color:#9a3412}.p-can_chu_xem{background:#ffe4ec;color:#be123c}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
+@media(max-width:820px){.flow{grid-template-columns:repeat(2,1fr)}}
+.st{position:relative;border-radius:18px;padding:10px 12px 12px;border:2px solid var(--b);background:#fff;min-height:112px;cursor:pointer;transition:transform .15s}
+.st:hover{transform:translateY(-2px)}
+.st .n{font:700 13px Fredoka,Nunito,sans-serif;color:var(--m)}.st .nm{font:700 15px/1.25 Fredoka,Nunito,sans-serif;margin:2px 0 8px}
+.st .s{font-weight:800;font-size:13px}.st .nt{font-size:12px;color:var(--m);margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.st.open .nt{-webkit-line-clamp:unset}
+.st.cho{border-color:#e4e7ee}.st.dang_lam{border-color:#9db4ff;background:#f5f8ff}.st.dat{border-color:#86efac;background:#f3fff6}
+.st.tra_ve{border-color:#fdba74;background:#fff8f1}.st.can_chu_xem{border-color:#fda4af;background:#fff4f6}
+.st.last{grid-column:span 1;box-shadow:0 0 0 3px #ff6b3d22}
+.dots{display:flex;gap:3px;margin-top:6px}.dots i{width:9px;height:9px;border-radius:50%;background:#eadfcd}.dots i.on{background:#fb923c}.dots i.max{background:#e11d48}
+.kpi{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.kpi div{background:#fff;border:1px solid var(--b);border-radius:14px;padding:6px 12px;font-size:13px;font-weight:700;color:var(--m)}
+.kpi b{font:700 18px Fredoka,Nunito,sans-serif;color:var(--a2);margin-right:4px}
+.out{margin-top:12px;font-size:13px;background:#f3fff6;border:1px dashed #86efac;border-radius:14px;padding:8px 12px}
+.legend{display:flex;gap:8px;flex-wrap:wrap}.note{background:#fff4d6;border:1px solid #f5d27a;border-radius:14px;padding:10px 14px;font-size:14px;font-weight:700}
+a.b2{border:1px solid var(--b);background:#fff;border-radius:14px;padding:8px 14px;font:700 14px Fredoka,Nunito,sans-serif;color:var(--t);text-decoration:none}
+.err{color:#be123c;font-weight:800}
+</style>
+</head>
+<body>
+<header><img class="logo" src="assets/logo_sm.webp" alt="PiToon"><h1>🎬 Xưởng phim<small>10 khâu AI – Tổng kiểm duyệt chấm cuối. Không đạt thì trả về đúng khâu, tối đa 4 lần.</small></h1><a class="b2" href="./">← Về app</a></header>
+<main>
+ <div class="card"><div class="legend" id="legend"></div><p class="mut" id="upd" style="margin:10px 0 0">Đang tải bảng…</p></div>
+ <div id="films"></div>
+ <div class="note">🔒 Phim đạt chỉ chuyển sang “Chờ chủ duyệt”. Không có phim nào tự đăng lên TikTok, Reels, YouTube, Facebook hay Zalo.</div>
+</main>
+<script>
+(function(){
+var ST={cho:["⏳","Chờ"],dang_lam:["🔧","Đang làm"],dat:["✅","Đạt"],tra_ve:["↩️","Trả về"],can_chu_xem:["🙋","Cần chủ xem"]};
+var OV={cho:["⏳","Chưa bắt đầu"],dang_lam:["🔧","Đang làm"],tra_ve:["↩️","Đang sửa theo QC"],can_chu_xem:["🙋","Cần chủ xem"],cho_chu_duyet:["🎬","Đạt – chờ chủ duyệt"],chu_da_duyet:["🌟","Chủ đã duyệt (chưa đăng)"]};
+var OUT={"vertical_9x16.mp4":"Bản dọc 9:16","youtube_16x9.mp4":"Bản ngang 16:9","subs.srt":"Phụ đề","thumb_16x9.jpg":"Ảnh bìa 16:9","thumb_9x16.jpg":"Ảnh bìa 9:16","metadata.json":"Chú thích + hashtag 6 nền tảng"};
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function vn(iso){try{var d=new Date(iso);return d.toLocaleString("vi-VN",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})+" (giờ VN)"}catch(e){return iso}}
+function num(x,d){return x==null?"–":String(Math.round(x*Math.pow(10,d||1))/Math.pow(10,d||1)).replace(".",",")}
+document.getElementById("legend").innerHTML=Object.keys(ST).map(function(k){return '<span class="pill p-'+k+'">'+ST[k][0]+" "+ST[k][1]+"</span>"}).join("");
+function film(f,max){
+ var o=OV[f.overall]||OV.cho,q=f.qc||{};
+ var h='<div class="card"><div class="top"><div class="ti"><h2>'+esc(f.title)+'</h2>'+(f.lesson?'<div class="mut">💡 '+esc(f.lesson)+"</div>":"")+'<div class="mut">Cập nhật '+vn(f.updated)+'</div></div><span class="pill p-'+esc(f.overall)+'">'+o[0]+" "+o[1]+"</span></div>";
+ if(q.total)h+='<div class="kpi"><div><b>'+q.passed+"/"+q.total+'</b>hạng mục QC đạt</div><div><b>'+num(q.motion)+'</b>chuyển động (cần ≥ 4,5)</div><div><b>'+num(q.static_pct,0)+'%</b>giây đứng yên (≤ 5%)</div><div><b>'+num(q.sfx_per_s,2)+'</b>tiếng động/giây (≥ 0,3)</div></div>';
+ h+='<div class="flow">'+f.stages.map(function(s){var t=ST[s.state]||ST.cho,r=Math.min(s.round||0,max),dots="";
+  for(var i=1;i<=max;i++)dots+='<i class="'+(i<=r?(s.state==="can_chu_xem"?"max":"on"):"")+'"></i>';
+  return '<div class="st '+esc(s.state)+(s.n===10?" last":"")+'" onclick="this.classList.toggle(\'open\')" title="'+esc(s.note)+'"><div class="n">Khâu '+s.n+'</div><div class="nm">'+esc(s.name)+'</div><div class="s">'+t[0]+" "+t[1]+(s.state==="tra_ve"&&s.n!==10?" "+r+"/"+max:"")+"</div>"+(r?'<div class="dots" aria-label="'+r+" / "+max+' vòng">'+dots+"</div>":"")+(s.note?'<div class="nt">'+esc(s.note)+"</div>":"")+"</div>"}).join("")+"</div>";
+ if(f.outputs&&f.outputs.length)h+='<div class="out">📦 Gói đăng (nháp): '+f.outputs.map(function(x){return esc(OUT[x]||x)}).join(" · ")+"</div>";
+ return h+"</div>"}
+function load(){fetch("studio/status.json?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(b){
+  var max=b.max_rounds||4;document.getElementById("films").innerHTML=(b.films||[]).map(function(f){return film(f,max)}).join("");
+  document.getElementById("upd").textContent="Bảng cập nhật lúc "+vn(b.updated)+" · tự tải lại mỗi phút · bấm vào một khâu để xem ghi chú đầy đủ";
+ }).catch(function(e){document.getElementById("upd").innerHTML='<span class="err">Chưa tải được bảng ('+esc(e.message)+'). Sẽ thử lại sau 1 phút.</span>'})}
+load();setInterval(load,60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)load()});
+})();
+</script>
+</body>
+</html>

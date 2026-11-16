@@ -12,7 +12,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build + ghi phiên bản
         run: |
-          V=${GITHUB_SHA::12}
+          # Phiên bản app = dấu vân tay mã nguồn, KHÔNG tính studio/ (bảng Xưởng phim do máy cập nhật thường xuyên),
+          # nên cập nhật bảng không làm app của khách tự tải lại; mọi thay đổi mã khác vẫn tự cập nhật như cũ.
+          V=$(git ls-tree -r HEAD | grep -v -P '\tstudio/' | sha1sum | cut -c1-12)
           mkdir _site && cp -r $(ls -A | grep -v -E '^(\.git|\.github|_site)$') _site/
           sed -i "s/__APP_VERSION__/$V/g" _site/index.html _site/manifest.webmanifest
           echo "{\"v\":\"$V\",\"built\":\"$(date -u +%FT%TZ)\"}" > _site/version.json

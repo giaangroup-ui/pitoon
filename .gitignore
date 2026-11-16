@@ -6,3 +6,10 @@ films/thao_sisters/audio/_mix_preview.wav
 films/thao_sisters/audio/voices/raw_*
 __pycache__/
 *.pyc
+
+# Xưởng phim: kết quả QC/đóng gói chạy trên máy (tạo lại được)
+films/**/studio.json
+films/**/qc.json
+films/**/qc.md
+films/**/qc_grid_*.jpg
+films/**/export_pkg/

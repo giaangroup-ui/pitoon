@@ -1,0 +1,269 @@
+{
+ "films": [
+  {
+   "id": "thao_sisters_v2",
+   "title": "Hai chị em Thảo Nguyên – Thảo My và người bạn ăn xin (bản mới)",
+   "lesson": "Thấy bạn cần giúp, hãy quan tâm và báo người lớn đáng tin.",
+   "updated": "2026-11-16T17:28:33+07:00",
+   "overall": "dang_lam",
+   "qc": {},
+   "outputs": [],
+   "stages": [
+    {
+     "n": 1,
+     "name": "Biên kịch",
+     "state": "dat",
+     "note": "25 câu, có bài học",
+     "round": 0
+    },
+    {
+     "n": 2,
+     "name": "Kiểm duyệt nội dung trẻ em",
+     "state": "dat",
+     "note": "0 lỗi luật cấm (máy) – AI đọc lại theo brief 02",
+     "round": 0
+    },
+    {
+     "n": 3,
+     "name": "Nhân vật, bối cảnh",
+     "state": "dat",
+     "note": "Bảng nhân vật đã duyệt; mỗi nhân vật một giọng dự phòng riêng",
+     "round": 0
+    },
+    {
+     "n": 4,
+     "name": "Đạo diễn phân cảnh",
+     "state": "dat",
+     "note": "35 cảnh 2,5–4 giây, 22 câu thoại cận mặt, 3 câu dẫn ngắn",
+     "round": 0
+    },
+    {
+     "n": 5,
+     "name": "Hoạt hình / Video",
+     "state": "cho",
+     "note": "Hẹn tạo video 11:45 thứ Hai 23/11 (giờ VN), khi hạn mức tuần mới mở",
+     "round": 0
+    },
+    {
+     "n": 6,
+     "name": "Lồng tiếng, khớp môi",
+     "state": "cho",
+     "note": "",
+     "round": 0
+    },
+    {
+     "n": 7,
+     "name": "Âm thanh, nhạc",
+     "state": "cho",
+     "note": "Kế hoạch có 29 tiếng động/108s = 0,27/giây – cần thêm ít nhất 4 tiếng để đạt 0,3",
+     "round": 0
+    },
+    {
+     "n": 8,
+     "name": "Dựng phim",
+     "state": "cho",
+     "note": "",
+     "round": 0
+    },
+    {
+     "n": 9,
+     "name": "Đóng gói đa nền tảng",
+     "state": "cho",
+     "note": "",
+     "round": 0
+    },
+    {
+     "n": 10,
+     "name": "Tổng kiểm duyệt",
+     "state": "cho",
+     "note": "",
+     "round": 0
+    }
+   ]
+  },
+  {
+   "id": "thao_sisters",
+   "title": "Hai chị em Thảo Nguyên – Thảo My và người bạn ăn xin",
+   "lesson": "Hãy biết sẻ chia, tôn trọng và giúp đỡ nhau. Khi gặp bạn nhỏ cần giúp đỡ, hãy báo người lớn đáng tin cậy.",
+   "updated": "2026-11-16T17:28:24+07:00",
+   "overall": "tra_ve",
+   "qc": {
+    "passed": 11,
+    "total": 24,
+    "motion": 1.65,
+    "static_pct": 11.1,
+    "sfx_per_s": 0.04
+   },
+   "outputs": [],
+   "stages": [
+    {
+     "n": 1,
+     "name": "Biên kịch",
+     "state": "tra_ve",
+     "note": "Lần 1/4: Kịch bản: [lời thoại dài] lines[0] > 12 từ – nói ngắn cho bé dễ hiểu; [lời thoại dài] lines[1] > 12 từ – nói ngắn cho bé dễ hiểu; Kịch bản có bài học, câu ≤ 12 từ (safety_",
+     "round": 1
+    },
+    {
+     "n": 2,
+     "name": "Kiểm duyệt nội dung trẻ em",
+     "state": "dat",
+     "note": "Đạt các hạng mục QC của khâu",
+     "round": 0
+    },
+    {
+     "n": 3,
+     "name": "Nhân vật, bối cảnh",
+     "state": "dat",
+     "note": "Đạt các hạng mục QC của khâu",
+     "round": 0
+    },
+    {
+     "n": 4,
+     "name": "Đạo diễn phân cảnh",
+     "state": "tra_ve",
+     "note": "Lần 1/4: Liên tục / luật một đạo cụ (scene.json) ([S01] nhân vật 'Thảo Nguyên' chưa có trong bible.json; [S01] nhân vật ); Mỗi cảnh dài 2.5–5 giây (S01 18.2s, S02 14.5s, S03 15.5s,",
+     "round": 1
+    },
+    {
+     "n": 5,
+     "name": "Hoạt hình / Video",
+     "state": "tra_ve",
+     "note": "Lần 1/4: Điểm chuyển động cả phim ≥ 4.5 (1.65 (mẫu Tí & Cún 5,6)); Cảnh nào cũng cử động (mỗi cảnh ≥ 1.2) (yếu: S02 1.15, S06 0.85); Nhân vật tự nói trong video (khớp môi thật) (27",
+     "round": 1
+    },
+    {
+     "n": 6,
+     "name": "Lồng tiếng, khớp môi",
+     "state": "tra_ve",
+     "note": "Lần 1/4: Lời thoại nghe rõ & đúng kịch bản (Whisper ≥ 80%) (L1 57% “Chiều thứ 7, Thảo Nguyên và Thảo My ghé vào quán cà phê” / kịc); Không có giọng lạ / lẩm bẩm ngoài kịch bản (65.",
+     "round": 1
+    },
+    {
+     "n": 7,
+     "name": "Âm thanh, nhạc",
+     "state": "tra_ve",
+     "note": "Lần 1/4: Mật độ tiếng động ≥ 0.3/giây (8 tiếng / 190s = 0.04/giây (mẫu 0,6))",
+     "round": 1
+    },
+    {
+     "n": 8,
+     "name": "Dựng phim",
+     "state": "tra_ve",
+     "note": "Lần 1/4: Không đứng hình > 1s (2 đoạn, dài nhất 1.3s (từ 23.124349, 90.624349s)); Giây gần như đứng yên ≤ 5% (11% số giây)",
+     "round": 1
+    },
+    {
+     "n": 9,
+     "name": "Đóng gói đa nền tảng",
+     "state": "cho",
+     "note": "Chờ phim đạt mới đóng gói",
+     "round": 0
+    },
+    {
+     "n": 10,
+     "name": "Tổng kiểm duyệt",
+     "state": "tra_ve",
+     "note": "13 hạng mục chưa đạt → trả về khâu 1, 4, 5, 6, 7, 8",
+     "round": 0
+    }
+   ]
+  },
+  {
+   "id": "v7",
+   "title": "Cún đội khăn xếp",
+   "lesson": "Muốn mượn đồ thì phải hỏi trước.",
+   "updated": "2026-11-16T17:24:34+07:00",
+   "overall": "cho_chu_duyet",
+   "qc": {
+    "passed": 24,
+    "total": 24,
+    "motion": 5.64,
+    "static_pct": 0.0,
+    "sfx_per_s": 0.6
+   },
+   "outputs": [
+    "metadata.json",
+    "subs.srt",
+    "thumb_16x9.jpg",
+    "thumb_9x16.jpg",
+    "vertical_9x16.mp4",
+    "youtube_16x9.mp4"
+   ],
+   "stages": [
+    {
+     "n": 1,
+     "name": "Biên kịch",
+     "state": "dat",
+     "note": "3 câu, có bài học",
+     "round": 0
+    },
+    {
+     "n": 2,
+     "name": "Kiểm duyệt nội dung trẻ em",
+     "state": "dat",
+     "note": "0 lỗi luật cấm (máy) – AI đọc lại theo brief 02",
+     "round": 0
+    },
+    {
+     "n": 3,
+     "name": "Nhân vật, bối cảnh",
+     "state": "dat",
+     "note": "Đạt các hạng mục QC của khâu",
+     "round": 0
+    },
+    {
+     "n": 4,
+     "name": "Đạo diễn phân cảnh",
+     "state": "dat",
+     "note": "Đạt các hạng mục QC của khâu",
+     "round": 0
+    },
+    {
+     "n": 5,
+     "name": "Hoạt hình / Video",
+     "state": "dat",
+     "note": "Đạt các hạng mục QC của khâu",
+     "round": 0
+    },
+    {
+     "n": 6,
+     "name": "Lồng tiếng, khớp môi",
+     "state": "dat",
+     "note": "Đạt các hạng mục QC của khâu",
+     "round": 0
+    },
+    {
+     "n": 7,
+     "name": "Âm thanh, nhạc",
+     "state": "dat",
+     "note": "Đạt các hạng mục QC của khâu",
+     "round": 0
+    },
+    {
+     "n": 8,
+     "name": "Dựng phim",
+     "state": "dat",
+     "note": "Đạt các hạng mục QC của khâu",
+     "round": 0
+    },
+    {
+     "n": 9,
+     "name": "Đóng gói đa nền tảng",
+     "state": "dat",
+     "note": "9:16 + 16:9, −14 LUFS, phụ đề trong vùng an toàn, 2 ảnh bìa, chú thích 6 nền tảng",
+     "round": 0
+    },
+    {
+     "n": 10,
+     "name": "Tổng kiểm duyệt",
+     "state": "dat",
+     "note": "Đạt 24/24 hạng mục máy + gói đăng. Chờ chủ duyệt – KHÔNG tự đăng",
+     "round": 0
+    }
+   ]
+  }
+ ],
+ "updated": "2026-11-16T17:28:33+07:00",
+ "max_rounds": 4,
+ "note": "Không bao giờ tự đăng: bản đạt chờ chủ duyệt."
+}

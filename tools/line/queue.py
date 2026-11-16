@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Shot queue + stage QC (JSON file). Stages: script>design>shot>voice>sfx>edit>qc>export>draft.
+"""Shot queue + stage QC (JSON file). 10 khâu: xem tools/studio/stages.py; phim cả bộ do line/studio_runner.py quản lý.
 Mỗi shot: pending -> generated -> qc_pass | qc_fail(retry<=4) -> rejected(cần người).
 Usage: queue.py add EP.json | next | mark SHOT STATE [note] | status"""
 import json, os, sys, time
