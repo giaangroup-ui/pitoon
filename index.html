@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="app-version" content="__APP_VERSION__"><title>PiToon – Xưởng phim hoạt hình AI</title>
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><script>
+/* Bắt beforeinstallprompt NGAY trong head, trước mọi script khác — Chrome có thể bắn sự kiện rất sớm. */
+(function(){window.__pitoonBIP=window.__pitoonBIP||null;
+ window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();window.__pitoonBIP=e;try{window.dispatchEvent(new CustomEvent("pitoon-bip"))}catch(err){}});
+ window.addEventListener("appinstalled",function(){window.__pitoonBIP=null;window.__pitoonInstalled=true;try{window.dispatchEvent(new CustomEvent("pitoon-appinstalled"))}catch(err){}});
+})();
+</script><meta name="app-version" content="__APP_VERSION__"><title>PiToon – Xưởng phim hoạt hình AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="intro.css"><link rel="manifest" href="manifest.webmanifest?v=__APP_VERSION__"><meta name="theme-color" content="#ff6b3d"><link rel="icon" href="favicon.ico?v=__APP_VERSION__" sizes="any"><link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png?v=__APP_VERSION__"><link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png?v=__APP_VERSION__"><link rel="icon" type="image/png" sizes="48x48" href="icons/favicon-48.png?v=__APP_VERSION__"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=__APP_VERSION__"><meta name="description" content="PiToon – xưởng phim hoạt hình 3D vui nhộn, an toàn cho bé 3–10 tuổi."><meta property="og:type" content="website"><meta property="og:site_name" content="PiToon"><meta property="og:title" content="PiToon – Xưởng phim hoạt hình AI cho bé"><meta property="og:description" content="Làm phim hoạt hình 3D hài hước, an toàn cho bé 3–10 tuổi cùng chú kiến PiToon."><meta property="og:url" content="https://giaangroup-ui.github.io/pitoon/"><meta property="og:image" content="https://giaangroup-ui.github.io/pitoon/assets/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Logo PiToon và chú kiến đeo kính vàng"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://giaangroup-ui.github.io/pitoon/assets/og.jpg"><link rel="preload" as="image" href="assets/ant.webp"><link rel="preload" as="image" href="assets/logo_eyes.webp"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=__APP_VERSION__"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="PiToon"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="application-name" content="PiToon">
@@ -353,7 +359,9 @@ const TX={
   and:["Trên Chrome, bấm <b>⋮</b> góc trên bên phải.","Chọn <b>Cài đặt ứng dụng</b> hoặc <b>Thêm vào màn hình chính</b>.","Mở PiToon từ biểu tượng vừa cài."],
   edge:["Bấm <b>⋯</b> góc trên Edge.","Chọn Ứng dụng → <b>Cài đặt PiToon</b>. Hoặc bấm biểu tượng cài ở cuối thanh địa chỉ.","Mở PiToon từ menu Start hoặc màn hình desktop."],
   mac:["Trong Safari máy tính, mở menu <b>Tệp</b> (File).","Chọn <b>Thêm vào Dock</b> (Add to Dock).","Mở PiToon từ Dock như app thật."],
-  chrome:["Bấm biểu tượng cài đặt ở cuối thanh địa chỉ.","Hoặc menu ⋮ → Truyền, lưu và chia sẻ → <b>Cài đặt PiToon</b>.","Mở PiToon từ biểu tượng trên desktop / menu Start."],
+  win:["Bấm biểu tượng cài đặt (hình màn hình + mũi tên) ở <b>cuối bên phải thanh địa chỉ</b>, rồi chọn <b>Cài đặt</b>.","Hoặc bấm menu <b>⋮</b> → <b>Truyền, lưu và chia sẻ</b> → <b>Cài đặt trang dưới dạng ứng dụng</b> → Cài đặt.","Để có lối tắt Desktop: mở <b>chrome://apps</b> (gõ vào thanh địa chỉ) → chuột phải <b>PiToon</b> → <b>Tạo lối tắt</b> → chọn <b>Màn hình nền</b>."],
+  edgew:["Bấm biểu tượng cài đặt ở <b>cuối bên phải thanh địa chỉ</b>, rồi chọn <b>Cài đặt</b>.","Hoặc bấm menu <b>⋯</b> → <b>Ứng dụng</b> → <b>Cài đặt PiToon này dưới dạng ứng dụng</b>.","Để có lối tắt Desktop: mở <b>edge://apps</b> → chuột phải <b>PiToon</b> → <b>Tạo lối tắt</b> → <b>Màn hình nền</b>."],
+  chrome:["Bấm biểu tượng cài đặt (hình màn hình + mũi tên) ở <b>cuối bên phải thanh địa chỉ</b>, rồi chọn <b>Cài đặt</b>.","Hoặc bấm menu <b>⋮</b> → <b>Truyền, lưu và chia sẻ</b> → <b>Cài đặt trang dưới dạng ứng dụng</b> → Cài đặt.","Để có lối tắt Desktop: mở <b>chrome://apps</b> → chuột phải <b>PiToon</b> → <b>Tạo lối tắt</b> → chọn <b>Màn hình nền</b>."],
   other:["Mở menu trình duyệt (⋮ hoặc Tệp).","Chọn <b>Cài đặt PiToon</b> hoặc <b>Thêm vào màn hình chính</b> / Add to Dock.","Mở PiToon từ biểu tượng vừa thêm."]},
  en:{t:"Install PiToon",iosT:"Install PiToon on iPhone/iPad",ok:"Got it",after:"After installing, open PiToon from its home-screen icon. The app updates itself — you don’t need to do anything.",
   ios:["Tap the <b>Share</b> ⬆️ button in Safari.","Choose <b>Add to Home Screen</b>.","Tap <b>Add</b> — the PiToon glasses icon appears on your home screen."],
@@ -371,15 +379,22 @@ const TX={
   other:["打开浏览器菜单（⋮ 或 文件）。","选择<b>安装 PiToon</b>或添加到主屏幕 / 程序坞。","从新图标打开 PiToon。"]}
 };
 const lang=()=>{try{const l=(window.AU_LANG?AU_LANG():document.documentElement.lang||"vi").slice(0,2);return TX[l]?l:"vi"}catch(e){return"vi"}};
+const win=/windows|win32|win64/i.test(ua)||(navigator.userAgentData&&/windows/i.test(navigator.userAgentData.platform||""));
 function openGuide(){const t=TX[lang()];let kind="other",steps=t.other,hd=t.t;
- if(ios){kind="ios";steps=t.ios;hd=t.iosT}else if(and){kind="and";steps=t.and}else if(edge){kind="edge";steps=t.edge}else if(safari){kind="mac";steps=t.mac}else if(/chrome|chromium|crios/i.test(ua)){kind="chrome";steps=t.chrome}
+ if(ios){kind="ios";steps=t.ios;hd=t.iosT}else if(and){kind="and";steps=t.and}else if(win&&edge){kind="edgew";steps=t.edgew||t.edge}else if(edge){kind="edge";steps=t.edge}else if(safari){kind="mac";steps=t.mac}else if(/chrome|chromium|crios/i.test(ua)){kind="chrome";steps=t.win||t.chrome}
  if(title)title.textContent=hd;if(body)body.innerHTML="<ol>"+steps.map(s=>"<li>"+s+"</li>").join("")+"</ol><p class=mut>"+t.after+"</p>";
  if(illust)illust.classList.toggle("on",kind==="ios");
  const ox=document.getElementById("installGuideX");if(ox)ox.textContent=t.ok;
  if(guide)guide.hidden=false}
-async function install(){if(standalone())return;if(dp){try{dp.prompt();const r=await dp.userChoice;if(r&&r.outcome==="accepted"){dp=null;hideAll();try{localStorage.setItem(KEY,String(Date.now()))}catch(e){}}}catch(e){openGuide()}return}openGuide()}
-addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;showBtn()});
-addEventListener("appinstalled",()=>{dp=null;hideAll()});
+function toastInstalled(){let d=document.getElementById("instToast");if(!d){d=document.createElement("div");d.id="instToast";d.style.cssText="position:fixed;left:50%;transform:translateX(-50%);bottom:calc(24px + env(safe-area-inset-bottom));z-index:2147483002;background:#1e2a4a;color:#fff;border-radius:999px;padding:12px 20px;font:700 14px Nunito,system-ui,sans-serif;box-shadow:0 8px 28px #0005;max-width:92vw;text-align:center";document.body.appendChild(d)}d.textContent="Đã cài PiToon! Tìm biểu tượng ở màn hình chính / menu Start";d.hidden=false;clearTimeout(d._t);d._t=setTimeout(()=>{d.hidden=true},6000)}
+const bip=()=>window.__pitoonBIP||dp;
+async function install(){if(standalone())return;const ev=bip();if(ev&&typeof ev.prompt==="function"){try{const p=ev.prompt();if(p&&p.then)await p;const r=await ev.userChoice;window.__pitoonBIP=null;dp=null;if(r&&r.outcome==="accepted"){hideAll();toastInstalled();try{localStorage.setItem(KEY,String(Date.now()))}catch(e){}}}catch(e){openGuide()}return}openGuide()}
+dp=window.__pitoonBIP||dp;
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;window.__pitoonBIP=e;showBtn()});
+addEventListener("pitoon-bip",()=>{dp=window.__pitoonBIP||dp;showBtn()});
+addEventListener("appinstalled",()=>{dp=null;window.__pitoonBIP=null;hideAll()});
+addEventListener("pitoon-appinstalled",()=>hideAll());
+if(window.__pitoonInstalled)hideAll();
 showBtn();
 const waitBanner=()=>{if(standalone())return;try{const el=document.getElementById("pt-intro");if(el&&el.style.display==="block"&&!el.classList.contains("is-out"))return setTimeout(waitBanner,500)}catch(e){}showBanner()};
 setTimeout(waitBanner,1200);
