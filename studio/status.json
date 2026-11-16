@@ -4,7 +4,7 @@
    "id": "thao_sisters_v2",
    "title": "Hai chị em Thảo Nguyên – Thảo My và người bạn ăn xin (bản mới)",
    "lesson": "Thấy bạn cần giúp, hãy quan tâm và báo người lớn đáng tin.",
-   "updated": "2026-11-16T17:28:33+07:00",
+   "updated": "2026-11-16T17:32:34+07:00",
    "overall": "dang_lam",
    "qc": {},
    "outputs": [],
@@ -48,7 +48,7 @@
      "n": 6,
      "name": "Lồng tiếng, khớp môi",
      "state": "cho",
-     "note": "",
+     "note": "Chờ video (khâu 5); giọng dự phòng mỗi nhân vật một giọng đã thử",
      "round": 0
     },
     {
@@ -263,7 +263,7 @@
    ]
   }
  ],
- "updated": "2026-11-16T17:28:33+07:00",
+ "updated": "2026-11-16T17:32:34+07:00",
  "max_rounds": 4,
  "note": "Không bao giờ tự đăng: bản đạt chờ chủ duyệt."
 }
