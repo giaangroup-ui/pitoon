@@ -289,12 +289,12 @@ $("lang").value=LANG;$("lang").onchange=e=>{LANG=S.pt_lang=e.target.value;render
 <script>/* Tự động cập nhật phiên bản mới — không cần bấm gì */
 (()=>{const CUR=(document.querySelector('meta[name="app-version"]')||{}).content||"dev";window.APP_VERSION=CUR;
 const T={vi:"Đã có bản mới — đang cập nhật…",en:"New version available — updating…",zh:"有新版本 — 正在更新…"};
-try{const u=new URL(location.href);if(u.searchParams.has("v")){u.searchParams.delete("v");history.replaceState(history.state,"",u.pathname+u.search+u.hash)}}catch(e){}
+try{const u=new URL(location.href);if(u.searchParams.has("v")){try{sessionStorage.pt_intro_skip="1"}catch(e){}u.searchParams.delete("v");history.replaceState(history.state,"",u.pathname+u.search+u.hash)}}catch(e){}
 let pending=null;
 const st=()=>{try{return window.AU_STATE?AU_STATE():"idle"}catch(e){return"idle"}};
 const lang=()=>{try{const l=(window.AU_LANG?AU_LANG():document.documentElement.lang||"vi").slice(0,2);return T[l]?l:"vi"}catch(e){return"vi"}};
 function toast(){let d=document.getElementById("auT");if(!d){d=document.createElement("div");d.id="auT";d.style.cssText="position:fixed;left:50%;transform:translateX(-50%);bottom:calc(64px + env(safe-area-inset-bottom));z-index:2147483000;background:#111a;backdrop-filter:blur(6px);color:#fff;border:1px solid #fff3;border-radius:999px;padding:10px 18px;font:600 14px system-ui,sans-serif;box-shadow:0 6px 24px #0008";document.body.appendChild(d)}d.textContent="🔄 "+T[lang()]}
-function apply(){if(!pending||apply._go)return;if(st()!=="idle"){toast();return}if(!apply._t){apply._t=1;toast();setTimeout(()=>{apply._t=2;apply()},1200);return}if(apply._t<2)return;apply._go=1;try{window.AU_BEFORE&&AU_BEFORE()}catch(e){}sessionStorage.auTried=pending;const u=new URL(location.href);u.searchParams.set("v",pending);location.replace(u.toString())}
+function apply(){if(!pending||apply._go)return;if(st()!=="idle"){toast();return}if(!apply._t){apply._t=1;toast();setTimeout(()=>{apply._t=2;apply()},1200);return}if(apply._t<2)return;apply._go=1;try{window.AU_BEFORE&&AU_BEFORE()}catch(e){}try{sessionStorage.pt_intro_skip="1"}catch(e){}sessionStorage.auTried=pending;const u=new URL(location.href);u.searchParams.set("v",pending);location.replace(u.toString())}
 window.AU_TRY=()=>{if(!pending)return false;if(st()==="idle"){apply();return true}toast();return false};
 window.AU_PENDING=()=>!!pending;
 async function armSW(v){if(!("serviceWorker"in navigator))return;try{const reg=await navigator.serviceWorker.register("sw.js?v="+v,{scope:"/pitoon/"});const kick=w=>{if(w)w.postMessage("skipWaiting")};kick(reg.waiting);if(reg.installing)reg.installing.addEventListener("statechange",e=>{if(e.target.state==="installed")kick(reg.waiting||e.target)});await reg.update().catch(()=>{})}catch(e){}}
@@ -405,5 +405,5 @@ if(guide)guide.addEventListener("click",e=>{if(e.target===guide)guide.hidden=tru
 })();</script>
 <div id="pt-intro" hidden></div>
 <script src="intro.js"></script>
-<script>PiToonIntro.mount({once:true,auto:true});</script>
+<script>PiToonIntro.mount({once:false,auto:true});</script>
 </body></html>

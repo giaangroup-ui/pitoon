@@ -50,8 +50,12 @@
 .pti-flash{position:absolute;inset:0;background:radial-gradient(circle,#fff 0 40%,#fff6fb 70%,#ffe3f4);opacity:0;pointer-events:none}
 .pti-skip,.pti-snd{position:absolute;z-index:5;border:0;border-radius:999px;font:700 15px/1 Fredoka,Nunito,system-ui,sans-serif;
   padding:11px 18px;cursor:pointer;background:#fff;color:var(--pt-royal);box-shadow:0 4px 0 #2b3fa033}
-.pti-skip{right:max(14px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));background:var(--pt-coral);color:#fff;box-shadow:0 4px 0 #c94a22}
+.pti-skip{right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));
+  font:600 12px/1 Fredoka,Nunito,system-ui,sans-serif;padding:7px 12px;
+  background:#ffffffcc;color:var(--pt-royal);box-shadow:0 2px 0 #2b3fa022;backdrop-filter:blur(6px)}
 .pti-snd{right:max(14px,env(safe-area-inset-right));top:max(14px,env(safe-area-inset-top));width:44px;height:44px;padding:0}
+.pti.is-reduce .pti-ant,.pti.is-reduce .pti-track,.pti.is-reduce .pti-rope,.pti.is-reduce .pti-o,
+.pti.is-reduce .pti-bulb,.pti.is-reduce .pti-thumb,.pti.is-reduce .pti-fx,.pti.is-reduce .pti-flash{opacity:0!important;pointer-events:none}
 .pti-skip:hover,.pti-snd:hover{transform:translateY(-1px)}
 .pti-skip:focus-visible,.pti-snd:focus-visible{outline:3px solid var(--pt-royal);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){.pti.is-out{transition:none}}

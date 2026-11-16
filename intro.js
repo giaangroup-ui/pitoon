@@ -6,6 +6,7 @@
   const DUR = 10.0;
   const STORE = "pt_intro_seen";
   const SNDK = "pt_intro_sound";
+  const SKIPK = "pt_intro_skip";
   const BASE = (function () { try { const s = document.currentScript && document.currentScript.src; return s ? s.replace(/[^/]*$/, "") : ""; } catch (e) { return ""; } })();
   const A = BASE + "assets/";
   /* measured from the art (see assets/art.json) */
@@ -737,20 +738,74 @@
     if (!isAds && t > 9.55) host.style.opacity = String(1 - smooth(9.55, DUR, t));
   }
 
+
+  function markSkipNext() { try { sessionStorage.setItem(SKIPK, "1"); } catch (e) {} }
+  function consumeSkip() {
+    try { if (sessionStorage.getItem(SKIPK) === "1") { sessionStorage.removeItem(SKIPK); return true; } } catch (e) {}
+    return false;
+  }
+  function placeStillLogo() {
+    if (!els || !els.logo) return;
+    const L = layout(), lg = ART.logo;
+    const pos = (box) => place(els[box], L.lx + lg[box][0] * L.logoW, L.ly + lg[box][1] * L.logoH, lg[box][2] * L.logoW, lg[box][3] * L.logoH, "");
+    ["pit", "n", "eyes", "antenna"].forEach(pos);
+    els.pit.style.opacity = els.n.style.opacity = els.eyes.style.opacity = els.antenna.style.opacity = "1";
+    els.logo.style.opacity = "1";
+  }
+  function playLogoFade() {
+    if (!host) return;
+    host.removeAttribute("hidden");
+    host.style.display = "block";
+    host.classList.remove("is-out");
+    host.classList.add("is-reduce");
+    host.style.opacity = "0";
+    playing = true; startT = (typeof performance !== "undefined" ? performance.now() : Date.now());
+    [els.ant, els.track, els.rope, els.o0, els.o1, els.bulb, els.thumb, els.fx, els.flash].forEach(el => { if (el) el.style.opacity = "0"; });
+    showUnmute(false);
+    placeStillLogo();
+    const tick = (now) => {
+      if (!playing) return;
+      const t = (now - startT) / 1000;
+      placeStillLogo();
+      const fadeIn = Math.min(1, t / 0.4);
+      const fadeOut = t > 1.15 ? 1 - Math.min(1, (t - 1.15) / 0.45) : 1;
+      host.style.opacity = String(fadeIn * fadeOut);
+      if (t >= 1.7) { finish(false); return; }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+  }
+
   function finish(skipped) {
     playing = false;
     stopAudio();
     if (raf) cancelAnimationFrame(raf);
     try { localStorage.setItem(STORE, "1"); } catch (e) {}
     if (host) { host.classList.add("is-out"); host.style.opacity = "0"; }
-    setTimeout(() => { if (host && !playing) host.style.display = "none"; }, 480);
+    setTimeout(() => {
+      if (host && !playing) { host.style.display = "none"; host.setAttribute("hidden", ""); }
+    }, 480);
     if (typeof onDone === "function") onDone({ skipped: !!skipped });
+  }
+
+  function bindHost() {
+    if (!els) els = build(host);
+    muted = false;
+    try { if (localStorage.getItem(SNDK) === "0") muted = true; } catch (e) {}
+    setMuted(muted);
+    els.skip.onclick = () => { try { ctx(); } catch (e) {} skip(); };
+    els.snd.onclick = () => { try { ctx(); } catch (e) {} setMuted(!muted); };
+    if (els.unmute) els.unmute.onclick = (ev) => { ev.stopPropagation(); try { ctx(); } catch (e) {} setMuted(false); tryPlayAudio(nowT()); };
+    const armAudio = () => { try { ctx(); } catch (e) {} if (!muted) tryPlayAudio(nowT()); };
+    host.addEventListener("pointerdown", armAudio, { once: true });
   }
 
   function play() {
     if (!host) return;
+    if (!els) bindHost();
     lastCue = {}; render._s = -1; render._spk = 0; render._boom = 0; sparks = [];
-    host.style.display = "block"; host.classList.remove("is-out");
+    host.removeAttribute("hidden");
+    host.style.display = "block"; host.classList.remove("is-out", "is-reduce");
     host.style.opacity = "1";
     playing = true; startT = -1;
     try { ctx(); } catch (e) {}
@@ -767,20 +822,19 @@
     host = opts.root || document.getElementById("pt-intro") || document.createElement("div");
     if (!host.id) host.id = "pt-intro";
     if (!host.parentNode) document.body.appendChild(host);
-    els = build(host);
-    muted = false;
-    try { if (localStorage.getItem(SNDK) === "0") muted = true; } catch (e) {}
-    setMuted(muted);
-    els.skip.onclick = () => { try { ctx(); } catch (e) {} skip(); };
-    els.snd.onclick = () => { try { ctx(); } catch (e) {} setMuted(!muted); };
-    if (els.unmute) els.unmute.onclick = (ev) => { ev.stopPropagation(); try { ctx(); } catch (e) {} setMuted(false); tryPlayAudio(nowT()); };
-    const armAudio = () => { try { ctx(); } catch (e) {} if (!muted) tryPlayAudio(nowT()); };
-    host.addEventListener("pointerdown", armAudio, { once: true });
-
-    const reduce = opts.ignoreReduce ? false : (opts.forceMotion ? false : !!(global.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches));
-    const seen = (() => { try { return localStorage.getItem(STORE) === "1"; } catch (e) { return false; } })();
 
     isAds = !!opts.ads;
+    /* Hide first so a version-update reload never flashes the intro. */
+    if (!isAds && consumeSkip()) {
+      host.style.display = "none";
+      host.setAttribute("hidden", "");
+      return;
+    }
+
+    bindHost();
+
+    const reduce = opts.ignoreReduce ? false : (opts.forceMotion ? false : !!(global.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches));
+
     if (isAds) {
       els.skip.style.display = "none"; els.snd.style.display = "none";
       const imgs = Array.from(host.querySelectorAll("img"));
@@ -790,18 +844,22 @@
       return;
     }
     if (reduce) {
-      host.style.display = "none";
-      try { localStorage.setItem(STORE, "1"); } catch (e) {}
-      if (onDone) onDone({ skipped: true, reduced: true });
+      if (opts.auto !== false) playLogoFade();
+      else { host.style.display = "none"; host.setAttribute("hidden", ""); }
       return;
     }
-    if (opts.auto !== false && (opts.once === false || !seen)) play();
-    else host.style.display = "none";
+    /* Play on every fresh launch / page load. once is ignored so returning visitors still see it.
+       In-app navigation does not remount, so the intro will not replay mid-session. */
+    if (opts.auto !== false) play();
+    else { host.style.display = "none"; host.setAttribute("hidden", ""); }
   }
 
   global.PiToonIntro = {
     mount, play: function () { if (host) play(); else mount({ once: false, auto: true }); },
-    skip, isPlaying: function () { return !!playing; }, duration: DUR, render: function (t) { render(t); }
+    skip, isPlaying: function () { return !!playing; }, duration: DUR, render: function (t) { render(t); },
+    markSkipNext
   };
   global.playPiToonIntro = function () { global.PiToonIntro.play(); };
+  const prevAU = global.AU_BEFORE;
+  global.AU_BEFORE = function () { markSkipNext(); if (typeof prevAU === "function") prevAU(); };
 })(typeof window !== "undefined" ? window : this);
