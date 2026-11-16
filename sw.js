@@ -1,7 +1,7 @@
 // Cache theo phiên bản: sw.js?v=<commit>. Không bao giờ chạm vào API/bên thứ ba.
 const V=new URL(self.location).searchParams.get("v")||"dev",C="pitoon-"+V,SHELL=["./","./index.html","./intro.js","./intro.css","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png","./icons/maskable-192.png","./icons/maskable-512.png","./icons/apple-touch-icon.png","./icons/favicon-32.png","./assets/ant.webp","./assets/ant_head.webp","./assets/logo_sm.webp","./assets/logo_pit.webp","./assets/logo_n.webp","./assets/logo_eyes.webp","./assets/logo_antenna.webp"];
 self.addEventListener("install",e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>Promise.all(SHELL.map(u=>fetch(u,{cache:"reload"}).then(r=>r.ok&&c.put(u,r)).catch(()=>{})))))});
-self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
+self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x.startsWith("pitoon-")&&x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener("fetch",e=>{const r=e.request,u=new URL(r.url);
  if(r.method!=="GET"||u.origin!==location.origin)return;
  const fresh=r.mode==="navigate"||/\/$|\.html$|\.js$|\.json$|\.webmanifest$/.test(u.pathname);

@@ -278,9 +278,9 @@ window.AU_PENDING=()=>!!pending;
 async function check(){try{const r=await fetch("version.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const j=await r.json();
  if(!j.v||j.v===CUR||CUR==="dev"||CUR.startsWith("__"))return;
  if(sessionStorage.auTried===j.v&&!pending){pending=null;return}/* tránh vòng lặp nếu CDN còn trả bản cũ */
- if(pending!==j.v){pending=j.v;if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js?v="+j.v,{scope:"./"}).catch(()=>{})}
+ if(pending!==j.v){pending=j.v;if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js?v="+j.v,{scope:"/pitoon/"}).catch(()=>{})}
  AU_TRY()}catch(e){}}
-if("serviceWorker"in navigator){addEventListener("load",()=>navigator.serviceWorker.register("sw.js?v="+CUR,{scope:"./"}).then(r=>{r.update().catch(()=>{});setInterval(()=>r.update().catch(()=>{}),30*60*1000)}).catch(()=>{}));
+if("serviceWorker"in navigator){addEventListener("load",()=>navigator.serviceWorker.register("sw.js?v="+CUR,{scope:"/pitoon/"}).then(r=>{r.update().catch(()=>{});setInterval(()=>r.update().catch(()=>{}),30*60*1000)}).catch(()=>{}));
  const hadCtl=!!navigator.serviceWorker.controller;let rl=0;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(!hadCtl||rl||st()!=="idle")return;rl=1;pending=pending||"sw";toast();setTimeout(()=>location.reload(),1200)})}
 
 setTimeout(check,2500);setInterval(check,5*60*1000);setInterval(()=>{if(pending)AU_TRY()},3000);
