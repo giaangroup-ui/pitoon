@@ -279,7 +279,7 @@ if("serviceWorker"in navigator){const boot=()=>navigator.serviceWorker.register(
 check();setTimeout(check,2500);setInterval(check,5*60*1000);setInterval(()=>{if(pending)AU_TRY()},3000);
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")check()});addEventListener("focus",check);addEventListener("online",check);
 })();</script>
-<footer id="ptFoot"<footer id="ptFoot" style="text-align:center;font:600 12px Nunito,system-ui,sans-serif;color:#8a7f73;padding:18px 12px calc(18px + env(safe-area-inset-bottom))"><span id="ptVer">PiToon</span></footer>
+<!-- au-bump: verify auto-update --><footer id="ptFoot"<!-- au-bump: verify auto-update --><footer id="ptFoot" style="text-align:center;font:600 12px Nunito,system-ui,sans-serif;color:#8a7f73;padding:18px 12px calc(18px + env(safe-area-inset-bottom))"><span id="ptVer">PiToon</span></footer>
 <div id="iosGuide" hidden style="position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:2147483001;background:#fff;color:#1e2a4a;border-radius:18px;padding:16px 18px;box-shadow:0 10px 40px #0005;font:600 15px/1.45 Nunito,system-ui,sans-serif">
 <b style="font-family:Fredoka,Nunito,sans-serif;font-size:17px">Cài PiToon lên iPhone/iPad</b><br>1. Bấm nút <b>Chia sẻ</b> <span aria-hidden="true">⬆️</span> ở thanh Safari.<br>2. Chọn <b>Thêm vào MH chính</b> (Add to Home Screen).<br>3. Bấm <b>Thêm</b> — biểu tượng chú kiến PiToon sẽ hiện trên màn hình.
 <button type="button" id="iosGuideX" style="display:block;margin:12px 0 0 auto;border:0;border-radius:999px;background:#ff6b3d;color:#fff;font:700 14px Fredoka,Nunito,sans-serif;padding:9px 18px;cursor:pointer">Đã hiểu</button></div>
