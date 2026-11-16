@@ -1,70 +1,30 @@
-/* PiToon landing intro — SVG ant, spring physics, Web Audio SFX. No external assets. */
+/* PiToon landing intro v2 — official 3D art (assets/ant.webp + logo pieces), spring physics, Web Audio SFX.
+   Story: the ant peeks in, sneaks and looks around, drags "PiToon" to the centre, the two O's roll away
+   along one straight track, the ant gets an idea, runs into the gap and its glasses become the logo eyes,
+   the logo comes alive, thumbs up, then BOOM — a fairy-tale portal into the app. */
 (function (global) {
-  const DUR = 9.7;
+  const DUR = 10.0;
   const STORE = "pt_intro_seen";
   const SNDK = "pt_intro_sound";
-
-  function Spring(x, k, c) {
-    this.x = x || 0; this.v = 0; this.k = k || 180; this.c = c || 16; this.t = x || 0;
-  }
-  Spring.prototype.set = function (t) { this.t = t; };
-  Spring.prototype.snap = function (v) { this.x = this.t = v; this.v = 0; };
-  Spring.prototype.step = function (dt) {
-    const a = -this.k * (this.x - this.t) - this.c * this.v;
-    this.v += a * dt; this.x += this.v * dt; return this.x;
+  const BASE = (function () { try { const s = document.currentScript && document.currentScript.src; return s ? s.replace(/[^/]*$/, "") : ""; } catch (e) { return ""; } })();
+  const A = BASE + "assets/";
+  /* measured from the art (see assets/art.json) */
+  const ART = {
+    ant: { ar: 877 / 800, lmx: (0.48816 + 0.81345) / 2, lmy: (0.33905 + 0.30018) / 2, ldx: 0.81345 - 0.48816, tilt: 7.5,
+           lensL: [0.48816, 0.33905, 0.155], lensR: [0.81345, 0.30018, 0.163] },
+    logo: { ar: 425 / 1200,
+      pit: [0.0, 0.03239, 0.46906, 0.96761], eyes: [0.39870, 0.27183, 0.36976, 0.63521],
+      antenna: [0.40719, 0.0, 0.38972, 0.35775], n: [0.71657, 0.18451, 0.28343, 0.76761],
+      ringL: [0.49800, 0.55070], ringR: [0.66866, 0.55352], ringR_vis: 0.0888 }
   };
-
-  const ANT_SVG = `<svg class="pti-ant" id="ptiAnt" viewBox="0 0 160 140" aria-hidden="true">
-    <g id="ptiAntRoot">
-      <g id="ptiLegs" fill="none" stroke="#3a241c" stroke-width="5" stroke-linecap="round">
-        <path id="L1" d="M70 88 C50 100 40 118 28 124"/>
-        <path id="L2" d="M78 92 C62 108 58 122 48 130"/>
-        <path id="L3" d="M86 90 C80 110 86 124 80 132"/>
-        <path id="R1" d="M96 88 C116 100 126 118 138 124"/>
-        <path id="R2" d="M88 92 C104 108 108 122 118 130"/>
-        <path id="R3" d="M80 90 C86 110 80 124 86 132"/>
-      </g>
-      <ellipse cx="86" cy="96" rx="28" ry="22" fill="#4a2e24"/>
-      <ellipse cx="86" cy="96" rx="18" ry="13" fill="#5b3a30"/>
-      <ellipse id="ptiThorax" cx="72" cy="78" rx="16" ry="14" fill="#3a241c"/>
-      <g id="ptiHead">
-        <path d="M58 38 C52 18 62 8 70 16" fill="none" stroke="#3a241c" stroke-width="3.5" stroke-linecap="round"/>
-        <path d="M78 36 C86 14 100 10 104 20" fill="none" stroke="#3a241c" stroke-width="3.5" stroke-linecap="round"/>
-        <circle cx="58" cy="16" r="3.2" fill="#3a241c"/><circle cx="104" cy="18" r="3.2" fill="#3a241c"/>
-        <ellipse cx="70" cy="52" rx="26" ry="24" fill="#4a2e24"/>
-        <ellipse cx="62" cy="58" rx="6" ry="4" fill="#f4a89a" opacity=".85"/>
-        <ellipse cx="82" cy="58" rx="6" ry="4" fill="#f4a89a" opacity=".85"/>
-        <path d="M62 66 Q70 72 80 66" fill="none" stroke="#2a1814" stroke-width="2" stroke-linecap="round"/>
-        <g id="ptiEyes">
-          <ellipse class="eye" cx="60" cy="50" rx="6" ry="7" fill="#fff"/>
-          <ellipse class="eye" cx="80" cy="50" rx="6" ry="7" fill="#fff"/>
-          <circle class="pup" cx="61" cy="51" r="3" fill="#1a1a1a"/>
-          <circle class="pup" cx="81" cy="51" r="3" fill="#1a1a1a"/>
-        </g>
-        <g id="ptiGlasses" transform="translate(0,0)">
-          <circle cx="60" cy="51" r="14" fill="none" stroke="#1a1a1a" stroke-width="5"/>
-          <circle cx="84" cy="51" r="14" fill="none" stroke="#1a1a1a" stroke-width="5"/>
-          <path d="M74 51 H70" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
-          <path d="M46 50 L40 48" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
-          <path d="M98 50 L104 48" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="60" cy="51" r="10" fill="#cfe8ff" opacity=".35"/>
-          <circle cx="84" cy="51" r="10" fill="#cfe8ff" opacity=".35"/>
-        </g>
-      </g>
-    </g>
-  </svg>`;
-
-  const BULB = `<svg class="pti-bulb" viewBox="0 0 52 64" aria-hidden="true">
-    <ellipse cx="26" cy="24" rx="18" ry="20" fill="#ffe566" stroke="#e8b84a" stroke-width="2"/>
-    <rect x="18" y="42" width="16" height="8" rx="2" fill="#cfd4dc"/>
-    <rect x="20" y="50" width="12" height="6" rx="2" fill="#aeb6c1"/>
-    <path d="M20 28 L32 20" stroke="#fff6" stroke-width="2"/>
-  </svg>`;
+  function rng(seed) { let s = seed >>> 0; return function () { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
 
   /* ---------- Web Audio ---------- */
   let actx, master, muted = false, lastCue = {};
   function ctx() {
     if (!actx) {
+      const ua = global.navigator && navigator.userActivation;
+      if (ua && !ua.hasBeenActive) return null; /* wait for a tap: no autoplay warnings */
       const AC = global.AudioContext || global.webkitAudioContext;
       if (!AC) return null;
       actx = new AC();
@@ -147,38 +107,79 @@
     lastCue[k] = 1;
     if (SFX[name]) SFX[name]();
   }
+  SFX.ding = function () {
+    const c = ctx(); if (!c || muted) return;
+    const t = c.currentTime;
+    [1318, 1976].forEach((f, i) => {
+      const o = c.createOscillator(); o.type = "sine"; o.frequency.value = f;
+      const g = envGain(t + i * 0.07, 0.004, 0.5, 0.18); if (!g) return;
+      o.connect(g); o.start(t + i * 0.07); o.stop(t + i * 0.07 + 0.55);
+    });
+  };
+  SFX.boing = function () {
+    const c = ctx(); if (!c || muted) return;
+    const t = c.currentTime, o = c.createOscillator(); o.type = "triangle";
+    o.frequency.setValueAtTime(220, t); o.frequency.exponentialRampToValueAtTime(520, t + 0.12);
+    o.frequency.exponentialRampToValueAtTime(260, t + 0.32);
+    const g = envGain(t, 0.004, 0.36, 0.28); if (!g) return;
+    o.connect(g); o.start(t); o.stop(t + 0.4);
+  };
+  SFX.sparkle = function () {
+    const c = ctx(); if (!c || muted) return;
+    const t = c.currentTime;
+    [1568, 2093, 2637, 3136].forEach((f, i) => {
+      const o = c.createOscillator(); o.type = "sine"; o.frequency.value = f;
+      const g = envGain(t + i * 0.05, 0.003, 0.25, 0.09); if (!g) return;
+      o.connect(g); o.start(t + i * 0.05); o.stop(t + i * 0.05 + 0.3);
+    });
+  };
 
-  function easeOutBack(x) { const c = 1.70158; const t = x - 1; return 1 + (c + 1) * t * t * t + c * t * t; }
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
   function lerp(a, b, t) { return a + (b - a) * t; }
   function smooth(t0, t1, t) { const x = clamp((t - t0) / Math.max(0.0001, t1 - t0), 0, 1); return x * x * (3 - 2 * x); }
+  function lin(t0, t1, t) { return clamp((t - t0) / Math.max(0.0001, t1 - t0), 0, 1); }
+  /* closed-form under-damped spring 0→1 (overshoot), deterministic for video export */
+  function spring(t0, t, k, z) {
+    if (t <= t0) return 0;
+    const x = t - t0, w = k || 14, d = z || 0.45;
+    const wd = w * Math.sqrt(1 - d * d);
+    return 1 - Math.exp(-d * w * x) * (Math.cos(wd * x) + (d * w / wd) * Math.sin(wd * x));
+  }
+  function wob(t0, t, f, decay) { if (t < t0) return 0; const x = t - t0; return Math.sin(x * (f || 18)) * Math.exp(-x * (decay || 4)); }
 
   function build(root) {
     root.innerHTML = "";
     root.className = "pti";
     root.setAttribute("role", "dialog");
     root.setAttribute("aria-label", "Hoạt ảnh mở đầu PiToon");
-    const fx = document.createElement("canvas"); fx.className = "pti-fx"; fx.id = "ptiFx";
-    const flash = document.createElement("div"); flash.className = "pti-flash";
-    const portal = document.createElement("div"); portal.className = "pti-portal";
-    const stage = document.createElement("div"); stage.className = "pti-stage";
-    const world = document.createElement("div"); world.className = "pti-world";
-    world.innerHTML = ANT_SVG + BULB +
-      `<div class="pti-logo" id="ptiLogo" aria-hidden="true">
-        <span class="ch" data-ch="P">P</span><span class="ch" data-ch="i">i</span><span class="ch" data-ch="T">T</span>
-        <span class="pti-hole" id="hole0"></span><span class="pti-hole" id="hole1"></span>
-        <span class="ch" data-ch="n">n</span>
-      </div>
-      <div class="pti-o" id="o0"></div><div class="pti-o" id="o1"></div>`;
-    stage.appendChild(world);
-    const skip = document.createElement("button"); skip.className = "pti-skip"; skip.type = "button"; skip.textContent = "Bỏ qua";
-    const snd = document.createElement("button"); snd.className = "pti-snd"; snd.type = "button"; snd.setAttribute("aria-label", "Bật/tắt âm thanh");
-    root.append(fx, portal, flash, stage, skip, snd);
-    return { fx, flash, portal, world, skip, snd };
+    root.innerHTML =
+      `<div class="pti-bg" aria-hidden="true"><i class="pti-sun"></i><i class="pti-cloud c1"></i><i class="pti-cloud c2"></i><i class="pti-hill h1"></i><i class="pti-hill h2"></i></div>
+       <div class="pti-track" aria-hidden="true"></div>
+       <svg class="pti-rope" aria-hidden="true"><path d=""/></svg>
+       <div class="pti-ant" aria-hidden="true"><img src="${A}ant.webp" alt="" draggable="false"><i class="pti-glint g0"></i><i class="pti-glint g1"></i></div>
+       <div class="pti-logo" aria-hidden="true">
+         <img class="pc pit" src="${A}logo_pit.webp" alt="" draggable="false">
+         <img class="pc n" src="${A}logo_n.webp" alt="" draggable="false">
+         <img class="pc eyes" src="${A}logo_eyes.webp" alt="" draggable="false">
+         <img class="pc antenna" src="${A}logo_antenna.webp" alt="" draggable="false">
+       </div>
+       <div class="pti-o o0" aria-hidden="true"></div><div class="pti-o o1" aria-hidden="true"></div>
+       <div class="pti-bulb" aria-hidden="true">💡</div>
+       <div class="pti-thumb" aria-hidden="true"><img src="${A}ant.webp" alt="" draggable="false"><b>Vào xưởng phim thôi!</b></div>
+       <canvas class="pti-fx" aria-hidden="true"></canvas>
+       <div class="pti-flash" aria-hidden="true"></div>
+       <button class="pti-skip" type="button">Bỏ qua</button>
+       <button class="pti-snd" type="button" aria-label="Bật/tắt âm thanh"></button>`;
+    const q = s => root.querySelector(s);
+    return {
+      root, track: q(".pti-track"), rope: q(".pti-rope"), ropeP: q(".pti-rope path"), logo: q(".pti-logo"),
+      pit: q(".pc.pit"), n: q(".pc.n"), eyes: q(".pc.eyes"), antenna: q(".pc.antenna"),
+      o0: q(".o0"), o1: q(".o1"), ant: q(".pti-ant"), g0: q(".g0"), g1: q(".g1"), bulb: q(".pti-bulb"),
+      thumb: q(".pti-thumb"), fx: q(".pti-fx"), flash: q(".pti-flash"), skip: q(".pti-skip"), snd: q(".pti-snd")
+    };
   }
 
-  let playing = false, startT = 0, raf = 0, els = null, host = null, onDone = null, particles = [], isAds = false;
-  const oPhys = [{ x: 0, y: 0, vx: 0, vy: 0, r: 0, vr: 0, mode: "slot" }, { x: 0, y: 0, vx: 0, vy: 0, r: 0, vr: 0, mode: "slot" }];
+  let playing = false, startT = 0, raf = 0, els = null, host = null, onDone = null, isAds = false;
 
   function setMuted(m) {
     muted = m; try { localStorage.setItem(SNDK, m ? "0" : "1"); } catch (e) {}
@@ -186,200 +187,337 @@
     if (els && els.snd) els.snd.textContent = m ? "🔇" : "🔊";
   }
 
-  function holeCenter(id) {
-    const h = document.getElementById(id), w = els.world.getBoundingClientRect();
-    const r = h.getBoundingClientRect();
-    return { x: r.left - w.left + r.width / 2, y: r.top - w.top + r.height / 2, s: r.width };
-  }
-  function placeO(el, p, rot, size) {
-    el.style.width = size + "px"; el.style.height = size + "px";
-    el.style.left = (p.x - size / 2) + "px"; el.style.top = (p.y - size / 2) + "px";
-    el.style.transform = "rotate(" + rot + "deg)";
+  function place(el, x, y, w, h, tf, origin) {
+    el.style.width = w + "px"; el.style.height = h + "px";
+    el.style.transform = "translate(" + x.toFixed(2) + "px," + y.toFixed(2) + "px)" + (tf || "");
+    if (origin) el.style.transformOrigin = origin;
   }
 
-  function blinkAmount(t) {
-    const wins = [[0.72, 0.86], [1.22, 1.36], [1.95, 2.06]];
-    let b = 0;
-    for (const [a, c] of wins) {
-      if (t >= a && t <= c) {
-        const u = (t - a) / (c - a);
-        b = Math.max(b, u < 0.5 ? u * 2 : (1 - u) * 2);
-      }
-    }
-    return b;
+  /* geometry for the current viewport */
+  function layout() {
+    const W = host.clientWidth || innerWidth, H = host.clientHeight || innerHeight;
+    const portrait = H > W * 1.15;
+    const logoW = Math.min(W * (portrait ? 0.9 : 0.66), H * 1.25, 860);
+    const logoH = logoW * ART.logo.ar;
+    const lx = (W - logoW) / 2, ly = H * (portrait ? 0.36 : 0.3) - logoH / 2;
+    const antH0 = Math.min(H * (portrait ? 0.34 : 0.44), W * (portrait ? 0.62 : 0.34));
+    const antW0 = antH0 / ART.ant.ar;
+    const ground = H * (portrait ? 0.84 : 0.93);
+    const antW1 = logoW * (ART.logo.ringR[0] - ART.logo.ringL[0]) / ART.ant.ldx;
+    const mid = { x: lx + logoW * (ART.logo.ringL[0] + ART.logo.ringR[0]) / 2, y: ly + logoH * (ART.logo.ringL[1] + ART.logo.ringR[1]) / 2 };
+    const trackY = ly + logoH * 1.04;
+    return { W, H, portrait, logoW, logoH, lx, ly, antW0, antH0, ground, antW1, mid, trackY };
   }
 
-  function spawnBurst(n) {
-    particles = [];
+  /* ant transform by its lens-midpoint P */
+  function setAnt(L, P, aw, rot, flip, sx, sy, op) {
+    const ah = aw * ART.ant.ar;
+    const ox = ART.ant.lmx * aw, oy = ART.ant.lmy * ah;
+    const e = els.ant;
+    e.style.width = aw + "px"; e.style.height = ah + "px";
+    e.style.transformOrigin = ox + "px " + oy + "px";
+    e.style.transform = "translate(" + (P.x - ox).toFixed(2) + "px," + (P.y - oy).toFixed(2) + "px) rotate(" + rot.toFixed(2) + "deg) scale(" + (flip * sx).toFixed(3) + "," + sy.toFixed(3) + ")";
+    e.style.opacity = op;
+  }
+  function groundP(L, x, aw, lift) { const ah = aw * ART.ant.ar; return { x: x, y: L.ground - (1 - ART.ant.lmy) * ah - (lift || 0) }; }
+
+  /* ---------- canvas fx: sparkles + fairy portal ---------- */
+  let sparks = [], streaks = [];
+  function spawnSparks(x, y, n, seed, spread) {
+    const r = rng(seed);
     for (let i = 0; i < n; i++) {
-      const a = Math.random() * Math.PI * 2, sp = 80 + Math.random() * 420;
-      particles.push({ x: 0.5, y: 0.48, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 0.7 + Math.random() * 0.5,
-        col: ["#ff6b3d", "#e8b84a", "#ff6b9a", "#7ec8e3", "#fff", "#2b3fa0"][i % 6], r: 2 + Math.random() * 5 });
+      const a = r() * Math.PI * 2, sp = (spread || 260) * (0.3 + r());
+      sparks.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 60, t0: null, life: 0.6 + r() * 0.6,
+        col: ["#fff6a8", "#ffd21f", "#ff9ad5", "#b8e8ff", "#ffffff", "#c9b8ff"][i % 6], s: 3 + r() * 6 });
     }
   }
-
-  function drawFx(t) {
+  function star(g, x, y, s, rot) {
+    g.save(); g.translate(x, y); g.rotate(rot || 0); g.beginPath();
+    for (let i = 0; i < 8; i++) { const rr = i % 2 ? s * 0.38 : s; const a = i * Math.PI / 4; g.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); }
+    g.closePath(); g.fill(); g.restore();
+  }
+  function fairyWorld(g, cx, cy, R, t, W, H) {
+    g.save();
+    g.beginPath(); g.arc(cx, cy, R, 0, Math.PI * 2); g.clip();
+    const S = Math.max(W, H);
+    const gr = g.createLinearGradient(0, cy - S * 0.6, 0, cy + S * 0.6);
+    gr.addColorStop(0, "#ffc9e8"); gr.addColorStop(0.45, "#d8c6ff"); gr.addColorStop(1, "#b6f0de");
+    g.fillStyle = gr; g.fillRect(cx - R, cy - R, R * 2, R * 2);
+    /* rainbow */
+    const rc = ["#ff9aa8", "#ffc98a", "#fff09a", "#aef0b0", "#9fd8ff", "#c8a8ff"];
+    g.lineWidth = S * 0.022;
+    rc.forEach((c, i) => { g.strokeStyle = c; g.globalAlpha = 0.55; g.beginPath(); g.arc(cx, cy + S * 0.32, S * (0.42 - i * 0.022), Math.PI, 0); g.stroke(); });
+    g.globalAlpha = 1;
+    /* pastel castle */
+    const bx = cx, by = cy + S * 0.3, u = S * 0.05;
+    g.fillStyle = "#f7e9ff";
+    g.fillRect(bx - u * 2.2, by - u * 3, u * 4.4, u * 3);
+    g.fillRect(bx - u * 3.4, by - u * 4.2, u * 1.2, u * 4.2); g.fillRect(bx + u * 2.2, by - u * 4.2, u * 1.2, u * 4.2);
+    g.fillRect(bx - u * 0.7, by - u * 5.2, u * 1.4, u * 2.4);
+    g.fillStyle = "#ff9ad5";
+    [[bx - u * 2.8, by - u * 4.2, u * 0.9], [bx + u * 2.8, by - u * 4.2, u * 0.9], [bx, by - u * 5.2, u * 1.0]].forEach(([x, y, w]) => {
+      g.beginPath(); g.moveTo(x - w, y); g.lineTo(x, y - w * 2); g.lineTo(x + w, y); g.closePath(); g.fill();
+    });
+    g.fillStyle = "#c9a6ff"; g.beginPath(); g.arc(bx, by - u * 0.9, u * 0.8, Math.PI, 0); g.fill(); g.fillRect(bx - u * 0.8, by - u * 0.9, u * 1.6, u * 0.9);
+    /* hills */
+    g.fillStyle = "#9fe3b8"; g.beginPath(); g.ellipse(cx - S * 0.25, cy + S * 0.42, S * 0.5, S * 0.14, 0, 0, Math.PI * 2); g.fill();
+    g.fillStyle = "#86d6a6"; g.beginPath(); g.ellipse(cx + S * 0.3, cy + S * 0.45, S * 0.5, S * 0.14, 0, 0, Math.PI * 2); g.fill();
+    /* clouds */
+    g.fillStyle = "#ffffffdd";
+    [[-0.28, -0.22, 1], [0.26, -0.3, 0.8], [0.05, -0.12, 0.6]].forEach(([dx, dy, k], i) => {
+      const x = cx + S * dx + Math.sin(t * 0.8 + i) * S * 0.02, y = cy + S * dy, s = S * 0.04 * k;
+      g.beginPath(); g.arc(x, y, s, 0, 7); g.arc(x + s * 1.1, y - s * 0.4, s * 1.2, 0, 7); g.arc(x + s * 2.3, y, s, 0, 7); g.fill();
+    });
+    /* twinkles */
+    const r = rng(77);
+    for (let i = 0; i < 40; i++) {
+      const x = cx + (r() - 0.5) * S, y = cy + (r() - 0.5) * S * 0.8, ph = r() * 6;
+      g.globalAlpha = 0.4 + 0.6 * Math.abs(Math.sin(t * 4 + ph)); g.fillStyle = "#fff";
+      star(g, x, y, 3 + r() * 6, t + ph);
+    }
+    g.restore(); g.globalAlpha = 1;
+  }
+  function drawFx(L, t) {
     const c = els.fx, g = c.getContext("2d");
-    const w = c.width = c.clientWidth, h = c.height = c.clientHeight;
-    g.clearRect(0, 0, w, h);
-    if (t < 7.35) return;
-    const dt = 1 / 60;
-    for (const p of particles) {
-      p.x += (p.vx / w) * dt; p.y += (p.vy / h) * dt; p.vy += 280 * dt; p.life -= dt;
-      if (p.life <= 0) continue;
-      g.globalAlpha = clamp(p.life * 1.6, 0, 1);
-      g.fillStyle = p.col;
-      g.beginPath(); g.arc(p.x * w, p.y * h, p.r, 0, 6.28); g.fill();
+    const dpr = Math.min(2, global.devicePixelRatio || 1);
+    const W = L.W, H = L.H;
+    if (c.width !== Math.round(W * dpr) || c.height !== Math.round(H * dpr)) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); }
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.clearRect(0, 0, W, H);
+    /* sparkles (time-based, deterministic) */
+    for (const p of sparks) {
+      const a = t - p.t0; if (a < 0 || a > p.life) continue;
+      const x = p.x + p.vx * a, y = p.y + p.vy * a + 220 * a * a;
+      g.globalAlpha = clamp(1 - a / p.life, 0, 1); g.fillStyle = p.col;
+      star(g, x, y, p.s * (1 - a / p.life * 0.5), a * 6);
     }
     g.globalAlpha = 1;
+    /* fairy portal */
+    if (t >= 8.25) {
+      const cx = L.W / 2, cy = L.H * 0.5, S = Math.hypot(L.W, L.H) / 2;
+      const u = smooth(8.25, 9.35, t);
+      const R = lerp(S * 0.1, S * 1.1, Math.sqrt(u));
+      /* dim + glow rim */
+      g.fillStyle = "rgba(60,30,110," + (0.12 * (1 - u)).toFixed(3) + ")"; g.fillRect(0, 0, W, H);
+      /* swirling light tunnel (outside rim) */
+      for (let k = 0; k < 6; k++) {
+        const rr = R * (1.05 + k * 0.09);
+        g.lineWidth = Math.max(3, R * 0.05 * (1 - k * 0.12));
+        g.strokeStyle = ["#ff9ad5", "#c9b8ff", "#9fd8ff", "#fff09a", "#aef0b0", "#ffffff"][k];
+        g.globalAlpha = 0.75 - k * 0.1;
+        const a0 = t * (3.2 + k * 0.6) * (k % 2 ? -1 : 1) + k;
+        for (let s = 0; s < 3; s++) { g.beginPath(); g.arc(cx, cy, rr, a0 + s * 2.094, a0 + s * 2.094 + 1.3); g.stroke(); }
+      }
+      g.globalAlpha = 1;
+      /* inner tunnel rings rushing inward before world appears */
+      fairyWorld(g, cx, cy, R, t, W, H);
+      const tun = 1 - smooth(8.3, 8.9, t);
+      if (tun > 0) {
+        g.save(); g.beginPath(); g.arc(cx, cy, R, 0, 7); g.clip();
+        for (let i = 0; i < 7; i++) {
+          const f = ((t * 1.6 + i / 7) % 1);
+          g.strokeStyle = ["#ffffff", "#ffd1ec", "#c9b8ff", "#9fd8ff"][i % 4]; g.globalAlpha = tun * (1 - f);
+          g.lineWidth = 2 + 10 * (1 - f); g.beginPath(); g.arc(cx, cy, R * (1 - f), 0, 7); g.stroke();
+        }
+        g.restore(); g.globalAlpha = 1;
+      }
+      /* warp streaks */
+      const r = rng(1234);
+      for (let i = 0; i < 70; i++) {
+        const a = r() * Math.PI * 2, sp = 0.6 + r() * 1.4, ph = r();
+        const f = ((t - 8.25) * sp + ph) % 1;
+        const d0 = R * 0.2 + f * S * 1.2, d1 = d0 + 18 + f * 90;
+        g.strokeStyle = ["#ffffff", "#fff09a", "#ff9ad5", "#9fd8ff"][i % 4];
+        g.globalAlpha = clamp(f * 2, 0, 1) * 0.85; g.lineWidth = 1.5 + f * 3;
+        g.beginPath(); g.moveTo(cx + Math.cos(a) * d0, cy + Math.sin(a) * d0); g.lineTo(cx + Math.cos(a) * d1, cy + Math.sin(a) * d1); g.stroke();
+      }
+      g.globalAlpha = 1;
+    }
   }
 
   function frame(now) {
     if (!playing) return;
-    if (!startT) startT = now;
+    if (startT < 0) startT = now;
     const t = (now - startT) / 1000;
-    const dt = Math.min(0.033, Math.max(0.008, (frame._p ? now - frame._p : 16) / 1000));
-    frame._p = now;
-
-    const ant = document.getElementById("ptiAnt");
-    const head = document.getElementById("ptiHead");
-    const eyes = document.getElementById("ptiEyes");
-    const glasses = document.getElementById("ptiGlasses");
-    const logo = document.getElementById("ptiLogo");
-    const bulb = els.world.querySelector(".pti-bulb");
-    const o0 = document.getElementById("o0"), o1 = document.getElementById("o1");
-
-    /* --- ant position: peek, then walk dragging logo --- */
-    let antX = -0.12, walk = 0; // fraction of world width, 0 = left edge
-    if (t < 0.5) antX = lerp(-0.12, 0.0, smooth(0, 0.5, t)); // poke head first
-    else if (t < 1.75) antX = lerp(-0.01, 0.06, smooth(0.45, 1.75, t));
-    else if (t < 3.45) { walk = smooth(1.75, 3.45, t); antX = lerp(0.06, 0.16, walk); }
-    else antX = 0.16;
-
-    const bob = (t > 1.7 && t < 3.4) ? Math.sin((t - 1.7) * 10) * 6 : (t >= 0.35 && t < 1.7 ? Math.sin(t * 3) * 2 : 0);
-    const look = t < 1.75
-      ? Math.sin(t * 5.2) * 16 * (t > 0.5 ? 1 : 0)
-      : (t > 5.0 && t < 5.8 ? -8 : 0);
-    const blink = blinkAmount(t);
-    if (eyes) eyes.style.transform = "scaleY(" + (1 - blink * 0.88) + ")";
-    if (head) head.style.transform = "rotate(" + look + "deg)";
-
-    /* walk legs */
-    const lg = t > 1.7 && t < 3.4 ? Math.sin((t - 1.7) * 10) : 0;
-    ["L1", "L2", "L3", "R1", "R2", "R3"].forEach((id, i) => {
-      const el = document.getElementById(id); if (!el) return;
-      const sgn = i < 3 ? 1 : -1;
-      const ph = (i % 3) * 0.8;
-      el.setAttribute("transform", "rotate(" + (lg * 12 * sgn * Math.sin(1 + ph)) + " 80 90)");
-    });
-
-    const worldW = els.world.clientWidth, worldH = els.world.clientHeight;
-    ant.style.left = (antX * worldW) + "px";
-    ant.style.top = (worldH * 0.62 + bob) + "px";
-    ant.style.transform = "translate(-20%,-50%) scaleX(" + (t > 5.5 && t < 6.4 ? -1 : 1) + ")";
-
-    /* ant drags the word from the left to centre */
-    let logoLeft = 28, logoS = 0.55, logoOp = 0;
-    if (t < 1.55) { logoOp = 0; logoS = 0.5; logoLeft = 22; }
-    else if (t < 3.45) {
-      const u = smooth(1.55, 3.45, t);
-      logoOp = 1; logoS = lerp(0.7, 1, easeOutBack(u));
-      logoLeft = lerp(26, 50, u);
-    } else { logoOp = 1; logoS = 1; logoLeft = 50; }
-    logo.style.opacity = logoOp;
-    logo.style.left = logoLeft + "%";
-    logo.style.transform = "translate(-50%,-50%) scale(" + logoS + ")";
-
-    /* rolling O's */
-    const c0 = holeCenter("hole0"), c1 = holeCenter("hole1");
-    const sz = c0.s;
-    if (t < 3.4) {
-      oPhys[0].mode = oPhys[1].mode = "slot";
-      o0.classList.remove("is-lens"); o1.classList.remove("is-lens");
-      placeO(o0, c0, 0, sz); placeO(o1, c1, 0, sz);
-      o0.style.opacity = o1.style.opacity = logoOp;
-    } else if (t < 6.15) {
-      if (oPhys[0].mode === "slot") {
-        oPhys[0] = { x: c0.x, y: c0.y, vx: -460, vy: -640, r: 0, vr: -640, mode: "roll" };
-        oPhys[1] = { x: c1.x, y: c1.y, vx: 520, vy: -680, r: 0, vr: 720, mode: "roll" };
-        cue("roll", 3.4);
-      }
-      const floor = worldH * 0.9;
-      for (const p of oPhys) {
-        p.vy += 780 * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.r += p.vr * dt;
-        if (p.y > floor - sz / 2) { p.y = floor - sz / 2; p.vy *= -0.48; p.vx *= 0.96; p.vr *= 0.9; }
-      }
-      o0.style.opacity = o1.style.opacity = t < 5.2 ? 1 : clamp(1 - (t - 5.2) / 0.4, 0, 1);
-      placeO(o0, oPhys[0], oPhys[0].r, sz);
-      placeO(o1, oPhys[1], oPhys[1].r, sz);
-    }
-
-    /* idea bulb */
-    if (t >= 5.05 && t < 7.4) {
-      const u = smooth(5.05, 5.45, t);
-      const ax = antX * worldW, ay = worldH * 0.62 + bob;
-      bulb.style.opacity = u * (t < 6.9 ? 1 : clamp(1 - (t - 6.9) / 0.3, 0, 1));
-      bulb.style.left = (ax + 36) + "px";
-      bulb.style.top = (ay - 118 - (1 - u) * 20) + "px";
-      bulb.style.transform = "scale(" + (0.4 + 0.7 * u) + ") rotate(" + ((1 - u) * -20) + "deg)";
-      if (t >= 5.12) cue("pop", 5.12, "bulb");
-    } else bulb.style.opacity = 0;
-
-    /* glasses lift + lenses become O's */
-    if (t >= 5.55 && glasses) {
-      const lift = smooth(5.55, 6.15, t);
-      glasses.style.transform = "translate(0," + (-lift * 28) + "px) rotate(" + (lift * -18) + "deg)";
-      glasses.style.opacity = t < 6.2 ? 1 : clamp(1 - (t - 6.2) / 0.2, 0, 1);
-    } else if (glasses) { glasses.style.transform = ""; glasses.style.opacity = 1; }
-
-    if (t >= 6.2) {
-      o0.classList.add("is-lens"); o1.classList.add("is-lens");
-      o0.style.opacity = 1; o1.style.opacity = 1;
-      const antR = ant.getBoundingClientRect(), wr = els.world.getBoundingClientRect();
-      const hand0 = { x: antR.left - wr.left + antR.width * 0.35, y: antR.top - wr.top + antR.height * 0.25 };
-      const hand1 = { x: antR.left - wr.left + antR.width * 0.55, y: antR.top - wr.top + antR.height * 0.25 };
-      const u0 = easeOutBack(smooth(6.2, 7.05, t));
-      const u1 = easeOutBack(smooth(6.38, 7.2, t));
-      placeO(o0, { x: lerp(hand0.x, c0.x, u0), y: lerp(hand0.y, c0.y, u0) }, (1 - u0) * -80, sz);
-      placeO(o1, { x: lerp(hand1.x, c1.x, u1), y: lerp(hand1.y, c1.y, u1) }, (1 - u1) * 80, sz);
-      if (t >= 6.22) cue("pop", 6.22, "lens0");
-      if (t >= 6.4) cue("pop", 6.4, "lens1");
-    }
-
-    /* logo bounce when complete */
-    if (t >= 7.15 && t < 7.7) {
-      const j = Math.sin((t - 7.15) * 16) * (1 - smooth(7.15, 7.7, t)) * 8;
-      logo.style.transform = "translate(-50%,-50%) scale(" + (1.06 + j / 70) + ")";
-    }
-
-    /* boom + portal */
-    if (t >= 7.45 && !frame._boom) { frame._boom = 1; spawnBurst(48); cue("boom", 7.45); }
-    if (t >= 7.85) cue("whoosh", 7.85);
-    const flashA = t >= 7.45 && t < 7.75 ? (1 - (t - 7.45) / 0.3) * 0.85 : 0;
-    els.flash.style.opacity = flashA;
-
-    if (t >= 7.7) {
-      const u = smooth(7.7, 9.55, t);
-      const sc = 0.2 + u * 4.2;
-      els.portal.style.opacity = clamp(u * 1.8, 0, 1);
-      els.portal.style.transform = "translate(-50%,-50%) scale(" + sc + ") rotate(" + (u * 320) + "deg)";
-      const stage = host.querySelector(".pti-stage");
-      if (stage) stage.style.transform = "scale(" + (1 + u * 0.35) + ")";
-      if (!isAds && u > 0.92) host.style.opacity = String(1 - (u - 0.92) / 0.08);
-    } else {
-      const stage = host.querySelector(".pti-stage");
-      if (stage) stage.style.transform = "";
-      host.style.opacity = "1";
-    }
-
-    /* sfx walk / blink */
-    if (t > 0.4 && t < 3.4 && Math.floor(t * 5) !== frame._step) { frame._step = Math.floor(t * 5); cue("tiptoe", t, "s" + frame._step); }
-    if (blink > 0.7) cue("blink", t, "b" + t.toFixed(1));
-
-    drawFx(t);
-
+    render(t);
     if (t >= DUR) { if (isAds) return; finish(false); return; }
     raf = requestAnimationFrame(frame);
+  }
+
+  function render(t) {
+    const L = layout();
+    els.root.style.setProperty("--pti-vh", L.H + "px");
+    const lg = ART.logo;
+
+    /* ---------- logo pieces ---------- */
+    /* pull: letters trail in from the left behind the ant (2.5–4.0) */
+    const startOff = -(L.lx + L.logoW + L.W * 0.15);
+    const pulls = { n: spring(2.55, t, 9, 0.55), o: spring(2.62, t, 9, 0.55), pit: spring(2.7, t, 9, 0.55) };
+    const offN = startOff * (1 - pulls.n), offO = startOff * (1 - pulls.o), offP = startOff * (1 - pulls.pit);
+    const tiltOf = (t0) => t < t0 ? -12 : -12 * Math.exp(-(t - t0) * 3) * Math.cos((t - t0) * 9);
+    const wave = (i) => t > 6.95 && t < 8.2 ? -Math.max(0, Math.sin((t - 6.95 - i * 0.09) * 9)) * L.logoH * 0.08 * Math.exp(-(t - 6.95) * 1.6) : 0;
+    const pos = (box, off, extraY, tf) => {
+      place(els[box], L.lx + off + lg[box][0] * L.logoW, L.ly + lg[box][1] * L.logoH + (extraY || 0), lg[box][2] * L.logoW, lg[box][3] * L.logoH, tf || "");
+    };
+    const vis = t >= 2.5 ? 1 : 0;
+    els.pit.style.opacity = els.n.style.opacity = vis;
+    pos("pit", offP, wave(0), " rotate(" + tiltOf(3.2).toFixed(2) + "deg)");
+    pos("n", offN, wave(3), " rotate(" + tiltOf(3.0).toFixed(2) + "deg)");
+    els.pit.style.transformOrigin = "50% 100%"; els.n.style.transformOrigin = "50% 100%";
+
+    /* official eyes + antenna: appear when the ant's glasses settle in the gap (6.55) */
+    const becomeT = 6.55;
+    const eu = t < becomeT ? 0 : spring(becomeT, t, 16, 0.4);
+    const eOp = clamp((t - becomeT) / 0.22, 0, 1);
+    const blinkE = (t > 7.5 && t < 7.62) ? 1 - Math.sin((t - 7.5) / 0.12 * Math.PI) * 0.85 : 1;
+    const wig = t > 6.9 && t < 8.3 ? Math.sin((t - 6.9) * 14) * L.logoW * 0.006 * Math.exp(-(t - 6.9) * 1.2) : 0;
+    const eScale = lerp(1.25, 1, eu);
+    pos("eyes", wig, wave(1.5), " scale(" + eScale.toFixed(3) + "," + (eScale * blinkE).toFixed(3) + ")");
+    els.eyes.style.transformOrigin = "50% 45%"; els.eyes.style.opacity = eOp;
+    const boing = wob(6.7, t, 17, 2.6) * 14 + wob(7.9, t, 17, 3) * 8;
+    pos("antenna", wig * 0.5, wave(1.5) + (1 - eu) * L.logoH * 0.25, " rotate(" + boing.toFixed(2) + "deg) scaleY(" + (1 + wob(6.7, t, 20, 3) * 0.12).toFixed(3) + ")");
+    els.antenna.style.transformOrigin = "50% 100%"; els.antenna.style.opacity = eOp;
+    if (t >= 6.7) cue("boing", 6.7, "boing1");
+    if (t >= 7.9) cue("boing", 7.9, "boing2");
+
+    /* ---------- the two plain O's ---------- */
+    const rv = lg.ringR_vis * L.logoW, d = rv * 2;
+    const oc = [{ x: L.lx + lg.ringL[0] * L.logoW, y: L.ly + lg.ringL[1] * L.logoH }, { x: L.lx + lg.ringR[0] * L.logoW, y: L.ly + lg.ringR[1] * L.logoH }];
+    const trackY = L.trackY + rv * 1.15;            /* O's centre height when sitting on the track */
+    const tOn = smooth(3.9, 4.25, t);               /* track line draws in */
+    els.track.style.top = (trackY + rv) + "px";
+    els.track.style.opacity = t < 6.3 ? tOn : 1 - smooth(6.3, 6.7, t);
+    els.track.style.transform = "scaleX(" + tOn.toFixed(3) + ")";
+    [0, 1].forEach(i => {
+      const el = els["o" + i];
+      let x = oc[i].x + offO, y = oc[i].y, rot = 0, sq = 1;
+      if (t >= 4.25) {
+        /* hop down onto the track */
+        const hd = 4.25 + i * 0.08;
+        const fall = smooth(hd, hd + 0.28, t);
+        y = lerp(oc[i].y, trackY, fall * fall) - Math.sin(fall * Math.PI) * rv * 0.5;
+        if (t > hd + 0.28) sq = 1 - wob(hd + 0.28, t, 26, 9) * 0.18;
+        /* roll left along the straight line and exit */
+        const rs = 4.6 + i * 0.06;
+        if (t > rs) {
+          const a = t - rs, dist = 0.5 * 1500 * a * a + 120 * a;
+          x -= dist; rot = -(dist / rv) * 57.3;
+        }
+      }
+      el.style.opacity = vis && x > -d * 2 ? 1 : 0;
+      place(el, x - rv, y - rv, d, d, " rotate(" + rot.toFixed(1) + "deg) scale(" + (2 - sq).toFixed(3) + "," + sq.toFixed(3) + ")", "50% 50%");
+    });
+    if (t >= 4.27) cue("pop", 4.27, "hop");
+    if (t >= 4.6) cue("roll", 4.6, "roll");
+
+    /* ---------- the ant ---------- */
+    let P, aw = L.antW0, rot = 0, flip = 1, sx = 1, sy = 1, op = 1;
+    const peekX = L.antW0 * (ART.ant.lmx - 0.56);  /* only the head shows at the left edge */
+    if (t < 2.3) {
+      /* peek, sneak, look left/right */
+      const inU = spring(0.1, t, 10, 0.5) - smooth(2.0, 2.3, t) * 1.0;
+      const x = lerp(-L.antW0 * 0.5, peekX + L.antW0 * 0.06, inU);
+      const bob = Math.sin(t * 7) * L.antH0 * 0.012;
+      P = groundP(L, x, aw, bob);
+      rot = t > 0.6 ? Math.sin((t - 0.6) * 4.2) * 9 : 0;
+      flip = (t > 1.3 && t < 1.68) ? -1 : 1;
+      if (t > 1.28 && t < 1.32) cue("blink", 1.28, "lk1");
+      const bl = (t > 1.05 && t < 1.17) || (t > 1.9 && t < 2.02);
+      sy = bl ? 0.92 : 1 - Math.abs(wob(0.25, t, 16, 5)) * 0.08; sx = 2 - sy;
+      if (bl) cue("blink", t < 1.5 ? 1.05 : 1.9, t < 1.5 ? "b1" : "b2");
+      if (t > 0.35 && Math.floor(t * 5) !== render._s) { render._s = Math.floor(t * 5); cue("tiptoe", t, "s" + render._s); }
+    } else if (t < 4.1) {
+      /* walks back in, dragging the word to the centre */
+      const u = spring(2.45, t, 8, 0.6);
+      const endX = L.portrait ? L.W * 0.66 : L.lx + L.logoW + L.antW0 * 0.15;
+      const x = lerp(-L.antW0 * 0.6, endX, u);
+      const step = Math.sin(t * 16);
+      P = groundP(L, x, aw, Math.abs(step) * L.antH0 * 0.03 * (1 - smooth(3.6, 4.0, t)));
+      rot = 4 + step * 3 * (1 - smooth(3.6, 4.0, t));
+      if (t > 2.45 && Math.floor(t * 6) !== render._s) { render._s = Math.floor(t * 6); cue("tiptoe", t, "w" + render._s); }
+    } else if (t < 5.75) {
+      /* watches the O's roll away, then gets the idea */
+      const endX = L.portrait ? L.W * 0.66 : L.lx + L.logoW + L.antW0 * 0.15;
+      const jump = t > 4.6 && t < 4.95 ? Math.sin((t - 4.6) / 0.35 * Math.PI) * L.antH0 * 0.12 : 0;
+      P = groundP(L, endX, aw, jump);
+      flip = t > 4.7 && t < 5.15 ? -1 : 1;
+      rot = t > 5.2 ? wob(5.2, t, 12, 3) * 8 : -6;
+      sy = 1 - wob(5.2, t, 18, 6) * 0.1; sx = 2 - sy;
+    } else {
+      /* runs into the gap: lens midpoint → ring midpoint, glasses become the logo eyes */
+      const endX = L.portrait ? L.W * 0.66 : L.lx + L.logoW + L.antW0 * 0.15;
+      const P0 = groundP(L, endX, L.antW0, 0);
+      const u = smooth(5.75, 6.5, t);
+      const arc = Math.sin(u * Math.PI) * L.logoH * 0.6;
+      P = { x: lerp(P0.x, L.mid.x, u), y: lerp(P0.y, L.mid.y, u) - arc };
+      aw = lerp(L.antW0, L.antW1, smooth(5.85, 6.5, t));
+      rot = lerp(-10, ART.ant.tilt, smooth(5.8, 6.5, t)) + Math.sin(t * 30) * 4 * (1 - u);
+      const land = wob(6.5, t, 22, 7);
+      sy = 1 - land * 0.12; sx = 1 + land * 0.12;
+      op = 1 - smooth(6.6, 6.95, t);
+      if (t >= 5.78) cue("whoosh", 5.78, "run");
+      if (t >= 6.5) { cue("pop", 6.5, "land"); }
+      if (t >= 6.55 && !render._spk) {
+        render._spk = 1;
+        const lr = [ART.logo.ringL, ART.logo.ringR];
+        lr.forEach((c, i) => spawnSparks(L.lx + c[0] * L.logoW, L.ly + c[1] * L.logoH, 16, 9 + i, L.logoW * 0.5));
+        sparks.forEach(s => { if (s.t0 === null) s.t0 = 6.55; });
+        cue("sparkle", 6.55, "spk");
+      }
+    }
+    setAnt(L, P, aw, rot, flip, sx, sy, op);
+    /* glasses glint sweeps */
+    const glint = (t0) => clamp((t - t0) / 0.35, 0, 1);
+    const gl = t < 1.6 ? glint(0.9) : t < 3 ? glint(1.95) : glint(5.3);
+    [els.g0, els.g1].forEach(gg => { gg.style.setProperty("--g", (gl * 220 - 60).toFixed(1) + "%"); gg.style.opacity = gl > 0 && gl < 1 ? 1 : 0; });
+
+    /* rope from the ant to the word while dragging */
+    if (t > 2.5 && t < 4.05) {
+      const ah = aw * ART.ant.ar, ax = P.x - ART.ant.lmx * aw + aw * 0.12, ay = P.y - ART.ant.lmy * ah + ah * 0.52;
+      const nx = L.lx + offN + lg.n[0] * L.logoW + lg.n[2] * L.logoW * 0.45, ny = L.ly + (lg.n[1] + lg.n[3] * 0.95) * L.logoH;
+      const sag = 30 + 30 * Math.sin(t * 6);
+      els.ropeP.setAttribute("d", "M" + ax.toFixed(1) + " " + ay.toFixed(1) + " Q" + ((ax + nx) / 2).toFixed(1) + " " + (Math.max(ay, ny) + sag).toFixed(1) + " " + nx.toFixed(1) + " " + ny.toFixed(1));
+      els.rope.style.opacity = 1 - smooth(3.85, 4.05, t);
+    } else els.rope.style.opacity = 0;
+
+    /* lightbulb idea */
+    const bu = t > 5.2 && t < 6.0 ? spring(5.2, t, 18, 0.35) : 0;
+    if (bu > 0) {
+      const ah = L.antW0 * ART.ant.ar, bx = P.x - L.antW0 * 0.05, by = P.y - ART.ant.lmy * ah - L.antH0 * 0.18;
+      const bs = Math.max(34, L.antH0 * 0.22);
+      els.bulb.style.fontSize = bs + "px";
+      els.bulb.style.transform = "translate(" + (bx - bs / 2) + "px," + (by - bs) + "px) scale(" + bu.toFixed(3) + ")";
+      els.bulb.style.opacity = 1 - smooth(5.8, 6.0, t);
+      cue("ding", 5.2, "ding");
+    } else els.bulb.style.opacity = 0;
+
+    /* thumbs up */
+    const tu = spring(7.45, t, 13, 0.45);
+    if (t > 7.45 && t < 8.6) {
+      const th = Math.min(L.H * (L.portrait ? 0.3 : 0.36), L.W * (L.portrait ? 0.55 : 0.28));
+      const tw = th / ART.ant.ar;
+      const tx = L.portrait ? (L.W - tw) / 2 : L.W * 0.5 - tw / 2;
+      const ty = L.portrait ? L.H * 0.5 : L.ly + L.logoH * 1.02;
+      els.thumb.style.width = tw + "px";
+      els.thumb.style.transform = "translate(" + tx + "px," + (ty + (1 - tu) * th * 0.6) + "px) scale(" + (0.4 + 0.6 * tu).toFixed(3) + ") rotate(" + (wob(7.6, t, 10, 3) * 6).toFixed(2) + "deg)";
+      els.thumb.style.opacity = clamp((t - 7.45) / 0.15, 0, 1) * (1 - smooth(8.3, 8.6, t));
+      if (t >= 7.5) cue("pop", 7.5, "thumb");
+    } else els.thumb.style.opacity = 0;
+
+    /* BOOM + fairy portal */
+    if (t >= 8.25 && !render._boom) {
+      render._boom = 1; cue("boom", 8.25, "boom");
+      spawnSparks(L.W / 2, L.H * 0.5, 50, 4242, Math.max(L.W, L.H) * 0.6);
+      sparks.forEach(s => { if (s.t0 === null) s.t0 = 8.25; });
+    }
+    if (t >= 8.4) cue("whoosh", 8.4, "portal");
+    if (t >= 8.6) cue("sparkle", 8.6, "fairy");
+    els.flash.style.opacity = t >= 8.25 && t < 8.6 ? (1 - (t - 8.25) / 0.35) * 0.9 : 0;
+    const zoom = t > 8.25 ? 1 + smooth(8.25, 9.4, t) * 0.5 : 1;
+    els.root.style.setProperty("--pti-zoom", zoom.toFixed(3));
+    els.logo.style.opacity = 1 - smooth(8.6, 9.2, t);
+    drawFx(L, t);
+    if (!isAds && t > 9.55) host.style.opacity = String(1 - smooth(9.55, DUR, t));
   }
 
   function finish(skipped) {
@@ -387,18 +525,16 @@
     if (raf) cancelAnimationFrame(raf);
     try { localStorage.setItem(STORE, "1"); } catch (e) {}
     if (host) { host.classList.add("is-out"); host.style.opacity = "0"; }
-    setTimeout(() => { if (host) host.style.display = "none"; }, 480);
+    setTimeout(() => { if (host && !playing) host.style.display = "none"; }, 480);
     if (typeof onDone === "function") onDone({ skipped: !!skipped });
   }
 
   function play() {
     if (!host) return;
-    lastCue = {}; frame._boom = 0; frame._p = 0; frame._step = -1; particles = [];
-    oPhys[0].mode = oPhys[1].mode = "slot";
+    lastCue = {}; render._s = -1; render._spk = 0; render._boom = 0; sparks = [];
     host.style.display = "block"; host.classList.remove("is-out");
-    host.style.opacity = "1"; host.style.transform = "none";
-    const stg = host.querySelector(".pti-stage"); if (stg) stg.style.transform = "";
-    playing = true; startT = 0;
+    host.style.opacity = "1";
+    playing = true; startT = -1;
     try { ctx(); } catch (e) {}
     raf = requestAnimationFrame(frame);
   }
@@ -425,8 +561,11 @@
     isAds = !!opts.ads;
     if (isAds) {
       els.skip.style.display = "none"; els.snd.style.display = "none";
-      global.__DURATION = DUR; global.__READY = true;
-      play(); return;
+      const imgs = Array.from(host.querySelectorAll("img"));
+      Promise.all(imgs.map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))).then(() => {
+        global.__DURATION = DUR; global.__READY = true; play();
+      });
+      return;
     }
     if (reduce) {
       host.style.display = "none";
@@ -440,7 +579,7 @@
 
   global.PiToonIntro = {
     mount, play: function () { if (host) play(); else mount({ once: false, auto: true }); },
-    skip, duration: DUR
+    skip, duration: DUR, render: function (t) { render(t); }
   };
   global.playPiToonIntro = function () { global.PiToonIntro.play(); };
 })(typeof window !== "undefined" ? window : this);
