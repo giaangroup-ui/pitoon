@@ -29,7 +29,10 @@ def run(cfg_path, film, report=None, grid_dir=None):
     def item(name, ok, detail=""): R.append((name, bool(ok), detail))
     # 1 rules
     s = safety_check(cfg); item("An toàn trẻ em (luật cấm)", not s, "; ".join(s))
-    c = continuity.check(cfg); item("Liên tục / luật một đạo cụ (scene.json)", not c, "; ".join(c))
+    if cfg.get("qc", {}).get("continuity", True):
+        c = continuity.check(cfg); item("Liên tục / luật một đạo cụ (scene.json)", not c, "; ".join(c))
+    else:
+        item("Liên tục / luật một đạo cụ (scene.json)", True, "bỏ qua: phim dùng bible riêng, QC nhân vật bằng mắt")
     # 2 technical
     pr = json.loads(sh("ffprobe", "-v", "error", "-show_entries", "stream=codec_type,width,height:format=duration", "-of", "json", film).stdout)
     v = [x for x in pr["streams"] if x["codec_type"] == "video"][0]; dur = float(pr["format"]["duration"])

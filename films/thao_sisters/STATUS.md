@@ -25,3 +25,16 @@
 3. Làm tuần tự S01→S12 theo `produce.py queue` và `SCENE_PLAN.json`.
 4. Hết hạn mức thì dừng ở cảnh đã QC đạt, không làm dở.
 5. `assemble_film.py` + motion + phụ đề + `qc.py`.
+
+## Cập nhật 16/11/2026 12:20 (giờ VN)
+- Hạn mức tuần đã reset: dùng 0,1%, reset tiếp theo thứ Hai 23/11/2026 lúc 11:23 (giờ VN).
+- Lượt chạy này (executor) KHÔNG có công cụ GenerateImage / GenerateVideo / videoReview, máy box không có GPU, nên chưa tạo được master Khang/Mẹ và 12 cảnh. Không dùng Ken Burns ảnh tĩnh (chủ đã từ chối).
+- Cần chạy lại hàng đợi `python3 produce.py queue` từ phiên có công cụ tạo ảnh/video. Giọng, nhạc, SFX, intro/title/outro vẫn sẵn sàng.
+
+## Cập nhật 16/11/2026 ~13:45 (giờ VN) — PHIM HOÀN CHỈNH
+- Master Khang và Mẹ (bible/khang_master.png, me_master.png) đã QC đạt brief: đúng tuổi, giản dị, có phẩm giá, không chữ.
+- S01–S12 keyframe + clip image-to-video đều QC bằng mắt đạt. S03 làm lại (bản cũ cầm hộp quà thay vì chiếc bánh): key + clip mới, My đưa bánh, Khang nhận.
+- Ghép: mỗi cảnh kéo đúng thời lượng thoại, chuyển cảnh mờ 0,35s, intro + title + outro, phụ đề tiếng Việt (Be Vietnam Pro), mix mới (nhạc hạ 11,8 dB khi có thoại, SFX đúng cue).
+- Kết quả: /workspace/ref/pitoon_free/thao_sisters_16x9.mp4 (3:10, 1920x1080), contact sheet thao_sisters_16x9_sheet.jpg, báo cáo thao_sisters_qc.md.
+- qc.py: đạt mọi mục kỹ thuật/âm thanh/thoại; còn cảnh báo 2 câu thoại dài (câu của Mẹ ở S05 và câu kết S12), giữ nguyên vì là kịch bản của chủ.
+- Sửa công cụ: safety_check khớp nguyên từ (trước đây báo nhầm "ngu" trong "Nguyên", "ao" trong "Thao"); qc.py có tuỳ chọn bỏ qua continuity cho phim dùng bible riêng.

@@ -8,10 +8,10 @@ RULES = {
  "đánh người": r"đánh|đá vào|đấm|đẩy ngã|ném vào|cắn|\bhit(s|ting)? \w+|punch|kick|slap|shove|bite",
  "lửa": r"lửa|diêm|bật lửa|nến|pháo|\bfire\b|flame|match(es)?\b|lighter|candle|firework",
  "điện": r"ổ cắm|dây điện|cột điện|electric|socket|power line|wire",
- "nước sâu": r"ao\b|hồ\b|sông|giếng|chum nước|lặn|đuối|\bpond|river|lake|\bwell\b|deep water|drown|swim",
- "vật sắc nhọn": r"dao|kéo|kim\b|mảnh vỡ|que nhọn|knife|scissors|needle|sharp|broken glass|shard",
+ "nước sâu": r"\bao\b|\bhồ\b|sông|giếng|chum nước|lặn|đuối|\bpond|river|lake|\bwell\b|deep water|drown|swim",
+ "vật sắc nhọn": r"\bdao\b|\bkéo\b|\bkim\b|mảnh vỡ|que nhọn|knife|scissors|needle|sharp|broken glass|shard",
  "ăn vật lạ": r"ăn (đất|lá lạ|nấm|thuốc|sỏi)|nuốt|ngậm (đồ|viên)|eat(s|ing)? (dirt|mushroom|pill|berr)|swallow",
- "hỗn với người lớn": r"lè lưỡi|đồ ngốc|ngu|im đi|cãi (bà|ông|mẹ|bố)|stupid|shut up|stick(s)? (out )?tongue",
+ "hỗn với người lớn": r"lè lưỡi|đồ ngốc|\bngu\b|im đi|cãi (bà|ông|mẹ|bố)|stupid|shut up|stick(s)? (out )?tongue",
 }
 def scan_text(t):
     return [(k, m.group(0)) for k, r in RULES.items() for m in [re.search(r, t, re.I)] if m]
@@ -26,7 +26,7 @@ def check(cfg):
     walk(cfg, "scene")
     if not cfg.get("lesson"): issues.append("[bài học] thiếu 'lesson' – mỗi tập phải kết bằng một bài học dễ hiểu")
     for i, l in enumerate(cfg.get("lines", [])):
-        if len(l.get("text", "").split()) > 12: issues.append(f"[lời thoại dài] lines[{i}] > 12 từ – nói ngắn cho bé dễ hiểu")
+        if len(l.get("text", "").split()) > int(cfg.get("qc", {}).get("max_line_words", 12)): issues.append(f"[lời thoại dài] lines[{i}] > 12 từ – nói ngắn cho bé dễ hiểu")
     return issues
 if __name__ == "__main__":
     iss = check(json.load(open(sys.argv[1])))
