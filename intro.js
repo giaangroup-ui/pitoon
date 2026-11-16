@@ -1,7 +1,7 @@
 /* PiToon landing intro v3 — official 3D art, cut-out walk-cycle rig, spring physics, cartoon jingle + SFX.
    Story: the ant peeks in, sneaks and looks around, drags "PiToon" to the centre, the two O's roll away
    along one straight track, the ant gets an idea, runs into the gap and its glasses become the logo eyes,
-   the logo comes alive, thumbs up, then BOOM — a fairy-tale portal into the app. */
+   the logo comes alive, the ant (now bare-eyed) blinks, squints and gives a thumbs-up, then BOOM — a fairy-tale portal into the app. */
 (function (global) {
   const DUR = 10.0;
   const STORE = "pt_intro_seen";
@@ -12,6 +12,7 @@
   const ART = {
     ant: { ar: 877 / 800, lmx: (0.48816 + 0.81345) / 2, lmy: (0.33905 + 0.30018) / 2, ldx: 0.81345 - 0.48816, tilt: 7.5,
            lensL: [0.48816, 0.33905, 0.155], lensR: [0.81345, 0.30018, 0.163] },
+    antBare: { ar: 941 / 800 },
     logo: { ar: 425 / 1200,
       pit: [0.0, 0.03239, 0.46906, 0.96761], eyes: [0.39870, 0.27183, 0.36976, 0.63521],
       antenna: [0.40719, 0.0, 0.38972, 0.35775], n: [0.71657, 0.18451, 0.28343, 0.76761],
@@ -312,7 +313,7 @@
        </div>
        <div class="pti-o o0" aria-hidden="true"></div><div class="pti-o o1" aria-hidden="true"></div>
        <div class="pti-bulb" aria-hidden="true">💡</div>
-       <div class="pti-thumb" aria-hidden="true"><img src="${A}ant.webp" alt="" draggable="false"><b>Vào xưởng phim thôi!</b></div>
+       <div class="pti-thumb" aria-hidden="true"><span class="pti-thumb-stack"><img class="pti-thumb-open" src="${A}ant_bare.webp" alt="" draggable="false"><img class="pti-thumb-squint" src="${A}ant_bare_squint.webp" alt="" draggable="false"></span><b>Hay quá!</b></div>
        <canvas class="pti-fx" aria-hidden="true"></canvas>
        <div class="pti-flash" aria-hidden="true"></div>
        <button class="pti-unmute" type="button">🔊 Bật âm thanh</button>
@@ -325,7 +326,7 @@
       root, track: q(".pti-track"), rope: q(".pti-rope"), ropeP: q(".pti-rope path"), logo: q(".pti-logo"),
       pit: q(".pc.pit"), n: q(".pc.n"), eyes: q(".pc.eyes"), antenna: q(".pc.antenna"),
       o0: q(".o0"), o1: q(".o1"), ant: q(".pti-ant"), g0: q(".g0"), g1: q(".g1"), bulb: q(".pti-bulb"),
-      thumb: q(".pti-thumb"), fx: q(".pti-fx"), flash: q(".pti-flash"), skip: q(".pti-skip"), snd: q(".pti-snd"),
+      thumb: q(".pti-thumb"), thumbSquint: q(".pti-thumb-squint"), thumbWord: q(".pti-thumb b"), fx: q(".pti-fx"), flash: q(".pti-flash"), skip: q(".pti-skip"), snd: q(".pti-snd"),
       unmute: q(".pti-unmute"), antFull: q(".pti-ant-full"), parts
     };
   }
@@ -525,7 +526,7 @@
     const becomeT = 6.55;
     const eu = t < becomeT ? 0 : spring(becomeT, t, 16, 0.4);
     const eOp = clamp((t - becomeT) / 0.22, 0, 1);
-    const blinkE = (t > 7.5 && t < 7.62) ? 1 - Math.sin((t - 7.5) / 0.12 * Math.PI) * 0.85 : 1;
+    const blinkE = (t > 7.20 && t < 7.36) ? 1 - Math.sin((t - 7.20) / 0.16 * Math.PI) * 0.85 : 1;
     const wig = t > 6.9 && t < 8.3 ? Math.sin((t - 6.9) * 14) * L.logoW * 0.006 * Math.exp(-(t - 6.9) * 1.2) : 0;
     const eScale = lerp(1.25, 1, eu);
     pos("eyes", wig, wave(1.5), " scale(" + eScale.toFixed(3) + "," + (eScale * blinkE).toFixed(3) + ")");
@@ -687,18 +688,38 @@
       cue("ding", 5.2, "ding");
     } else els.bulb.style.opacity = 0;
 
-    /* thumbs up */
-    const tu = spring(7.45, t, 13, 0.45);
-    if (t > 7.45 && t < 8.6) {
-      const th = Math.min(L.H * (L.portrait ? 0.3 : 0.36), L.W * (L.portrait ? 0.55 : 0.28));
-      const tw = th / ART.ant.ar;
+    /* bare-eyes ant: blinks & squints (glasses already given to the logo), then proud thumbs-up */
+    const tAppear = 7.08;
+    const tu = spring(tAppear, t, 13, 0.45);
+    const pulse = (a, b) => (t <= a || t >= b) ? 0 : Math.sin((t - a) / (b - a) * Math.PI);
+    if (t > tAppear && t < 8.6) {
+      const th = Math.min(L.H * (L.portrait ? 0.28 : 0.36), L.W * (L.portrait ? 0.52 : 0.28));
+      const tw = th / ART.antBare.ar;
       const tx = L.portrait ? (L.W - tw) / 2 : L.W * 0.5 - tw / 2;
-      const ty = L.portrait ? L.H * 0.5 : L.ly + L.logoH * 1.02;
+      const ty = L.portrait ? L.H * 0.54 : L.ly + L.logoH * 1.04;
+      const proud = 1 + wob(7.55, t, 12, 3.2) * 0.1;
+      const sc = (0.42 + 0.58 * tu) * proud;
+      els.thumb.classList.toggle("is-port", !!L.portrait);
       els.thumb.style.width = tw + "px";
-      els.thumb.style.transform = "translate(" + tx + "px," + (ty + (1 - tu) * th * 0.6) + "px) scale(" + (0.4 + 0.6 * tu).toFixed(3) + ") rotate(" + (wob(7.6, t, 10, 3) * 6).toFixed(2) + "deg)";
-      els.thumb.style.opacity = clamp((t - 7.45) / 0.15, 0, 1) * (1 - smooth(8.3, 8.6, t));
-      if (t >= 7.5) cue("pop", 7.5, "thumb");
-    } else els.thumb.style.opacity = 0;
+      els.thumb.style.transform = "translate(" + tx + "px," + (ty + (1 - tu) * th * 0.55) + "px) scale(" + sc.toFixed(3) + ") rotate(" + (wob(7.2, t, 10, 3) * 5).toFixed(2) + "deg)";
+      els.thumb.style.opacity = clamp((t - tAppear) / 0.14, 0, 1) * (1 - smooth(8.3, 8.6, t));
+      /* blink, then a longer happy squint, then open happy eyes */
+      const sq = Math.max(pulse(7.20, 7.36), t > 7.42 && t < 7.62 ? (t < 7.48 ? (t - 7.42) / 0.06 : t < 7.54 ? 1 : 1 - (t - 7.54) / 0.08) : 0);
+      if (els.thumbSquint) els.thumbSquint.style.opacity = sq.toFixed(3);
+      const wOn = clamp((t - 7.46) / 0.10, 0, 1) * (1 - smooth(8.25, 8.5, t));
+      const wBounce = 0.85 + 0.15 * spring(7.46, t, 16, 0.4) + wob(7.46, t, 14, 3) * 0.08;
+      if (els.thumbWord) {
+        els.thumbWord.style.opacity = wOn.toFixed(3);
+        els.thumbWord.style.transform = L.portrait
+          ? "translate(-50%,-100%) scale(" + (wBounce * wOn).toFixed(3) + ")"
+          : "scale(" + (wBounce * wOn).toFixed(3) + ")";
+      }
+      if (t >= 7.15) cue("pop", 7.15, "thumb");
+      if (t >= 7.46) cue("pop", 7.46, "word");
+    } else {
+      els.thumb.style.opacity = 0;
+      if (els.thumbWord) els.thumbWord.style.opacity = 0;
+    }
 
     /* BOOM + fairy portal */
     if (t >= 8.25 && !render._boom) {
