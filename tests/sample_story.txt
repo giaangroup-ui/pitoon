@@ -1,0 +1,70 @@
+Tên phim: Chiếc hộp màu của bạn Mây
+
+Tóm tắt: Bạn Mây mang hộp màu tới nhà bạn Tí. Cả hai cùng bà Năm vẽ một bức tranh làng quê và học rằng chia sẻ làm niềm vui lớn hơn.
+
+Bài học: Chia sẻ với bạn bè làm niềm vui lớn hơn.
+
+Nhân vật:
+- Bạn Mây: bé gái 6 tuổi, tóc hai bím, áo vàng, vui vẻ, hay chia sẻ. Giọng: child_girl
+- Bạn Tí: bé trai 6 tuổi, tóc xoăn, áo xanh, hơi nhút nhát, tốt bụng. Giọng: child_boy
+- Bà Năm: bà hiền, tóc bạc búi, áo bà ba nâu, nói nhẹ nhàng. Giọng: old_woman
+- Người dẫn: người dẫn chuyện ấm áp, giọng kể chậm rãi. Giọng: narrator
+
+Bối cảnh:
+- Sân nhà: sân đất vui, chum nước có nắp, luống hoa, nắng sớm an toàn.
+- Gốc cây đa: gốc cây mát, chiếu cói trải dưới đất, gió nhẹ.
+
+Cảnh 1
+Bối cảnh: Sân nhà
+Nhân vật: Bạn Mây, Bạn Tí
+Hành động: Bạn Mây chạy trên sân phẳng, đưa hộp màu cho bạn Tí. Cả hai cười rạng rỡ.
+Cảm xúc: vui
+SFX: bước chân, chim hót
+Nhạc: vui nhẹ
+Thời lượng: 8 giây
+Bạn Mây: Tí ơi, mình vẽ chung nhé!
+Bạn Tí: Ồ, đẹp quá, cảm ơn Mây!
+
+Cảnh 2
+Bối cảnh: Gốc cây đa
+Nhân vật: Bạn Mây, Bạn Tí, Bà Năm
+Hành động: Bà Năm trải chiếu dưới gốc cây, đưa giấy cho các bạn. Mây mở hộp màu, Tí chọn cây cọ.
+Cảm xúc: háo hức
+SFX: giấy xào, hộp mở
+Nhạc: ấm áp
+Thời lượng: 8 giây
+Bà Năm: Các cháu ngồi đây, bà kể chuyện làng mình.
+Bạn Mây: Con vẽ ngôi nhà nhỏ nhé bà!
+
+Cảnh 3
+Bối cảnh: Gốc cây đa
+Nhân vật: Bạn Mây, Bạn Tí
+Hành động: Tí nhìn hộp màu, ngập ngừng. Mây đẩy hộp về phía Tí và mỉm cười.
+Cảm xúc: vui
+SFX: cọ chạm giấy, gió nhẹ
+Nhạc: dịu dàng
+Thời lượng: 8 giây
+Bạn Tí: Mây dùng hết màu rồi thì sao?
+Bạn Mây: Mình tô chung, tranh sẽ đẹp hơn!
+
+Cảnh 4
+Bối cảnh: Gốc cây đa
+Nhân vật: Bạn Mây, Bạn Tí, Bà Năm
+Hành động: Hai bạn cùng tô bức tranh nhà, cây đa và luống hoa. Bà Năm vỗ tay khen.
+Cảm xúc: vui
+SFX: vỗ tay, chim hót
+Nhạc: vui tươi
+Thời lượng: 8 giây
+Bà Năm: Đẹp lắm, hai cháu tô rất hòa nhau.
+Người dẫn: Bức tranh sáng lên như nắng sớm.
+
+Cảnh 5
+Bối cảnh: Sân nhà
+Nhân vật: Bạn Mây, Bạn Tí, Bà Năm, Người dẫn
+Hành động: Các bạn treo tranh ở hàng rào thấp, đứng cạnh nhau cười. Bà Năm nói bài học.
+Cảm xúc: vui
+SFX: gió, chuông nhỏ
+Nhạc: ấm kết
+Thời lượng: 8 giây
+Bà Năm: Chia sẻ với bạn, niềm vui lớn hơn.
+Người dẫn: Mây và Tí nắm tay, cùng cười dưới nắng.

@@ -1,0 +1,1120 @@
+{
+ "lesson": "Thấy bạn cần giúp, hãy quan tâm và báo người lớn đáng tin.",
+ "title": "Hai chị em Thảo Nguyên – Thảo My và người bạn ăn xin (v2)",
+ "method": "v7: short shots, native lip-synced speech, never stretch clips, cut more shots instead",
+ "out": "/workspace/ref/pitoon_free/thao_sisters_v2_16x9.mp4",
+ "body_s": 108.0,
+ "intro_s": 3.6,
+ "outro_s": 4.0,
+ "transition_s": 0.25,
+ "narration": [
+  {
+   "at_shot": "A01",
+   "text": "Chiều mưa, hai chị em ghé quán quen.",
+   "voice": "Người dẫn"
+  },
+  {
+   "at_shot": "A18",
+   "text": "Hai chị em kể hết cho mẹ nghe.",
+   "voice": "Người dẫn"
+  },
+  {
+   "at_shot": "A35",
+   "text": "Quan tâm thật lòng, nhờ người lớn giúp đúng cách.",
+   "voice": "Người dẫn"
+  }
+ ],
+ "voice_fallback": {
+  "Thảo Nguyên": {
+   "engine": "vi-VN-HoaiMyNeural",
+   "pitch_hz": 15,
+   "rate": 8,
+   "formant": 1.12
+  },
+  "Thảo My": {
+   "engine": "vi-VN-HoaiMyNeural",
+   "pitch_hz": 35,
+   "rate": 12,
+   "formant": 1.2
+  },
+  "Khang": {
+   "engine": "vi-VN-NamMinhNeural",
+   "pitch_hz": 40,
+   "rate": 4,
+   "formant": 1.24
+  },
+  "Mẹ": {
+   "engine": "vi-VN-HoaiMyNeural",
+   "pitch_hz": -6,
+   "rate": -6,
+   "formant": 1.0
+  },
+  "Người dẫn": {
+   "engine": "vi-VN-HoaiMyNeural",
+   "pitch_hz": 0,
+   "rate": -4,
+   "formant": 1.0
+  }
+ },
+ "qc": {
+  "visual_min": 8,
+  "max_regen": 4,
+  "no_freeze_over_s": 0.8,
+  "whisper_min": 0.7,
+  "motion_min_mean_diff": 3.0,
+  "usage_stop_pct": 90
+ },
+ "shots": [
+  {
+   "id": "A01",
+   "scene": "S01",
+   "set": "cafe_rain",
+   "chars": [
+    "TN",
+    "TM"
+   ],
+   "from": 0,
+   "to": 3,
+   "camera": "wide establishing, slow dolly-in through rainy window",
+   "acting": "Raindrops run down the cafe window; inside, warm light. Little bell over door swings.",
+   "emo": "calm",
+   "line": null,
+   "sfx": [
+    "rain_window",
+    "cafe_murmur",
+    "bell"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png",
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: wide establishing, slow dolly-in through rainy window. Raindrops run down the cafe window; inside, warm light. Little bell over door swings. No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A02",
+   "scene": "S01",
+   "set": "cafe_rain",
+   "chars": [
+    "TM"
+   ],
+   "from": 3,
+   "to": 5.5,
+   "camera": "medium close-up",
+   "acting": "Thao My reads a picture book, totally focused, tongue slightly out in concentration, turns a page.",
+   "emo": "focused",
+   "line": null,
+   "sfx": [
+    "page"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: medium close-up. Thao My reads a picture book, totally focused, tongue slightly out in concentration, turns a page. No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 2.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A03",
+   "scene": "S01",
+   "set": "cafe_rain",
+   "chars": [
+    "TN"
+   ],
+   "from": 5.5,
+   "to": 8.5,
+   "camera": "close-up",
+   "acting": "Thao Nguyen leans in with a mischievous grin, wiggles eyebrows above her black glasses.",
+   "emo": "cheeky",
+   "line": {
+    "who": "Thảo Nguyên",
+    "text": "My ơi, đọc gì mà say thế?",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Thao Nguyen leans in with a mischievous grin, wiggles eyebrows above her black glasses. Thảo Nguyên speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"My ơi, đọc gì mà say thế?\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A04",
+   "scene": "S01",
+   "set": "cafe_rain",
+   "chars": [
+    "TM"
+   ],
+   "from": 8.5,
+   "to": 11.5,
+   "camera": "close-up",
+   "acting": "Thao My puffs her cheeks, pushes up her pink glasses, then can't hold it and bursts into giggles.",
+   "emo": "cheeky",
+   "line": {
+    "who": "Thảo My",
+    "text": "Bí mật! Chị đừng phá em!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [
+    "giggle"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Thao My puffs her cheeks, pushes up her pink glasses, then can't hold it and bursts into giggles. Thảo My speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Bí mật! Chị đừng phá em!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A05",
+   "scene": "S01",
+   "set": "cafe_rain",
+   "chars": [
+    "TN",
+    "TM"
+   ],
+   "from": 11.5,
+   "to": 14.0,
+   "camera": "two-shot",
+   "acting": "Both sisters laugh together, Thao Nguyen ruffles My's bangs.",
+   "emo": "happy",
+   "line": null,
+   "sfx": [
+    "laugh_kids"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png",
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: two-shot. Both sisters laugh together, Thao Nguyen ruffles My's bangs. No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 2.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A06",
+   "scene": "S02",
+   "set": "cafe_porch",
+   "chars": [
+    "TM"
+   ],
+   "from": 14.0,
+   "to": 16.5,
+   "camera": "over-shoulder through glass",
+   "acting": "Thao My stops laughing, notices something outside, her smile fades softly, head tilts.",
+   "emo": "curious",
+   "line": null,
+   "sfx": [
+    "rain_soft"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: over-shoulder through glass. Thao My stops laughing, notices something outside, her smile fades softly, head tilts. No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 2.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A07",
+   "scene": "S02",
+   "set": "cafe_porch",
+   "chars": [
+    "Khang"
+   ],
+   "from": 16.5,
+   "to": 20.0,
+   "camera": "wide, respectful distance, eye level",
+   "acting": "Under the shop awning a boy (Khang) sits quietly hugging a small cloth bag, looking at the rain, hungry but calm and dignified.",
+   "emo": "tender",
+   "line": null,
+   "sfx": [
+    "rain_awning",
+    "stomach_soft"
+   ],
+   "refs": [
+    "../thao_sisters/bible/khang_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: wide, respectful distance, eye level. Under the shop awning a boy (Khang) sits quietly hugging a small cloth bag, looking at the rain, hungry but calm and dignified. No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A08",
+   "scene": "S02",
+   "set": "cafe_porch",
+   "chars": [
+    "TM"
+   ],
+   "from": 20.0,
+   "to": 23.0,
+   "camera": "close-up",
+   "acting": "Thao My's eyes become soft and worried; she gently tugs her sister's sleeve.",
+   "emo": "sad",
+   "line": {
+    "who": "Thảo My",
+    "text": "Chị ơi, bạn ấy đói kìa.",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [
+    "rain_soft"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Thao My's eyes become soft and worried; she gently tugs her sister's sleeve. Thảo My speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Chị ơi, bạn ấy đói kìa.\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A09",
+   "scene": "S02",
+   "set": "cafe_porch",
+   "chars": [
+    "TN"
+   ],
+   "from": 23.0,
+   "to": 26.0,
+   "camera": "close-up",
+   "acting": "Thao Nguyen looks, nods thoughtfully, then looks back toward Mom.",
+   "emo": "kind",
+   "line": {
+    "who": "Thảo Nguyên",
+    "text": "Mình hỏi mẹ trước nhé!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Thao Nguyen looks, nods thoughtfully, then looks back toward Mom. Thảo Nguyên speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Mình hỏi mẹ trước nhé!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A10",
+   "scene": "S03",
+   "set": "cafe_porch",
+   "chars": [
+    "Me",
+    "TM"
+   ],
+   "from": 26.0,
+   "to": 28.5,
+   "camera": "medium",
+   "acting": "Mom smiles warmly and nods yes; Thao My's face lights up with joy.",
+   "emo": "warm",
+   "line": null,
+   "sfx": [
+    "chime_soft"
+   ],
+   "refs": [
+    "../thao_sisters/bible/me_master.png",
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: medium. Mom smiles warmly and nods yes; Thao My's face lights up with joy. No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 2.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A11",
+   "scene": "S03",
+   "set": "cafe_porch",
+   "chars": [
+    "TM",
+    "Khang"
+   ],
+   "from": 28.5,
+   "to": 32.0,
+   "camera": "medium two-shot",
+   "acting": "Thao My crouches to Khang's eye level and offers a cleanly wrapped bun with both hands, smiling shyly.",
+   "emo": "kind",
+   "line": {
+    "who": "Thảo My",
+    "text": "Bạn ăn bánh nhé! Mình là My.",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [
+    "paper_wrap"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_my_model_sheet.png",
+    "../thao_sisters/bible/khang_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: medium two-shot. Thao My crouches to Khang's eye level and offers a cleanly wrapped bun with both hands, smiling shyly. Thảo My speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Bạn ăn bánh nhé! Mình là My.\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A12",
+   "scene": "S03",
+   "set": "cafe_porch",
+   "chars": [
+    "Khang"
+   ],
+   "from": 32.0,
+   "to": 35.5,
+   "camera": "close-up",
+   "acting": "Khang receives the bun with both hands, surprised, then a small grateful smile.",
+   "emo": "grateful",
+   "line": {
+    "who": "Khang",
+    "text": "Cảm ơn bạn. Mình là Khang.",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/khang_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Khang receives the bun with both hands, surprised, then a small grateful smile. Khang speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Cảm ơn bạn. Mình là Khang.\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A13",
+   "scene": "S03",
+   "set": "cafe_porch",
+   "chars": [
+    "TN"
+   ],
+   "from": 35.5,
+   "to": 38.5,
+   "camera": "close-up",
+   "acting": "Thao Nguyen waves friendly with a big smile.",
+   "emo": "happy",
+   "line": {
+    "who": "Thảo Nguyên",
+    "text": "Mình là Nguyên, chị của My!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Thao Nguyen waves friendly with a big smile. Thảo Nguyên speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Mình là Nguyên, chị của My!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A14",
+   "scene": "S04",
+   "set": "cafe_porch",
+   "chars": [
+    "Khang",
+    "TN",
+    "TM"
+   ],
+   "from": 38.5,
+   "to": 41.5,
+   "camera": "insert close-up on hands",
+   "acting": "Khang opens an old notebook showing a crayon drawing of a school with a flag; the sisters lean in.",
+   "emo": "wonder",
+   "line": null,
+   "sfx": [
+    "page",
+    "chime_soft"
+   ],
+   "refs": [
+    "../thao_sisters/bible/khang_master.png",
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png",
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: insert close-up on hands. Khang opens an old notebook showing a crayon drawing of a school with a flag; the sisters lean in. No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A15",
+   "scene": "S04",
+   "set": "cafe_porch",
+   "chars": [
+    "TM"
+   ],
+   "from": 41.5,
+   "to": 44.0,
+   "camera": "close-up",
+   "acting": "Thao My gasps with sparkling eyes, hands on cheeks.",
+   "emo": "excited",
+   "line": {
+    "who": "Thảo My",
+    "text": "Oa, tranh đẹp quá!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [
+    "sparkle"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Thao My gasps with sparkling eyes, hands on cheeks. Thảo My speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Oa, tranh đẹp quá!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 2.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A16",
+   "scene": "S04",
+   "set": "cafe_porch",
+   "chars": [
+    "Khang"
+   ],
+   "from": 44.0,
+   "to": 47.5,
+   "camera": "close-up",
+   "acting": "Khang looks down at his drawing, a quiet hopeful longing, then up.",
+   "emo": "sad_hope",
+   "line": {
+    "who": "Khang",
+    "text": "Mình mong được đi học lại.",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/khang_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Khang looks down at his drawing, a quiet hopeful longing, then up. Khang speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Mình mong được đi học lại.\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A17",
+   "scene": "S04",
+   "set": "cafe_porch",
+   "chars": [
+    "TN"
+   ],
+   "from": 47.5,
+   "to": 50.5,
+   "camera": "medium",
+   "acting": "Thao Nguyen puts a hand on her heart, determined and kind.",
+   "emo": "determined",
+   "line": {
+    "who": "Thảo Nguyên",
+    "text": "Tụi mình sẽ nhờ mẹ giúp!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: medium. Thao Nguyen puts a hand on her heart, determined and kind. Thảo Nguyên speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Tụi mình sẽ nhờ mẹ giúp!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A18",
+   "scene": "S05",
+   "set": "home_living",
+   "chars": [
+    "Me",
+    "TN",
+    "TM"
+   ],
+   "from": 50.5,
+   "to": 53.5,
+   "camera": "medium three-shot",
+   "acting": "At home on the sofa, the sisters tell Mom excitedly, hands moving; Mom listens and hugs them.",
+   "emo": "warm",
+   "line": null,
+   "sfx": [
+    "clock_tick",
+    "sofa"
+   ],
+   "refs": [
+    "../thao_sisters/bible/me_master.png",
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png",
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: medium three-shot. At home on the sofa, the sisters tell Mom excitedly, hands moving; Mom listens and hugs them. No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A19",
+   "scene": "S05",
+   "set": "home_living",
+   "chars": [
+    "Me"
+   ],
+   "from": 53.5,
+   "to": 57.0,
+   "camera": "close-up",
+   "acting": "Mom speaks gently with a proud warm smile.",
+   "emo": "warm",
+   "line": {
+    "who": "Mẹ",
+    "text": "Các con thương bạn, mẹ rất vui.",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/me_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Mom speaks gently with a proud warm smile. Mẹ speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Các con thương bạn, mẹ rất vui.\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A20",
+   "scene": "S05",
+   "set": "home_living",
+   "chars": [
+    "Me"
+   ],
+   "from": 57.0,
+   "to": 60.5,
+   "camera": "close-up",
+   "acting": "Mom raises one finger softly, kind but serious.",
+   "emo": "warm",
+   "line": {
+    "who": "Mẹ",
+    "text": "Gặp bạn cần giúp, hãy báo người lớn nhé.",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/me_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Mom raises one finger softly, kind but serious. Mẹ speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Gặp bạn cần giúp, hãy báo người lớn nhé.\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A21",
+   "scene": "S05",
+   "set": "home_living",
+   "chars": [
+    "TN",
+    "TM"
+   ],
+   "from": 60.5,
+   "to": 63.5,
+   "camera": "two-shot",
+   "acting": "Both sisters nod together, then Thao My raises her hand eagerly.",
+   "emo": "excited",
+   "line": {
+    "who": "Thảo My",
+    "text": "Con tặng bạn vở mới nha!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [
+    "pop"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png",
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: two-shot. Both sisters nod together, then Thao My raises her hand eagerly. Thảo My speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Con tặng bạn vở mới nha!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A22",
+   "scene": "S06",
+   "set": "home_room",
+   "chars": [
+    "TN",
+    "TM"
+   ],
+   "from": 63.5,
+   "to": 66.5,
+   "camera": "top-down insert",
+   "acting": "Small hands place a new notebook, colored pencils and folded clothes neatly into a gift bag.",
+   "emo": "playful",
+   "line": null,
+   "sfx": [
+    "paper",
+    "pencil_rattle"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png",
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: top-down insert. Small hands place a new notebook, colored pencils and folded clothes neatly into a gift bag. No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A23",
+   "scene": "S06",
+   "set": "home_room",
+   "chars": [
+    "TN"
+   ],
+   "from": 66.5,
+   "to": 69.5,
+   "camera": "medium",
+   "acting": "Thao Nguyen proudly holds up a box of colored pencils like a trophy; My claps.",
+   "emo": "playful",
+   "line": {
+    "who": "Thảo Nguyên",
+    "text": "Thêm hộp bút màu nữa!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [
+    "clap"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: medium. Thao Nguyen proudly holds up a box of colored pencils like a trophy; My claps. Thảo Nguyên speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Thêm hộp bút màu nữa!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A24",
+   "scene": "S07",
+   "set": "park_day",
+   "chars": [
+    "Me",
+    "TN",
+    "TM",
+    "Khang"
+   ],
+   "from": 69.5,
+   "to": 72.5,
+   "camera": "wide",
+   "acting": "In a bright public park, Mom walks with the sisters; Khang waits on a bench and stands up politely.",
+   "emo": "hopeful",
+   "line": null,
+   "sfx": [
+    "birds",
+    "kids_far"
+   ],
+   "refs": [
+    "../thao_sisters/bible/me_master.png",
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png",
+    "../thao_sisters/bible/thao_my_model_sheet.png",
+    "../thao_sisters/bible/khang_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: wide. In a bright public park, Mom walks with the sisters; Khang waits on a bench and stands up politely. No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A25",
+   "scene": "S07",
+   "set": "park_day",
+   "chars": [
+    "Khang"
+   ],
+   "from": 72.5,
+   "to": 76.0,
+   "camera": "close-up",
+   "acting": "Khang holds the gift bag with both hands, eyes glistening with grateful tears but smiling, dignified.",
+   "emo": "moved",
+   "line": {
+    "who": "Khang",
+    "text": "Mình sẽ giữ thật cẩn thận.",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/khang_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Khang holds the gift bag with both hands, eyes glistening with grateful tears but smiling, dignified. Khang speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Mình sẽ giữ thật cẩn thận.\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A26",
+   "scene": "S07",
+   "set": "park_day",
+   "chars": [
+    "TM",
+    "TN"
+   ],
+   "from": 76.0,
+   "to": 79.0,
+   "camera": "two-shot",
+   "acting": "Thao My and Thao Nguyen smile and give a thumbs up.",
+   "emo": "happy",
+   "line": {
+    "who": "Thảo My",
+    "text": "Mong bạn sớm được đi học!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/thao_my_model_sheet.png",
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: two-shot. Thao My and Thao Nguyen smile and give a thumbs up. Thảo My speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Mong bạn sớm được đi học!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A27",
+   "scene": "S08",
+   "set": "school_gate",
+   "chars": [
+    "Khang"
+   ],
+   "from": 79.0,
+   "to": 82.0,
+   "camera": "wide, low angle",
+   "acting": "Morning at the school gate: Khang in a neat white uniform and backpack walks in with a kind adult relative, sunlight.",
+   "emo": "bright",
+   "line": null,
+   "sfx": [
+    "school_bell",
+    "kids_far"
+   ],
+   "refs": [
+    "../thao_sisters/bible/khang_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: wide, low angle. Morning at the school gate: Khang in a neat white uniform and backpack walks in with a kind adult relative, sunlight. No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A28",
+   "scene": "S08",
+   "set": "school_gate",
+   "chars": [
+    "TN",
+    "TM",
+    "Me"
+   ],
+   "from": 82.0,
+   "to": 85.0,
+   "camera": "medium",
+   "acting": "The sisters wave both arms happily beside Mom.",
+   "emo": "happy",
+   "line": {
+    "who": "Thảo Nguyên",
+    "text": "Chúc bạn học vui nha!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png",
+    "../thao_sisters/bible/thao_my_model_sheet.png",
+    "../thao_sisters/bible/me_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: medium. The sisters wave both arms happily beside Mom. Thảo Nguyên speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Chúc bạn học vui nha!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A29",
+   "scene": "S08",
+   "set": "school_gate",
+   "chars": [
+    "Khang"
+   ],
+   "from": 85.0,
+   "to": 87.5,
+   "camera": "close-up",
+   "acting": "Khang turns back, waves, beaming.",
+   "emo": "proud",
+   "line": {
+    "who": "Khang",
+    "text": "Mình sẽ học thật giỏi!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/khang_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Khang turns back, waves, beaming. Khang speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Mình sẽ học thật giỏi!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 2.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A30",
+   "scene": "S09",
+   "set": "cafe_sun",
+   "chars": [
+    "Khang",
+    "TN",
+    "TM"
+   ],
+   "from": 87.5,
+   "to": 90.5,
+   "camera": "insert",
+   "acting": "Khang unrolls a drawing of three friends at a school gate (girl with black glasses, girl with pink glasses, boy with a book).",
+   "emo": "tender",
+   "line": null,
+   "sfx": [
+    "paper_unroll",
+    "sparkle"
+   ],
+   "refs": [
+    "../thao_sisters/bible/khang_master.png",
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png",
+    "../thao_sisters/bible/thao_my_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: insert. Khang unrolls a drawing of three friends at a school gate (girl with black glasses, girl with pink glasses, boy with a book). No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A31",
+   "scene": "S09",
+   "set": "cafe_sun",
+   "chars": [
+    "Khang"
+   ],
+   "from": 90.5,
+   "to": 94.0,
+   "camera": "close-up",
+   "acting": "Khang says shyly, rubbing the back of his head.",
+   "emo": "shy",
+   "line": {
+    "who": "Khang",
+    "text": "Tặng hai bạn: Những người bạn tốt!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [],
+   "refs": [
+    "../thao_sisters/bible/khang_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: close-up. Khang says shyly, rubbing the back of his head. Khang speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Tặng hai bạn: Những người bạn tốt!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A32",
+   "scene": "S09",
+   "set": "cafe_sun",
+   "chars": [
+    "TM",
+    "TN"
+   ],
+   "from": 94.0,
+   "to": 97.0,
+   "camera": "two-shot",
+   "acting": "Thao My hugs the drawing to her chest, Thao Nguyen dabs a happy tear.",
+   "emo": "moved",
+   "line": {
+    "who": "Thảo My",
+    "text": "Mình sẽ treo ở góc học tập!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [
+    "sparkle"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_my_model_sheet.png",
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: two-shot. Thao My hugs the drawing to her chest, Thao Nguyen dabs a happy tear. Thảo My speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Mình sẽ treo ở góc học tập!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A33",
+   "scene": "S10",
+   "set": "school_art",
+   "chars": [
+    "Khang"
+   ],
+   "from": 97.0,
+   "to": 100.5,
+   "camera": "medium",
+   "acting": "In a bright art classroom, Khang stands by his displayed drawing and speaks to classmates with a hopeful look.",
+   "emo": "inspire",
+   "line": {
+    "who": "Khang",
+    "text": "Sau này mình sẽ giúp các bạn khác.",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [
+    "applause_small"
+   ],
+   "refs": [
+    "../thao_sisters/bible/khang_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: medium. In a bright art classroom, Khang stands by his displayed drawing and speaks to classmates with a hopeful look. Khang speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Sau này mình sẽ giúp các bạn khác.\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A34",
+   "scene": "S11",
+   "set": "cafe_sun",
+   "chars": [
+    "TN",
+    "TM",
+    "Khang"
+   ],
+   "from": 100.5,
+   "to": 104.0,
+   "camera": "medium three-shot, slow push-in",
+   "acting": "Sunny cafe table: Thao My reads, Khang draws, Thao Nguyen smiles; they all laugh together.",
+   "emo": "joy",
+   "line": {
+    "who": "Thảo Nguyên",
+    "text": "Từ nay mình là bạn nhé!",
+    "src": "native",
+    "fallback": "edge"
+   },
+   "sfx": [
+    "laugh_kids",
+    "cafe_murmur"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png",
+    "../thao_sisters/bible/thao_my_model_sheet.png",
+    "../thao_sisters/bible/khang_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: medium three-shot, slow push-in. Sunny cafe table: Thao My reads, Khang draws, Thao Nguyen smiles; they all laugh together. Thảo Nguyên speaks this Vietnamese line clearly with visible lip-synced mouth movement and matching facial emotion: \"Từ nay mình là bạn nhé!\" Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 3.5,
+    "chain_from_prev_last_frame": true
+   }
+  },
+  {
+   "id": "A35",
+   "scene": "S12",
+   "set": "path_trees",
+   "chars": [
+    "TN",
+    "TM",
+    "Khang"
+   ],
+   "from": 104.0,
+   "to": 108.0,
+   "camera": "wide, crane up",
+   "acting": "The three friends walk down a tree-lined path near the school, leaves sway in golden light, space above for title.",
+   "emo": "ending",
+   "line": null,
+   "sfx": [
+    "wind_leaves",
+    "birds"
+   ],
+   "refs": [
+    "../thao_sisters/bible/thao_nguyen_model_sheet.png",
+    "../thao_sisters/bible/thao_my_model_sheet.png",
+    "../thao_sisters/bible/khang_master.png"
+   ],
+   "video_prompt_en": "Cinematic high-quality 3D animated kids film, expressive cartoon acting like a feature animation, natural child proportions, keep exact faces, glasses, hair and outfits from the reference sheets, 16:9, no text. Camera: wide, crane up. The three friends walk down a tree-lined path near the school, leaves sway in golden light, space above for title. No dialogue, natural ambient sound only. Lively natural movement throughout, no frozen poses. Safe, gentle, respectful.",
+   "gen": {
+    "duration": 6,
+    "use_s": 4,
+    "chain_from_prev_last_frame": true
+   }
+  }
+ ]
+}

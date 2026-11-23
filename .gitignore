@@ -13,3 +13,9 @@ films/**/qc.json
 films/**/qc.md
 films/**/qc_grid_*.jpg
 films/**/export_pkg/
+
+# Large generated media (rebuildable; do not commit)
+films/**/export/
+films/**/scenes/
+films/**/clips/
+films/**/voice_test/

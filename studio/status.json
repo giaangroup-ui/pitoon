@@ -4,7 +4,7 @@
    "id": "thao_sisters_v2",
    "title": "Hai chị em Thảo Nguyên – Thảo My và người bạn ăn xin (bản mới)",
    "lesson": "Thấy bạn cần giúp, hãy quan tâm và báo người lớn đáng tin.",
-   "updated": "2026-11-16T17:32:34+07:00",
+   "updated": "2026-11-16T19:20:36+07:00",
    "overall": "dang_lam",
    "qc": {},
    "outputs": [],
@@ -54,8 +54,8 @@
     {
      "n": 7,
      "name": "Âm thanh, nhạc",
-     "state": "cho",
-     "note": "Kế hoạch có 29 tiếng động/108s = 0,27/giây – cần thêm ít nhất 4 tiếng để đạt 0,3",
+     "state": "dat",
+     "note": "Kế hoạch 33 tiếng động/108s = 0,31/giây (đã thêm rain_soft, chime_soft, pop, sparkle)",
      "round": 0
     },
     {
